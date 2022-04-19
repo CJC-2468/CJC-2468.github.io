@@ -204,7 +204,7 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 
     ,
         "url" : "https:\/\/example.com\/post\/hugo\u002bgithub-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "138",
+        "wordCount" : "136",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -430,9 +430,9 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 <h2 id="核心步骤">核心步骤</h2>
 <h3 id="1下载安装hugo和git并准备一下github相关的库">1.下载安装hugo和git，并准备一下github相关的库</h3>
 <p>下载hugo：<code>brew install hugo</code>  测试安装是否成功：<code>hugo version</code></p>
-<img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419175420.png" style="zoom:50%;" />
+<img src="/images/20220419175420.png" style="zoom:50%;" />
 <p>下载git：<code>brew install git</code> 测试安装是否成功：<code>git --version</code></p>
-<img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419175515.png" style="zoom:50%;" />
+<img src="/images/20220419175515.png" style="zoom:50%;" />
 <p>自己注册创建一个github账号，然后创建一个GitHub repository，库名为 <em>username</em>.github.io。username 即你的 GitHub 账号 username。我的是下面这样：</p>
 <img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419182649.png" style="zoom:50%;" />
 <h3 id="2使用hugo-创建一个网站模版">2.使用Hugo 创建一个网站模版</h3>
@@ -444,10 +444,10 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 <h3 id="3找个合适的主题">3.找个合适的主题</h3>
 <p>Hugo Themes: <a href="https://themes.gohugo.io">https://themes.gohugo.io</a>
 自己去上面找一个喜欢的网站主题</p>
-<p><code>cd XXX-blog</code> ,这时候的路径是这样的：<img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419180325.png" style="zoom:50%;" /></p>
+<p><code>cd XXX-blog</code> ,这时候的路径是这样的：<img src="/images/20220419180325.png" style="zoom:50%;" /></p>
 <p>接着在这个目录下创建themes 目录，一般默认有，如果没有自行创建：<code>mkdir -p themes</code></p>
 <p>截止到目前目录是这样的：</p>
-<img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419180518.png" style="zoom:50%;" />
+<img src="/images/20220419180518.png" style="zoom:50%;" />
 <p>进入themes目录后，下载自己喜欢的主题：git clone <a href="https://github.com/lxndrblz/anatole.git">https://github.com/lxndrblz/anatole.git</a></p>
 <p>参考所选 Hugo 主题的配置说明，编辑 <code>config.toml</code> 文件。这个文件在xxx-blog目录下面，自己对应个人喜好修改。</p>
 <h3 id="4创建一篇文章">4.创建一篇文章</h3>
@@ -470,7 +470,7 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 <p>这里如果提交失败，有两种情况，一个是就是本地库和远程库不一致，另一个是你没有配置过ssh-key，这两个都是git相关的基本常见问题，自己可以google一下，很好解决。</p>
 <h3 id="8最后一步">8.最后一步</h3>
 <p>访问https://username.github.io/即可，如果这里访问不了，有可能是因为github pages的source中分支有问题，切换成如图样子就可以了。
-![image-20220419183644888](/Users/cjc/Library/Application Support/typora-user-images/image-20220419183644888.png)</p>
+<img src="/images/202204192222.png" /></p>
 <p>另外就是要注意耐心等待，查看上图中的action可以看到github帮你构建和部署的过程。</p>
 <h1 id="总结">总结</h1>
 <p>整体搭建过程还是比较简单的，需要你了解一些git相关命令即可，遇到的问题也大多是git相关的常见问题，自己google一下就可以解决。</p>
