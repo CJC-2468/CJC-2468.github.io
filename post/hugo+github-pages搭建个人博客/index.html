@@ -204,7 +204,7 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 
     ,
         "url" : "https:\/\/example.com\/post\/hugo\u002bgithub-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "136",
+        "wordCount" : "135",
         "genre" : [ ],
         "keywords" : [ 
       
@@ -434,7 +434,7 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 <p>下载git：<code>brew install git</code> 测试安装是否成功：<code>git --version</code></p>
 <img src="/images/20220419175515.png" style="zoom:50%;" />
 <p>自己注册创建一个github账号，然后创建一个GitHub repository，库名为 <em>username</em>.github.io。username 即你的 GitHub 账号 username。我的是下面这样：</p>
-<img src="https://gitee.com/studytopia/picgo/raw/master/img/20220419182649.png" style="zoom:50%;" />
+<img src="/images/20220419182649.png" style="zoom:50%;" />
 <h3 id="2使用hugo-创建一个网站模版">2.使用Hugo 创建一个网站模版</h3>
 <p>创建自己想存放网站的目录，我是在Documents下创建hugo-blog这个目录放我的网站资源。</p>
 <p><code>cd Documents</code></p>
@@ -459,8 +459,8 @@ Github pages：提供免费的静态网站托管服务，用来存放用hugo生�
 <p>在网站根目录（xxx-blog）下，执行 <code>hugo</code>，这时候hugo就会自己根据刚才的配置和相关资源生成我们要的静态网站。Hugo 会将构建的网站内容默认保存至网站根目录的 <code>public/</code> 文件夹中。</p>
 <h3 id="7将静态网站资源转为git库并和第一步中创建的库做一个关联">7.将静态网站资源转为git库并和第一步中创建的库做一个关联</h3>
 <p>将xxx-blog/public转为git库，因为编译好的完整资源都在这里。怎么做呢？</p>
-<p><code>cd xxx-blog/public  # 生成的 HTML 文件保存在 &quot;public&quot; 目录中，&quot;public&quot; 文件夹会被转换为 Git 库。</code>
-<code>git init  # 初始化 Git 库。</code></p>
+<p><code>cd xxx-blog/public  </code>   生成的 HTML 文件保存在 &ldquo;public&rdquo; 目录中，&ldquo;public&rdquo; 文件夹会被转换为 Git 库。
+<code>git init  </code> # 初始化 Git 库。</p>
 <p>然后关联一下：</p>
 <p><code>git remote add origin git@github.com:username/username.github.io.git</code> 这里的username就是之前你创建的 github库的那个username。</p>
 <p>查看当前修改状态 <code>git status</code></p>
