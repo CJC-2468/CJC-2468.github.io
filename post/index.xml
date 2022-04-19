@@ -8,13 +8,17 @@
     <language>en</language>
     <lastBuildDate>Tue, 19 Apr 2022 13:44:33 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First Post</title>
-      <link>https://example.com/post/first-post/</link>
+      <title>Github Pages &#43; Hugo 搭建个人博客</title>
+      <link>https://example.com/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Tue, 19 Apr 2022 13:44:33 +0800</pubDate>
       
-      <guid>https://example.com/post/first-post/</guid>
+      <guid>https://example.com/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
       
-        <description>this is a test for the first post!</description>
+        <description>这篇文章会简单介绍如何利用Github Pages和Hugo 搭建一个简单的个人博客，不涉及云服务器及域名购买。
+为什么用hugo+github pages搭建个人博客 Hugo:一个用Go语言编写的静态网站生成器，几分钟就能上手，用来生成我们需要的静态的个人博客。优点是修改MarkDown文章后，页面会自动呈现出最终显示效果，能极大的提高博客书写效率。
+Github pages：提供免费的静态网站托管服务，用来存放用hugo生成的静态网站的资源，它可以给你提供免费的域名如XXXX.github.io，让别人能访问你的静态个人博客。
+两者结合可以搭建好看并且免费的个人博客。
+搭建过程 环境：macos 核心步骤 1.</description>
       
     </item>
     

@@ -5,16 +5,26 @@
     <loc>https://example.com/</loc>
     <lastmod>2022-04-19T13:44:33+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/first-post/</loc>
+    <loc>https://example.com/tags/blog/</loc>
+    <lastmod>2022-04-19T13:44:33+08:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/github-pages/</loc>
+    <lastmod>2022-04-19T13:44:33+08:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2022-04-19T13:44:33+08:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/hugo/</loc>
     <lastmod>2022-04-19T13:44:33+08:00</lastmod>
   </url><url>
     <loc>https://example.com/post/</loc>
     <lastmod>2022-04-19T13:44:33+08:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/</loc>
+    <lastmod>2022-04-19T13:44:33+08:00</lastmod>
+  </url><url>
     <loc>https://example.com/categories/</loc>
   </url><url>
     <loc>https://example.com/series/</loc>
-  </url><url>
-    <loc>https://example.com/tags/</loc>
   </url>
 </urlset>
