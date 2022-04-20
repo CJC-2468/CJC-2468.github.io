@@ -5,6 +5,18 @@
     <link>https://example.com/categories/</link>
     <description>Recent content in Categories on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 20 Apr 2022 09:22:02 +0800</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>blog搭建</title>
+      <link>https://example.com/categories/blog%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 20 Apr 2022 09:22:02 +0800</pubDate>
+      
+      <guid>https://example.com/categories/blog%E6%90%AD%E5%BB%BA/</guid>
+      
+        <description></description>
+      
+    </item>
+    
   </channel>
 </rss>

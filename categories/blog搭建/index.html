@@ -8,6 +8,11 @@
   <title>
     
       CJC
+        |
+        blog搭建
+
+
+      
 
 
     
@@ -81,10 +86,10 @@ H O P E
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://example.com/" />
+  <link rel="canonical" href="https://example.com/categories/blog%E6%90%AD%E5%BB%BA/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="" />
+  <link rel="alternate" type="application/rss+xml" href="/categories/blog%E6%90%AD%E5%BB%BA/index.xml" title="" />
 
 
   
@@ -114,7 +119,7 @@ H O P E
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
+<meta name="twitter:title" content="blog搭建"/>
 <meta name="twitter:description" content="Integrity
 Goodness
 Passion
@@ -124,32 +129,20 @@ H O P E
 
 
   
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="blog搭建" />
 <meta property="og:description" content="Integrity
 Goodness
 Passion
 H O P E
 " />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://example.com/" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+<meta property="og:url" content="https://example.com/categories/blog%E6%90%AD%E5%BB%BA/" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
 
 
 
 
   
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": "",
-      "url": "https:\/\/example.com",
-      "description": "Integrity\nGoodness\nPassion\nH O P E\n",
-      "thumbnailUrl": "https:\/\/example.com",
-      "license": ""
-    }
-  </script>
-
-
+  
 
 </head>
 <body
@@ -178,9 +171,9 @@ H O P E
         alt="profile picture"
       />
       
-        <h1 class="sidebar__introduction-title">
+        <div class="sidebar__introduction-title">
           <a href="/">CJC&#39;s time&amp;space</a>
-        </h1>
+        </div>
 
       
       <div class="sidebar__introduction-description">
@@ -265,9 +258,6 @@ H O P E
         <li class="nav__list-item">
           <a
             
-              class="nav__link--active"
-
-            
             href="/"
             
             title=""
@@ -318,115 +308,31 @@ H O P E
 </div>
 </header>
   <div
-    class="post 
+    class="archive 
       animated fadeInDown
 
     "
   >
-    <div class="post__content">
+    
+      <div class="archive__heading">2022</div>
       
-    </div>
+        <ul class="archive__list">
+          <li class="archive__list-item">
+            <a class="archive__list-title" href="/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/" title="使用hugo写博客">使用hugo写博客</a>
+            <div class="archive__list-date">
+              
+                Apr 20
+
+
+              
+            </div>
+          </li>
+        </ul>
+
+      
+
 
     
-  </div>
-
-  
-
-  
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/">使用HUGO写博客</a></h3>
-        
-          <p>这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Wed, Apr 20, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/">hugo写文章</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">GITHUB PAGES &#43; HUGO 搭建个人博客</a></h3>
-        
-          <p>这篇文章会简单介绍如何利用Github Pages和Hugo 搭建一个简单的个人博客，不涉及云服务器及域名购买。
-为什么用hugo+github pages搭建个人博客 Hugo:一个用Go语言编写的静态网站生成器，几分钟就能上手，用来生成我们需要的静态的个人博客。优点是修改MarkDown文章后，页面会自动呈现出最终显示效果，能极大的提高博客书写效率。
-Github pages：提供免费的静态网站托管服务，用来存放用hugo生成的静态网站的资源，它可以给你提供免费的域名如XXXX.github.io，让别人能访问你的静态个人博客。
-两者结合可以搭建好看并且免费的个人博客。
-搭建过程 环境：macos 核心步骤 1.</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Tue, Apr 19, 2022
-
-
-          </span
-        >
-        
-
-        
-          <span><a class="tag" href="/tags/blog/">blog</a><a class="tag" href="/tags/hugo/">hugo</a><a class="tag" href="/tags/github-pages/">github pages</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-  <div class="pagination">
-    
-
   </div>
 
 

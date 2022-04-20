@@ -204,9 +204,17 @@ H O P E
 
     ,
         "url" : "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "38",
-        "genre" : [ ],
-        "keywords" : [ ]
+        "wordCount" : "54",
+        "genre" : [ 
+      
+      "blog搭建"
+
+    ],
+        "keywords" : [ 
+      
+      "hugo写文章"
+
+    ]
     }
   </script>
 
@@ -418,7 +426,12 @@ H O P E
 <p>第二处： cjc@~/Documents/hugo-blog/cjc-blog/public/post git:(master) 下的博客文件，执行命令rm -rf XXX</p>
 <h1 id="同步到github-pages">同步到github pages</h1>
 <p>使用基本的hugo和git命令即可完成该操作，具体过程如下：</p>
-<p>使用hugo渲染，也就是执行命令hugo即可。ps:要在</p>
+<p>使用hugo渲染，也就是执行命令hugo即可。ps:要在cjc@~/Documents/hugo-blog/cjc-blog路径下执行 <code>hugo</code></p>
+<p>进入public目录，然后执行一些简单的git指令。</p>
+<p><code>git add .</code></p>
+<p><code>git commit -m 'commit info'</code></p>
+<p><code>git push -u origin master</code></p>
+<p>最后访问自己的博客地址就可以看到最新的效果。</p>
 <h1 id="附">附：</h1>
 <h2 id="hugo-添加图片">hugo 添加图片</h2>
 <p>Hugo 的配置文件和文章中引用图片都是从static作为根目录的。
@@ -426,6 +439,18 @@ H O P E
 </div>
     <div class="post__footer">
       
+        <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
+
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/">hugo写文章</a></span>
+
+
+
 
       
     </div>
