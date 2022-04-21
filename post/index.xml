@@ -6,7 +6,102 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Apr 2022 23:58:58 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Apr 2022 12:31:50 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go的GC机制</title>
+      <link>https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Thu, 21 Apr 2022 12:31:50 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/</guid>
+      
+        <description>什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。
+golang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。
+垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下：</description>
+      
+    </item>
+    
+    <item>
+      <title>Go的并发编程</title>
+      <link>https://example.com/post/go%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Thu, 21 Apr 2022 12:29:15 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</guid>
+      
+        <description>讲一下go的并发模型？ go控制并发的话有三种种经典的方式，一种是通过channel通知实现并发控制，一种是WaitGroup，另外一种就是Context。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。这样子其实就实现了发送和接收goroutine的同步化，也就是并发控制。注意：当一个值在无缓冲通道传递，接收值后发送方goroutine才会被再次唤醒。
+例子：
+func main() { ch := make(chan struct{}) go func() { ch &amp;lt;- struct{}{} }() fmt.</description>
+      
+    </item>
+    
+    <item>
+      <title>Go的Map详解</title>
+      <link>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 21 Apr 2022 12:28:16 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。</description>
+      
+    </item>
+    
+    <item>
+      <title>Go的Channel详解</title>
+      <link>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 21 Apr 2022 12:26:57 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
+要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
+channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</description>
+      
+    </item>
+    
+    <item>
+      <title>Go的Slice详解</title>
+      <link>https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 21 Apr 2022 12:25:09 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
+讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
+newcap := old.cap	//old.</description>
+      
+    </item>
+    
+    <item>
+      <title>设计模式</title>
+      <link>https://example.com/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 21 Apr 2022 12:22:40 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      
+        <description>实现单例模式 单例模式（Singleton）的目的是为了保证在一个进程中，某个类有且仅有一个实例。保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。
+type singleton struct{} var instance *singleton var once sync.</description>
+      
+    </item>
+    
+    <item>
+      <title>Go基础</title>
+      <link>https://example.com/post/go%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 21 Apr 2022 12:18:26 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E5%9F%BA%E7%A1%80/</guid>
+      
+        <description>go语言中new和make的区别？ 首先这俩都是内建函数。
+new函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。
+make函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。
+其实 new 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用T{}方式更加便捷方便。
+与其他语言相比，使用 Go 有什么好处?  语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。 高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。 内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。 垃圾回收：自动垃圾回收，三色标记法和写屏障。 静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。 标准库：自身标准库丰富，比如net/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。 工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。  Go中的包是什么？ 由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。</description>
+      
+    </item>
+    
     <item>
       <title>Go的GMP模型详解</title>
       <link>https://example.com/post/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/</link>

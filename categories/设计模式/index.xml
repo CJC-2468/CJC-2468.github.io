@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>设计模式 on </title>
+    <link>https://example.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+    <description>Recent content in 设计模式 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Apr 2022 12:22:40 +0800</lastBuildDate><atom:link href="https://example.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式</title>
+      <link>https://example.com/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Thu, 21 Apr 2022 12:22:40 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      
+        <description>实现单例模式 单例模式（Singleton）的目的是为了保证在一个进程中，某个类有且仅有一个实例。保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。
+type singleton struct{} var instance *singleton var once sync.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

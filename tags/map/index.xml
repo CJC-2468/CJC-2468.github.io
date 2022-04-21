@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>map on </title>
+    <link>https://example.com/tags/map/</link>
+    <description>Recent content in map on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Apr 2022 12:28:16 +0800</lastBuildDate><atom:link href="https://example.com/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go的Map详解</title>
+      <link>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 21 Apr 2022 12:28:16 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -9,7 +9,7 @@
     
       CJC
         |
-        Tags
+        Go的Map详解
 
 
       
@@ -86,12 +86,9 @@ H O P E
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://example.com/tags/" />
+  <link rel="canonical" href="https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/" />
 
   
-  <link rel="alternate" type="application/rss+xml" href="/tags/index.xml" title="" />
-
-
   
   
   
@@ -119,30 +116,101 @@ H O P E
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content="Integrity
-Goodness
-Passion
-H O P E
-"/>
+<meta name="twitter:title" content="Go的Map详解"/>
+<meta name="twitter:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。"/>
 
 
 
   
-  <meta property="og:title" content="Tags" />
-<meta property="og:description" content="Integrity
-Goodness
-Passion
-H O P E
-" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://example.com/tags/" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+  <meta property="og:title" content="Go的Map详解" />
+<meta property="og:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T12:28:16+08:00" />
+<meta property="article:modified_time" content="2022-04-21T12:28:16+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
 
 
 
 
   
   
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Go的Map详解",
+        "headline": "Go的Map详解",
+        "alternativeHeadline": "",
+        "description": "
+      
+        golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/go%E7%9A%84map%E8%AF%A6%E8%A7%A3\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-04-21T12:28:16.00Z",
+        "datePublished": "2022-04-21T12:28:16.00Z",
+        "dateModified": "2022-04-21T12:28:16.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/go%E7%9A%84map%E8%AF%A6%E8%A7%A3\/",
+        "wordCount" : "63",
+        "genre" : [ 
+      
+      "Go"
+
+    ],
+        "keywords" : [ 
+      
+      "map"
+
+    ]
+    }
+  </script>
+
+
 
 </head>
 <body
@@ -320,141 +388,66 @@ H O P E
 </div>
 </header>
   <div
-    class="archive 
+    class="post 
       animated fadeInDown
 
     "
   >
     
-      <div class="archive__heading">2022</div>
+    <div class="post__content">
+      <h1>Go的Map详解</h1>
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/gc/" title="GC">GC</a>
-            <div class="archive__list-date">
-              
-                Apr 21
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Thu, Apr 21, 2022
 
 
               
-            </div>
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">One-minute read</span>
           </li>
         </ul>
 
+      <h2 id="golang-map底层实现">golang map底层实现？</h2>
+<p>底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用<strong>拉链法</strong>解决冲突。这个散列表里有两个结构体，一个是<strong>hmap</strong>（(a header for a go map)），一个是<strong>bmap</strong>（(a bucket for a Go map，通常叫其 bucket)）。</p>
+<p><strong>hmap中存有buckets数组的地址，数组中每一个元素都是一个bucket，bucket是一个链表。</strong></p>
+<p>我们根据key计算出一个hash，取低位找到我们要找的kv在数组的哪一个bucket（也就是在buckets数组的哪一个位置），再取高位哈希，定位到他在bucket的哪个key，这里其实是按照链表那样，如果这个bucket没找到就一个个往后面的overflow bucket找，然后取到我们要的kv。</p>
+<p>（如果在 bucket 中没找到，并且 overflow 不为空，还要继续去 overflow bucket 中寻找，直到找到或是所有的 key 槽位都找遍了，包括所有的 overflow bucket。）</p>
+<p><code>bmap</code> 就是我们常说的“桶”，桶里面会最多装 8 个 key，这些 key 之所以会落入同一个桶，是因为它们经过哈希计算后，哈希结果是“一类”的。在桶内，又会根据 key 计算出来的 hash 值的高 8 位来决定 key 到底落入桶内的哪个位置（一个桶内最多有8个位置）。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227102350.png" style="zoom:50%;" />
+<h2 id="go-map如何扩容">go map如何扩容？</h2>
+<p>双倍扩容：扩容采用一种增量式扩容，原有的 key 并不会一次性搬迁完毕，因为会造成系统卡顿，所以他是通过后面每次访问的时候顺便搬迁，每次最多只会搬迁 2 个 bucket。</p>
+<p>等量扩容：重新排列。扩容完成后，其实链表长度就变短，key 都集中到了一个 bucket，更为紧凑，提高了查找的效率。</p>
+<p>极端情况下，重新排列也解决不了，map存储就会蜕变成链表，性能大大降低。</p>
+<p>此时调整哈希因子hash0，可以降低此类极端场景的发生。哈希因子阈值是6.5，超过就会扩容。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227102912.png" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227103011.png" style="zoom:50%;" />
+<h2 id="参考文献">参考文献</h2>
+<p><a href="https://juejin.cn/post/6844903848587296781">深度解密Go语言之 map - 掘金 (juejin.cn)</a></p>
+</div>
+    <div class="post__footer">
       
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="并发编程">并发编程</a>
-            <div class="archive__list-date">
-              
-                Apr 21
+        <span><a class="category" href="/categories/go/">Go</a></span>
 
 
-              
-            </div>
-          </li>
-        </ul>
 
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/map/" title="map">map</a>
-            <div class="archive__list-date">
-              
-                Apr 21
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/channel/" title="channel">channel</a>
-            <div class="archive__list-date">
-              
-                Apr 21
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/slice/" title="slice">slice</a>
-            <div class="archive__list-date">
-              
-                Apr 21
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/gmp/" title="GMP">GMP</a>
-            <div class="archive__list-date">
-              
-                Apr 20
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/" title="hugo写文章">hugo写文章</a>
-            <div class="archive__list-date">
-              
-                Apr 20
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/hugo/" title="hugo">hugo</a>
-            <div class="archive__list-date">
-              
-                Apr 19
-
-
-              
-            </div>
-          </li>
-        </ul>
-
-      
-        <ul class="archive__list">
-          <li class="archive__list-item">
-            <a class="archive__list-title" href="/tags/blog/" title="blog">blog</a>
-            <div class="archive__list-date">
-              
-                Apr 19
-
-
-              
-            </div>
-          </li>
-        </ul>
 
       
 
+      
+        <span><a class="tag" href="/tags/map/">map</a></span>
+
+
+
+
+      
+    </div>
 
     
   </div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GC on </title>
+    <link>https://example.com/tags/gc/</link>
+    <description>Recent content in GC on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Apr 2022 12:31:50 +0800</lastBuildDate><atom:link href="https://example.com/tags/gc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go的GC机制</title>
+      <link>https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/</link>
+      <pubDate>Thu, 21 Apr 2022 12:31:50 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/</guid>
+      
+        <description>什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。
+golang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。
+垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下：</description>
+      
+    </item>
+    
+  </channel>
+</rss>

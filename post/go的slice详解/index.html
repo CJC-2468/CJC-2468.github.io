@@ -9,7 +9,7 @@
     
       CJC
         |
-        使用hugo写博客
+        Go的Slice详解
 
 
       
@@ -86,7 +86,7 @@ H O P E
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://example.com/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/" />
+  <link rel="canonical" href="https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/" />
 
   
   
@@ -116,26 +116,26 @@ H O P E
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用hugo写博客"/>
-<meta name="twitter:description" content="这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面同步到github pages部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。"/>
+<meta name="twitter:title" content="Go的Slice详解"/>
+<meta name="twitter:description" content="go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
+讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
+newcap := old.cap	//old."/>
 
 
 
   
-  <meta property="og:title" content="使用hugo写博客" />
-<meta property="og:description" content="这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面同步到github pages部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。" />
+  <meta property="og:title" content="Go的Slice详解" />
+<meta property="og:description" content="go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
+讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
+newcap := old.cap	//old." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.com/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-20T09:22:02+08:00" />
-<meta property="article:modified_time" content="2022-04-20T09:22:02+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+<meta property="og:url" content="https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T12:25:09+08:00" />
+<meta property="article:modified_time" content="2022-04-21T12:25:09+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
 
 
 
@@ -149,12 +149,12 @@ H O P E
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "post",
-        "name": "使用hugo写博客",
-        "headline": "使用hugo写博客",
+        "name": "Go的Slice详解",
+        "headline": "Go的Slice详解",
         "alternativeHeadline": "",
         "description": "
       
-        这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。\n新增文章 在博客根路径下执行命令即可生成相应的文件：\n启动hugo服务，打开http:\/\/localhost:1313\/ 可实时查看最新的博客效果。\n最后做同步到github pages操作即可，见后面同步到github pages部分。\n编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。
+        go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。\n切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。\ngolang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。\n讲一下slice的扩容机制？ 根据runtime\/slice.go源码，它的扩容情况如下：\nnewcap := old.cap\t\/\/old.
 
 
       
@@ -165,7 +165,7 @@ H O P E
         "isFamilyFriendly": "true",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/"
+            "@id": "https:\/\/example.com\/post\/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3\/"
         },
         "author" : {
             "@type": "Person",
@@ -184,9 +184,9 @@ H O P E
             "name": "CJC"
         },
         "copyrightYear" : "2022",
-        "dateCreated": "2022-04-20T09:22:02.00Z",
-        "datePublished": "2022-04-20T09:22:02.00Z",
-        "dateModified": "2022-04-20T09:22:02.00Z",
+        "dateCreated": "2022-04-21T12:25:09.00Z",
+        "datePublished": "2022-04-21T12:25:09.00Z",
+        "dateModified": "2022-04-21T12:25:09.00Z",
         "publisher":{
             "@type":"Organization",
             "name": "CJC",
@@ -203,16 +203,16 @@ H O P E
       ]
 
     ,
-        "url" : "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "62",
+        "url" : "https:\/\/example.com\/post\/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3\/",
+        "wordCount" : "63",
         "genre" : [ 
       
-      "blog搭建"
+      "Go"
 
     ],
         "keywords" : [ 
       
-      "hugo写文章"
+      "slice"
 
     ]
     }
@@ -403,14 +403,14 @@ H O P E
   >
     
     <div class="post__content">
-      <h1>使用hugo写博客</h1>
+      <h1>Go的Slice详解</h1>
       
         <ul class="post__meta">
           <li class="post__meta-item">
             <em class="fas fa-calendar-day post__meta-icon"></em>
             <span class="post__meta-text"
               >
-                Wed, Apr 20, 2022
+                Thu, Apr 21, 2022
 
 
               
@@ -422,40 +422,40 @@ H O P E
           </li>
         </ul>
 
-      <p><strong>这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。</strong></p>
-<h1 id="新增文章">新增文章</h1>
-<p>在博客根路径下执行命令即可生成相应的文件：</p>
-<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092551.png" style="zoom:50%;" />
-<p>启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。</p>
-<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092759.png" style="zoom:50%;" />
-<p>最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<h1 id="编辑文章">编辑文章</h1>
-<p>使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。</p>
-<p>最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<h1 id="删除文章">删除文章</h1>
-<p>删除两处文件，最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<p>第一处：cjc@~/Documents/hugo-blog/cjc-blog/content/post下的博客文件，执行命令rm -rf XXX</p>
-<p>第二处： cjc@~/Documents/hugo-blog/cjc-blog/public/post git:(master) 下的博客文件，执行命令rm -rf XXX</p>
-<h1 id="同步到github-pages">同步到github pages</h1>
-<p>使用基本的hugo和git命令即可完成该操作，具体过程如下：</p>
-<p>使用hugo渲染，也就是执行命令hugo即可。ps:要在cjc@~/Documents/hugo-blog/cjc-blog路径下执行 <code>hugo</code></p>
-<p>进入public目录，然后执行一些简单的git指令。</p>
-<p><code>git add .</code></p>
-<p><code>git commit -m 'commit info'</code></p>
-<p><code>git push -u origin master</code></p>
-<p>最后访问自己的博客地址就可以看到最新的效果。</p>
-<h1 id="附">附：</h1>
-<h2 id="hugo-添加图片基础版">hugo 添加图片（基础版）</h2>
-<p>Hugo 的配置文件和文章中引用图片都是从static作为根目录的。
-写md文章时可以使用<code>&lt;img src=&quot;/images/XXX.png&quot; /&gt;</code> 的方式插入图片，本地是看不到的，使用hugo命令渲染以后才能看到，图片就放到 cjc@~/Documents/hugo-blog/cjc-blog/static/images路径下面即可。</p>
-<p>相比于这种方式我更推荐下面的方式。</p>
-<h2 id="picgo-阿里云oss做图床进阶">PicGo +阿里云oss做图床（进阶）</h2>
-<p>之前有用picgo+gitee做图床，但是gitee现在加了防盗链，所以只能把图床迁移到阿里云oss上了。</p>
-<p>感兴趣可以自己google一下这部分，现在有很多现成的教程。</p>
+      <h2 id="go数组和切片区别">go数组和切片区别？</h2>
+<p>数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。</p>
+<p>切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。</p>
+<h2 id="golang中数组和切片在参数传递的时候区别是什么">golang中数组和切片在参数传递的时候区别是什么？</h2>
+<p>数组是值传递，切片看上去像是引用传递，实际上还是值传递。</p>
+<h2 id="讲一下slice的扩容机制">讲一下slice的扩容机制？</h2>
+<p>根据runtime/slice.go源码，它的扩容情况如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">newcap</span> <span class="o">:=</span> <span class="nx">old</span><span class="p">.</span><span class="nx">cap</span>		<span class="c1">//old.cap指的是旧容量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="nx">newcap</span><span class="o">+</span><span class="nx">newcap</span> <span class="p">&lt;</span> <span class="nx">cap</span> <span class="p">{</span>	<span class="c1">//cap指的是old.cap+新元素个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">newcap</span> <span class="p">=</span> <span class="nx">cap</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">old</span><span class="p">.</span><span class="nx">len</span> <span class="p">&lt;</span> <span class="mi">1024</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">newcap</span> <span class="o">+=</span> <span class="nx">newcap</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">newcap</span> <span class="o">+=</span> <span class="nx">newcap</span> <span class="o">/</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">newcap</span> <span class="o">&gt;=</span> <span class="nx">cap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">break</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>它会先计算旧容量加上新加入的元素个数，然后和旧容量的2倍做个比较，看看能不能hold住，如果hold不住的话，就会直接扩容到旧容量加上新加入的元素个数，如果能hold住，那么就判断旧容量大不大于1024，如果不大于，就2倍2倍的扩，如果大于，就1.25倍的扩。但是到这里还没结束，为了更高效的利用内存，还会有一个内存对齐的操作，经过内存对齐重新计算应该的容量，然后才能得到最后的结果。</p>
+<h2 id="扩容前后slice是否相同">扩容前后slice是否相同？</h2>
+<p>注意一个前提：切片可能只用了一个数组中间的部分，指定的cap没有到数组的末尾。</p>
+<p>当切片底层指向的数组的实际容量还够扩容时，扩容前后切片底层的数组还是原来的数组，</p>
+<p>如果切片底层指向的数组实际容量已经到了最大值，扩容会重新分配一块更大的内存，将原 slice 拷贝到新 slice ，再将数据追加进去。</p>
+<h2 id="slice的深拷贝和浅拷贝">slice的深拷贝和浅拷贝？</h2>
+<p>深拷贝：新的切片和原来的切片指向不同的底层数组，任何一个数组元素改变都不影响另外一个。</p>
+<p>浅拷贝：新的切片和原来的切片指向相同的底层数组，任何一个数组元素改变都会影响另外一个。</p>
 </div>
     <div class="post__footer">
       
-        <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
+        <span><a class="category" href="/categories/go/">Go</a></span>
 
 
 
@@ -463,7 +463,7 @@ H O P E
       
 
       
-        <span><a class="tag" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/">hugo写文章</a></span>
+        <span><a class="tag" href="/tags/slice/">slice</a></span>
 
 
 

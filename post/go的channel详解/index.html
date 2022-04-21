@@ -9,7 +9,7 @@
     
       CJC
         |
-        使用hugo写博客
+        Go的Channel详解
 
 
       
@@ -86,7 +86,7 @@ H O P E
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-  <link rel="canonical" href="https://example.com/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/" />
+  <link rel="canonical" href="https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/" />
 
   
   
@@ -116,26 +116,24 @@ H O P E
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="使用hugo写博客"/>
-<meta name="twitter:description" content="这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面同步到github pages部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。"/>
+<meta name="twitter:title" content="Go的Channel详解"/>
+<meta name="twitter:description" content="channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
+要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
+channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。"/>
 
 
 
   
-  <meta property="og:title" content="使用hugo写博客" />
-<meta property="og:description" content="这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面同步到github pages部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。" />
+  <meta property="og:title" content="Go的Channel详解" />
+<meta property="og:description" content="channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
+要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
+channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.com/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-20T09:22:02+08:00" />
-<meta property="article:modified_time" content="2022-04-20T09:22:02+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+<meta property="og:url" content="https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T12:26:57+08:00" />
+<meta property="article:modified_time" content="2022-04-21T12:26:57+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
 
 
 
@@ -149,12 +147,12 @@ H O P E
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "post",
-        "name": "使用hugo写博客",
-        "headline": "使用hugo写博客",
+        "name": "Go的Channel详解",
+        "headline": "Go的Channel详解",
         "alternativeHeadline": "",
         "description": "
       
-        这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。\n新增文章 在博客根路径下执行命令即可生成相应的文件：\n启动hugo服务，打开http:\/\/localhost:1313\/ 可实时查看最新的博客效果。\n最后做同步到github pages操作即可，见后面同步到github pages部分。\n编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。
+        channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。\n要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。\nchannel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。\n有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。
 
 
       
@@ -165,7 +163,7 @@ H O P E
         "isFamilyFriendly": "true",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/"
+            "@id": "https:\/\/example.com\/post\/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3\/"
         },
         "author" : {
             "@type": "Person",
@@ -184,9 +182,9 @@ H O P E
             "name": "CJC"
         },
         "copyrightYear" : "2022",
-        "dateCreated": "2022-04-20T09:22:02.00Z",
-        "datePublished": "2022-04-20T09:22:02.00Z",
-        "dateModified": "2022-04-20T09:22:02.00Z",
+        "dateCreated": "2022-04-21T12:26:57.00Z",
+        "datePublished": "2022-04-21T12:26:57.00Z",
+        "dateModified": "2022-04-21T12:26:57.00Z",
         "publisher":{
             "@type":"Organization",
             "name": "CJC",
@@ -203,16 +201,16 @@ H O P E
       ]
 
     ,
-        "url" : "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "62",
+        "url" : "https:\/\/example.com\/post\/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3\/",
+        "wordCount" : "16",
         "genre" : [ 
       
-      "blog搭建"
+      "Go"
 
     ],
         "keywords" : [ 
       
-      "hugo写文章"
+      "channel"
 
     ]
     }
@@ -403,14 +401,14 @@ H O P E
   >
     
     <div class="post__content">
-      <h1>使用hugo写博客</h1>
+      <h1>Go的Channel详解</h1>
       
         <ul class="post__meta">
           <li class="post__meta-item">
             <em class="fas fa-calendar-day post__meta-icon"></em>
             <span class="post__meta-text"
               >
-                Wed, Apr 20, 2022
+                Thu, Apr 21, 2022
 
 
               
@@ -422,40 +420,18 @@ H O P E
           </li>
         </ul>
 
-      <p><strong>这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。</strong></p>
-<h1 id="新增文章">新增文章</h1>
-<p>在博客根路径下执行命令即可生成相应的文件：</p>
-<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092551.png" style="zoom:50%;" />
-<p>启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。</p>
-<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092759.png" style="zoom:50%;" />
-<p>最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<h1 id="编辑文章">编辑文章</h1>
-<p>使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。</p>
-<p>最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<h1 id="删除文章">删除文章</h1>
-<p>删除两处文件，最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
-<p>第一处：cjc@~/Documents/hugo-blog/cjc-blog/content/post下的博客文件，执行命令rm -rf XXX</p>
-<p>第二处： cjc@~/Documents/hugo-blog/cjc-blog/public/post git:(master) 下的博客文件，执行命令rm -rf XXX</p>
-<h1 id="同步到github-pages">同步到github pages</h1>
-<p>使用基本的hugo和git命令即可完成该操作，具体过程如下：</p>
-<p>使用hugo渲染，也就是执行命令hugo即可。ps:要在cjc@~/Documents/hugo-blog/cjc-blog路径下执行 <code>hugo</code></p>
-<p>进入public目录，然后执行一些简单的git指令。</p>
-<p><code>git add .</code></p>
-<p><code>git commit -m 'commit info'</code></p>
-<p><code>git push -u origin master</code></p>
-<p>最后访问自己的博客地址就可以看到最新的效果。</p>
-<h1 id="附">附：</h1>
-<h2 id="hugo-添加图片基础版">hugo 添加图片（基础版）</h2>
-<p>Hugo 的配置文件和文章中引用图片都是从static作为根目录的。
-写md文章时可以使用<code>&lt;img src=&quot;/images/XXX.png&quot; /&gt;</code> 的方式插入图片，本地是看不到的，使用hugo命令渲染以后才能看到，图片就放到 cjc@~/Documents/hugo-blog/cjc-blog/static/images路径下面即可。</p>
-<p>相比于这种方式我更推荐下面的方式。</p>
-<h2 id="picgo-阿里云oss做图床进阶">PicGo +阿里云oss做图床（进阶）</h2>
-<p>之前有用picgo+gitee做图床，但是gitee现在加了防盗链，所以只能把图床迁移到阿里云oss上了。</p>
-<p>感兴趣可以自己google一下这部分，现在有很多现成的教程。</p>
+      <h2 id="channel有什么特点需要注意什么">channel有什么特点，需要注意什么？</h2>
+<p>通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。</p>
+<p>要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。</p>
+<h2 id="channel有什么特点无缓冲和有缓冲区别">channel有什么特点？（无缓冲和有缓冲区别）</h2>
+<p>无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 <code>goroutine</code> 和接收 <code>goroutine</code> 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。</p>
+<p>有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</p>
+<h2 id="讲一下channel中ring-buffer的实现">讲一下channel中ring buffer的实现？</h2>
+<p>channel 使用的ring buffer来缓存写入的数据，ring buffer非常适合实现fifo的固定长度的队列。</p>
 </div>
     <div class="post__footer">
       
-        <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
+        <span><a class="category" href="/categories/go/">Go</a></span>
 
 
 
@@ -463,7 +439,7 @@ H O P E
       
 
       
-        <span><a class="tag" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/">hugo写文章</a></span>
+        <span><a class="tag" href="/tags/channel/">channel</a></span>
 
 
 

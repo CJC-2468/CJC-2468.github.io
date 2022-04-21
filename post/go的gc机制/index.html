@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      CJC
+        |
+        Go的GC机制
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.97.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="CJC" />
+  <meta
+    name="description"
+    content="
+      Integrity
+Goodness
+Passion
+H O P E
+
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.560a26330d27ff44a44e83b53cd07a95d4230a65930d31c5c76a8d481e5b35bf.js"
+      integrity="sha256-VgomMw0n/0SkToO1PNB6ldQjCmWTDTHFx2qNSB5bNb8="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go的GC机制"/>
+<meta name="twitter:description" content="什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。
+golang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。
+垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下："/>
+
+
+
+  
+  <meta property="og:title" content="Go的GC机制" />
+<meta property="og:description" content="什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。
+golang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。
+垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T12:31:50+08:00" />
+<meta property="article:modified_time" content="2022-04-21T12:31:50+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Go的GC机制",
+        "headline": "Go的GC机制",
+        "alternativeHeadline": "",
+        "description": "
+      
+        什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。\ngolang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。\n垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下：
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/go%E7%9A%84gc%E6%9C%BA%E5%88%B6\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-04-21T12:31:50.00Z",
+        "datePublished": "2022-04-21T12:31:50.00Z",
+        "dateModified": "2022-04-21T12:31:50.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/go%E7%9A%84gc%E6%9C%BA%E5%88%B6\/",
+        "wordCount" : "162",
+        "genre" : [ 
+      
+      "Go"
+
+    ],
+        "keywords" : [ 
+      
+      "GC"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/cat.jpeg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">CJC&#39;s time&amp;space</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Integrity<br />Goodness<br />Passion<br />H O P E<br /></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/CJC-2468" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Posts</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/categories/"
+            
+            title=""
+            >categories</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="#"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Go的GC机制</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Thu, Apr 21, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">One-minute read</span>
+          </li>
+        </ul>
+
+      <h2 id="什么是gcgarbage-collection">什么是GC（garbage collection）？</h2>
+<p>垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。</p>
+<p>golang可以在语言层面包含自动的垃圾回收功能，系统可以在<code>CPU</code>相对空闲的时候进行垃圾回收。</p>
+<h2 id="垃圾回收的目的是什么">垃圾回收的目的是什么？</h2>
+<ul>
+<li>防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。</li>
+<li>自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾</li>
+<li>内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。</li>
+</ul>
+<h2 id="什么是stwstop-the-world-">什么是STW（stop the world ）？</h2>
+<ul>
+<li>这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。</li>
+<li>STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。</li>
+</ul>
+<h2 id="垃圾回收器的原理是什么">垃圾回收器的原理是什么？</h2>
+<p>垃圾回收器的工作流程大体如下：</p>
+<ol>
+<li>
+<p>标记出哪些对象是存活的，哪些是可回收的。做标记的过程又可以分成两个步骤。</p>
+<ul>
+<li>
+<p>标记 GC ROOT 能关联到的对象。这里会 STW。</p>
+</li>
+<li>
+<p>从 GCRoots 的直接关联对象开始遍历整个对象图。这里不会STW。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>进行回收（清除/复制/整理）。如果在回收期间有移动过的对象（复制/整理），还需要更新引用。</p>
+</li>
+</ol>
+<h2 id="如何判断对象存活">如何判断对象存活？</h2>
+<ul>
+<li>
+<p>引用计数：每个对象进行计数，每被其它对象引用一次，计数就 +1，引用失效后，计数就 -1。当计数器的数值为 0，就意味着它没有被使用，可以回收。优点是简单，可以立刻知道对象是不是垃圾，缺点是无法处理循环引用，比如a引用b，b也引用a，两个的计数器都不是0，无法回收。</p>
+</li>
+<li>
+<p>可达性分析：通过引用链路判断对象是否可被触达，如果能触达说明该对象当前正在被使用，不可回收；反之，没有触达到的对象则认为是无使用的，可以回收。优点是可以解决循环引用，无法像引用计数那样立刻知道对象是不是垃圾，依赖于GC线程。</p>
+<p>详细：主要包括两类对象：一个是GC roots，是一个集合，称之为 GCRoots，包括全局对象、栈上的对象（函数参数与内部变量），java里面的thread也是可以的，另一个是与<code>GC Root</code>对象通过引用链<code>Reference Chain</code>相连的对象。</p>
+<p>这个引用链路的结构类似于有向有环图。目前主流的 GC 机制大多用的是「可达性分析」这条路线。Go、Java都是如此。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318191948.png" style="zoom:25%;" />
+</li>
+</ul>
+<h2 id="常见的垃圾回收算法有哪些">常见的垃圾回收算法有哪些？</h2>
+<p>其实分为两个大的部分，一般都要先判断对象是否存活，然后再用垃圾回收算法。</p>
+<ul>
+<li>
+<p>标记-清除：算法属于最早的垃圾回收算法，它是由标记阶段和清除阶段构成的。标记阶段会给所有的存活对象做上标记，而清除阶段会把没有被标记的死亡对象进行回收。会发生stw。优点是吞吐量高，因为标记完后一次可以清理大量标记过的垃圾。缺点是会产生大量内存碎片，这样子的话就没办法给比较大的对象分配内存空间了，需要赶紧进行下一次的GC操作，也就是内存整理。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318195347.png" style="zoom: 33%;" />
+</li>
+<li>
+<p>标记-复制：内存分成大小相等的两块，每次使用其中一块，当垃圾回收的时候， 把存活的对象复制到另一块上，然后把这块内存整个清理掉。优点是只需要从<code>GC Root</code>对象出发，将“可到达”的对象复制到另一块内存后直接清理当前这块的内存，优点是效率高；不用担心内存碎片。缺点是只能用一半内存，内存利用效率比较低。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318195422.png" style="zoom:33%;" />
+</li>
+<li>
+<p>标记-整理：综合了标记-清除法和标记-复制法的优势，首先标记出所有“可达”的对象，然后将存活的对象移动到内存空间的一端，最后清理掉端边界以外的内存。优点是避免了内存碎片，缺点是较为复杂，需要多次遍历内存导致STW时间较长。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318195450.png" style="zoom:33%;" />
+</li>
+<li>
+<p>分代收集：根据对象存活的生命周期将内存划分为若干个不同的区域。一般情况下将堆区划分为老年代（Tenured Generation）和新生代（Young Generation）。老年代的特点是每次垃圾收集时只有少量对象需要被回收，而新生代的特点是每次垃圾回收时都有大量的对象需要被回收，那么就可以根据不同代的特点采取最适合的收集算法。</p>
+</li>
+</ul>
+<h2 id="什么是三色标记法">什么是三色标记法？</h2>
+<p>前面提到的“标记”类算法都有一个共同的瑕疵，即在进行垃圾回收的时候会暂停整个程序（<code>STW</code>问题）。<code>GC</code>线程将所有对象分为三类：</p>
+<p>白色：未搜索的对象，在回收周期开始时所有对象都是白色，在回收周期结束时所有的白色都是垃圾对象</p>
+<p>灰色：正在搜索的对象，但是对象身上还有一个或多个引用没有扫描</p>
+<p>黑色：已搜索完的对象，所有的引用已经被扫描完</p>
+<p>三色标记法属于增量式<code>GC</code>算法，回收器首先将所有的对象着色成白色，然后从<code>GC Root</code>出发，逐步把所有“可达”的对象变成灰色再到黑色，最终所有的白色对象即是“不可达”对象。具体流程如下：</p>
+<ul>
+<li>初始状态下所有对象都是白色的。（这一步需 STW ）</li>
+<li>从GCRoots开始扫描，找出所有可达对象，标记成灰色,放入待处理队列。</li>
+<li>从队列取出灰色对象，把灰色对象变成黑色，然后把它引用的对象标记成灰色然后放入待处理队列。</li>
+<li>重复上一步，直到队列为空。</li>
+<li>此时所有白色对象都是垃圾。</li>
+</ul>
+<h2 id="三色标记法有什么弊端是否存在并发性问题">三色标记法有什么弊端？是否存在并发性问题？</h2>
+<p>三色标记法在没有STW的情况下会存在存在并发性问题。简单来说一句话：在三色标记法执行的时候，有可能有用户让一个黑色的对象指向了白色对象且这个白色对象没有被还没访问过的其他灰色对象指着，白色对象最后会被错误的回收。</p>
+<p>假设三色标记法执行前，包含如下对象：</p>
+<p>则三色标记法的具体执行过程如下：</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318202333.png" style="zoom:33%;" />
+<p>上述三色标记执行过后堆内存中白色对象（只有<code>D</code>）会被当做垃圾对象清理掉，如果用户在标记执行过程中建立了从<code>A</code>对象到<code>D</code>对象的引用，那么会导致后续对<code>D</code>的访问出错。这种没有指向合法地址的指针一般被称为“野指针”，会造成严重的程序错误。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220318202418.png" style="zoom:25%;" />
+<h2 id="三色标记法出现并发性问题的原因和解决方案"><strong>三色标记法出现并发性问题的原因和解决方案</strong>：</h2>
+<p>假设三色标记法和用户程序并发执行，那么下列两个条件<strong>同时满足</strong>就可能出现错误 回收非垃圾对象 的问题（一句话，回收了不该回收的对象，动了不该动的人！）：</p>
+<ul>
+<li>条件1：某一黑色对象新增了对白色对象的引用</li>
+<li>条件2：对于这个白色对象，所有和它存在可达关系的灰色对象丢失了访问它的可达路径</li>
+</ul>
+<p>为什么满足这俩条件就能出问题？满足条件1时说明黑色节点已扫描完毕，无法再通过这个黑色节点扫描到这个白色节点；满足条件2时说明没有其他灰色节点指向这个白色节点了，所以这个白色节点没办法从灰色节点到达，所以最终一定会被错误的回收掉 。</p>
+<p>解决方案就两种：一种是STW（用户程序和三色标记法不同时进行），另外一种思路就是写屏障，使用<strong>赋值器屏障技术</strong>使得赋值器在进行指针写操作时同步垃圾回收器，保证不破坏弱三色不变性。</p>
+<p>但是STW会影响程序的性能，所以我们要通过写屏障技术尽可能地缩短STW的时间。</p>
+<h2 id="什么是写屏障写屏障如何保证对象不丢失保证gc的正确性">什么是写屏障？写屏障如何保证对象不丢失？保证GC的正确性？</h2>
+<p>屏障技术（内存屏障技术）：给代码 操作内存的顺序 添加一些限制，即在内存屏障前执行的动作必须先于在你内存屏障后执行的动作。</p>
+<p>使用屏障技术可以使得用户程序和三色标记过程并发执行（不需要stw），我们只需要达成下列任意一种三色不变性：</p>
+<ul>
+<li>强三色不变性：黑色对象永远不会指向白色对象</li>
+<li>弱三色不变性：黑色对象指向的白色对象至少包含一条由灰色对象经过白色对象最终可以到达该白色对象的可达路径。</li>
+</ul>
+<p>GC中使用的内存读写屏障技术指的是编译器会在编译期间生成一段代码，该代码在运行期间用户访问内存对象时会拦截这个操作，相当于一个<code>hook</code>调用，根据<code>hook</code>时机不同可分为不同的屏障技术。由于读屏障技术需要在读操作中插入代码片段从而影响用户程序性能，所以一般使用写屏障技术来保证三色标记的稳健性。</p>
+<p>（hook实际上是一个处理消息的程序段，通过系统调用，把它挂入系统。每当特定的消息发出，在没有到达目的窗口前，钩子程序就先捕获该消息，亦即钩子函数先得到控制权。这时钩子函数即可以加工处理（改变）该消息，也可以不作处理而继续传递该消息，还可以强制结束消息的传递）</p>
+<p><strong>满足强三色不变性-Dijkstra 插入写屏障</strong>：核心思想是不允许黑色节点指向白色节点。当黑色节点新增了白色节点的引用时，将对应的白色节点改为灰色。需要STW。</p>
+<p>黑色对象的内存槽有两种位置, <code>栈</code>和<code>堆</code>. 栈空间的特点是容量小,但是要求相应速度快,因为函数调用弹出频繁使用, 所以“插入屏障”机制,在栈空间的对象操作中不使用. 而仅仅使用在堆空间对象的操作中.</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220406152948.png" alt=""></p>
+<p>如果栈不添加,当全部三色标记扫描之后,栈上有可能依然存在白色对象被引用的情况(如上图的对象9). 所以要对栈重新进行三色标记扫描, 但这次为了对象不丢失, 要对本次标记扫描启动STW暂停. 直到栈空间的三色标记结束</p>
+<p><strong>满足弱三色不变性-Yuasa 删除写屏障</strong>：核心思想是防止丢失灰色对象到白色对象的可达路径，简单来说就是当删除对象<code>A</code>指向对象<code>B</code>的指针时，那么将被删除的对象标记为灰色（如果B之前为白色的话）。</p>
+<p>[<a href="https://segmentfault.com/a/1190000022030353">典藏版]Golang三色标记、混合写屏障GC模式图文全分析 - SegmentFault 思否</a></p>
+<h2 id="什么是混合写屏障go采用的是什么写屏障">什么是混合写屏障？go采用的是什么写屏障？</h2>
+<p>插入写屏障和删除写屏障的短板：</p>
+<ul>
+<li>插入写屏障：结束时需要STW来重新扫描栈，标记栈上引用的白色对象的存活；</li>
+<li>删除写屏障：回收精度低，GC开始时STW扫描堆栈来记录初始快照，这个过程会保护开始时刻的所有存活对象。</li>
+</ul>
+<p>为了结合插入写屏障和删除写屏障的优点，避免对栈re-scan的过程，同时优化STW的时间，引入了混合写屏障。<strong>满足变形的弱三色不变性。</strong></p>
+<p><strong>由于栈上的操作需要保证性能，所以所有的写屏障均只针对堆上的对象。</strong></p>
+<ol>
+<li>GC开始将栈上的对象全部扫描并标记为黑色。(之后不再进行第二次重复扫描，无需STW)</li>
+<li>GC期间，任何在栈上创建的新对象，均为黑色。</li>
+<li>被删除的对象标记为灰色。</li>
+<li>被添加的对象标记为灰色。</li>
+</ol>
+<p>Golang中的混合写屏障满足弱三色不变式，结合了删除写屏障和插入写屏障的优点，只需要在开始时并发扫描各个goroutine的栈，使其变黑并一直保持，这个过程不需要STW，而标记结束后，因为栈在扫描后始终是黑色的，也无需再进行re-scan操作了，减少了STW的时间。</p>
+<h2 id="gc触发的时机">GC触发的时机？</h2>
+<p>主动触发，通过调用 runtime.GC 来触发 GC，此调用阻塞式地等待当前 GC 运行完毕，一般都不用。</p>
+<p>系统触发：</p>
+<ul>
+<li>
+<p>定时触发：使用系统监控，当超过两分钟没有产生任何 GC 时，强制触发 GC。</p>
+</li>
+<li>
+<p>当所分配的堆大小达到阈值(由控制器计算的触发堆的大小)时，将会触发。</p>
+</li>
+</ul>
+<h2 id="go语言中gc流程是什么">go语言中GC流程是什么？</h2>
+<p>当前GO版本以 STW 为界限，可以将 GC 划分为五个阶段:</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220120140622.png" style="zoom: 50%;" />
+<p>sweep termination（清扫终止阶段）:意味着上一阶段结束，下一阶段标记开始，启动写屏障，会stw</p>
+<p>mark（标记阶段）：与赋值器（赋值器是修改引用的）并发执行，这时候新创建的对象都会被标记成黑色，写屏障开启</p>
+<p>mark termination（标记终止阶段）：保证一个周期内的标记任务完成，写屏障停止，会stw</p>
+<p>gc off（内存清扫阶段）：清理内存并归还给操作系统，写屏障关闭</p>
+<h2 id="什么是gc调优gc如何调优">什么是GC调优？GC如何调优？</h2>
+<p>当我们谈论 GC 调优时，通常是指减少用户代码对 GC 产生的压力，减少用户代码分配内存的数量。</p>
+<p>减少内存分配并复用内存，例如使用 sync.Pool 来复用需要频繁创建临时对象。</p>
+<p>考虑内存对齐。</p>
+<h2 id="参考文献">参考文献</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/297177002">图示Golang垃圾回收机制 - 知乎 (zhihu.com)</a></p>
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/gc/">GC</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

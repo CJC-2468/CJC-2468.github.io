@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      CJC
+        |
+        Go基础
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.97.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="CJC" />
+  <meta
+    name="description"
+    content="
+      Integrity
+Goodness
+Passion
+H O P E
+
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://example.com/post/go%E5%9F%BA%E7%A1%80/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.560a26330d27ff44a44e83b53cd07a95d4230a65930d31c5c76a8d481e5b35bf.js"
+      integrity="sha256-VgomMw0n/0SkToO1PNB6ldQjCmWTDTHFx2qNSB5bNb8="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go基础"/>
+<meta name="twitter:description" content="go语言中new和make的区别？ 首先这俩都是内建函数。
+new函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。
+make函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。
+其实 new 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用T{}方式更加便捷方便。
+与其他语言相比，使用 Go 有什么好处?  语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。 高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。 内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。 垃圾回收：自动垃圾回收，三色标记法和写屏障。 静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。 标准库：自身标准库丰富，比如net/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。 工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。  Go中的包是什么？ 由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。"/>
+
+
+
+  
+  <meta property="og:title" content="Go基础" />
+<meta property="og:description" content="go语言中new和make的区别？ 首先这俩都是内建函数。
+new函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。
+make函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。
+其实 new 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用T{}方式更加便捷方便。
+与其他语言相比，使用 Go 有什么好处?  语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。 高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。 内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。 垃圾回收：自动垃圾回收，三色标记法和写屏障。 静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。 标准库：自身标准库丰富，比如net/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。 工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。  Go中的包是什么？ 由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/go%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-21T12:18:26+08:00" />
+<meta property="article:modified_time" content="2022-04-21T12:18:26+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Go基础",
+        "headline": "Go基础",
+        "alternativeHeadline": "",
+        "description": "
+      
+        go语言中new和make的区别？ 首先这俩都是内建函数。\nnew函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。\nmake函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。\n其实 new 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用T{}方式更加便捷方便。\n与其他语言相比，使用 Go 有什么好处?  语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。 高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。 内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。 垃圾回收：自动垃圾回收，三色标记法和写屏障。 静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。 标准库：自身标准库丰富，比如net\/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。 工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。  Go中的包是什么？ 由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/go%E5%9F%BA%E7%A1%80\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-04-21T12:18:26.00Z",
+        "datePublished": "2022-04-21T12:18:26.00Z",
+        "dateModified": "2022-04-21T12:18:26.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/go%E5%9F%BA%E7%A1%80\/",
+        "wordCount" : "326",
+        "genre" : [ 
+      
+      "Go"
+
+    ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/cat.jpeg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">CJC&#39;s time&amp;space</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Integrity<br />Goodness<br />Passion<br />H O P E<br /></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/CJC-2468" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Posts</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/categories/"
+            
+            title=""
+            >categories</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="#"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Go基础</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Thu, Apr 21, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">2-minute read</span>
+          </li>
+        </ul>
+
+      <h2 id="go语言中new和make的区别">go语言中new和make的区别？</h2>
+<p>首先这俩都是内建函数。</p>
+<p>new函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。</p>
+<p>make函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。</p>
+<p>其实 <code>new</code> 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用<code>T{}</code>方式更加便捷方便。</p>
+<h2 id="与其他语言相比使用-go-有什么好处">与其他语言相比，使用 <strong>Go</strong> 有什么好处?</h2>
+<ul>
+<li>语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。</li>
+<li>高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。</li>
+<li>内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。</li>
+<li>垃圾回收：自动垃圾回收，三色标记法和写屏障。</li>
+<li>静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。</li>
+<li>标准库：自身标准库丰富，比如net/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。</li>
+<li>工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。</li>
+</ul>
+<h2 id="go中的包是什么">Go中的包是什么？</h2>
+<p>由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。</p>
+<h2 id="go支持什么形式类型转换">go支持什么形式类型转换？</h2>
+<p>强制使用显式类型转换，这个它的设计理念符合，尽可能简单，统一，语意要明确。</p>
+<h2 id="如何在运行时检查变量类型">如何在运行时检查变量类型？</h2>
+<p>类型开关（type switch），用switch case 加类型判断（x.(type)）可以实现。type switch不支持fallthrough.</p>
+<h2 id="switch的fullthough有什么用">switch的fullthough有什么用？</h2>
+<p>这个放在某个case的最后，可以继续执行后面的case，不需要再进行条件判断</p>
+<h2 id="什么是内存对齐为什么需要">什么是内存对齐？为什么需要？</h2>
+<p>CPU 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问。比如 32 位的 CPU ，字长为 4 字节，那么 CPU 访问内存的单位也是 4 字节。</p>
+<p>这么设计的目的，是减少 CPU 访问内存的次数，加大 CPU 访问内存的吞吐量。比如同样读取 8 个字节的数据，一次读取 4 个字节那么只需要读取 2 次。</p>
+<p>CPU 始终以字长访问内存，如果不进行内存对齐，很可能增加 CPU 访问内存的次数，例如：</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220327221722.png" style="zoom:33%;" />
+<p>不对齐的话，要访问b就要2次，对齐的话只用1次。</p>
+<h2 id="cap函数能作用于哪些类型">cap函数能作用于哪些类型？</h2>
+<p>array：等同于len，返回数组长度</p>
+<p>slice：返回切片的容量</p>
+<p>channel：返回通道的容量</p>
+<h2 id="printf-sprintf-fprintf有什么区别">Printf, Sprintf, Fprintf有什么区别？</h2>
+<p>Printf是标准输出，一般是屏幕，也可以重定向。</p>
+<p>Sprintf是格式化字符串，然后保存到字符串变量里。</p>
+<p>Fprintf是格式化字符串输出到文件。</p>
+<h2 id="什么是值类型和引用类型区别">什么是值类型和引用类型？区别？</h2>
+<p>值类型：基本数据类型，int, float, bool, array，struct。变量存储的是值，内存通常在栈中分配。</p>
+<p>引用类型：slice，map，chan,interface。变量存储的是地址，这个地址对应的空间才真正存储数据，内存通常在堆上分配。</p>
+<h2 id="go语言函数传参是值传递和引用传递">go语言函数传参是值传递和引用传递？</h2>
+<p>go语言中在函数传参时其实只有值传递，要么传的是值的副本，要么是指针的副本。无论是值类型还是引用类型的变量，在函数传参时都会发生值拷贝，开辟新的内存空间。</p>
+<p>若参数为值类型，相当于直接把原来的变量值拷贝一份放进函数，新旧两个变量地址不一样，不可以相互修改。</p>
+<p>若参数为引用类型，那么新旧变量虽然是两个，但是他们存的地址是一样的，也就是说会将我们要修改的变量的地址传进去，所以函数内部改变数据时，就是对该数据本身的修改。</p>
+<h2 id="defer函数是什么特点和作用场景">defer函数是什么？特点和作用？场景？</h2>
+<p>用来做延迟调用的。只有在当前函数执行结束之前，才会最后被调用。如果有多个defer语句，则执行顺序是以栈的顺序执行。通常用于资源释放，锁的释放，关闭连接之类的，一般写的时候应该和请求资源的时候成对出现。</p>
+<h2 id="java和golang有什么区别">java和golang有什么区别？</h2>
+<p>面向对象：java是面向对象语言，golang不是，但是golang可以用面向对象的思想，java的类和go的结构体很像。比如java里有继承的概念，go里是没有的，但是也可以通过结构体嵌套做。</p>
+<p>并发：Golang 的一大特色就是从语言层面原生支持协程，在函数或者方法前面加 go关键字就可创建一个协程。</p>
+<p>工具链：java的工具链和社区环境现在已经非常成熟，golang的还在高速发展期。</p>
+<p>解释编译语言：Java既不是解释性语言，也不是编译型语言，Java代码编译后不能直接运行，他是需要解释运行在jvm上的，go是编译型语言，在编译好以后，在任何相同平台都能运行，而且他可以跨平台编译。</p>
+<h2 id="go语言中变量分配的位置在哪里">go语言中变量分配的位置在哪里？</h2>
+<p>堆区：由GC自动回收。</p>
+<p>栈区：不涉及GC操作，每个 goroutine 都有自己的栈，扩容时被分配在堆上。</p>
+<p>总结：很难说，对于局部变量而言：尽可能会分到栈上，但是如果变量过大，那可能会被分到堆上，具体想知道什么情况就要做逃逸分析了。</p>
+<h2 id="方法中值接收者和指针接收者区别">方法中值接收者和指针接收者区别？</h2>
+<p>如果是值类型，修改的都是对象的副本，不影响调用者</p>
+<p>如果是指针类型，修改的都是对象本身，会影响调用者</p>
+<h2 id="讲讲select">讲讲select？</h2>
+<p>select 是 Go 中的一个控制结构，类似于用于通信的 switch 语句。select就是用来监听和channel有关的IO操作，当 IO 操作发生时，触发相应的动作。执行过程：如果有一个或多个IO操作可以完成，则Go运行时系统会随机的选择一个执行，否则的话，如果有default分支，则执行default分支语句，如果连default都没有，则select语句会一直阻塞，直到至少有一个IO操作可以进行。</p>
+<h2 id="init函数是什么时候执行的">init函数是什么时候执行的？</h2>
+<p><code>init()</code> 函数是 Go 程序初始化的一部分。Go 程序初始化先于 main 函数，由 runtime 初始化每个导入的包，初始化顺序不是按照从上到下的导入顺序，而是按照解析的依赖关系，没有依赖的包最先初始化。</p>
+<p>每个包首先初始化包作用域的常量和变量（常量优先于变量），然后执行包的 <code>init()</code> 函数。同一个包，甚至是同一个源文件可以有多个 <code>init()</code> 函数。<code>init()</code> 函数没有入参和返回值，不能被其他函数调用，同一个包内多个 <code>init()</code> 函数的执行顺序不作保证。</p>
+<p>一句话总结： import –&gt; const –&gt; var –&gt; <code>init()</code> –&gt; <code>main()</code></p>
+<h2 id="go语言的局部变量分配在堆上还是栈上">go语言的局部变量分配在堆上还是栈上？</h2>
+<p>由编译器决定。Go 语言编译器会自动决定把一个变量放在栈还是放在堆，编译器会做逃逸分析(escape analysis)，当发现变量的作用域没有超出函数范围，就可以在栈上，反之则必须分配在堆上。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">foo</span><span class="p">()</span> <span class="o">*</span><span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">v</span> <span class="o">:=</span> <span class="mi">11</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">v</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">m</span> <span class="o">:=</span> <span class="nf">foo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">println</span><span class="p">(</span><span class="o">*</span><span class="nx">m</span><span class="p">)</span> <span class="c1">// 11
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p><code>foo()</code> 函数中，如果 v 分配在栈上，foo 函数返回时，<code>&amp;v</code> 就不存在了，但是这段函数是能够正常运行的。Go 编译</p>
+<h2 id="两个interface可以比较吗">两个interface可以比较吗？</h2>
+<p>Go 语言中，interface 的内部实现包含了 2 个字段，类型 <code>T</code> 和 值 <code>V</code>，interface 可以使用 <code>==</code> 或 <code>!=</code> 比较。2 个 interface 相等有以下 2 种情况</p>
+<ol>
+<li>两个 interface 均等于 nil（此时 V 和 T 都处于 unset 状态）</li>
+<li>类型 T 相同，且对应的值 V 相等。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Stu</span> <span class="kd">struct</span> <span class="p">{</span>	<span class="nx">Name</span> <span class="kt">string</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">StuInt</span> <span class="kd">interface</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>	
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">stu1</span><span class="p">,</span> <span class="nx">stu2</span> <span class="nx">StuInt</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Stu</span><span class="p">{</span><span class="s">&#34;Tom&#34;</span><span class="p">},</span> <span class="o">&amp;</span><span class="nx">Stu</span><span class="p">{</span><span class="s">&#34;Tom&#34;</span><span class="p">}</span>	
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">stu3</span><span class="p">,</span> <span class="nx">stu4</span> <span class="nx">StuInt</span> <span class="p">=</span> <span class="nx">Stu</span><span class="p">{</span><span class="s">&#34;Tom&#34;</span><span class="p">},</span> <span class="nx">Stu</span><span class="p">{</span><span class="s">&#34;Tom&#34;</span><span class="p">}</span>	
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">stu1</span> <span class="o">==</span> <span class="nx">stu2</span><span class="p">)</span> <span class="c1">// false	 两个类型相同*Stu，值是 Stu 结构体的地址，两个地址不同，因此结果为 false。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">stu3</span> <span class="o">==</span> <span class="nx">stu4</span><span class="p">)</span> <span class="c1">// true 类型相等且值相等
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h2 id="什么是rune类型">什么是rune类型？</h2>
+<p>ASCII 码只需要 7 bit 就可以完整地表示，但只能表示英文字母在内的128个字符，为了表示世界上大部分的文字系统，发明了 Unicode， 它是ASCII的超集，包含世界上书写系统中存在的所有字符，在 Go 语言中称之为 rune，是 int32 类型的别名。</p>
+<p>Go 语言中，字符串的底层表示是 byte (8 bit) 序列，而非 rune (32 bit) 序列。例如下面的例子中 <code>语</code> 和 <code>言</code> 使用 UTF-8 编码后各占 3 个 byte，因此 <code>len(&quot;Go语言&quot;)</code> 等于 8，当然我们也可以将字符串转换为 rune 序列。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s">&#34;Go语言&#34;</span><span class="p">))</span> <span class="c1">// 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="s">&#34;Go语言&#34;</span><span class="p">)))</span> <span class="c1">// 4
+</span></span></span></code></pre></div><h2 id="如何高效拼接字符串">如何高效拼接字符串？</h2>
+<p>Go 语言中，字符串是只读的，也就意味着每次修改操作都会创建一个新的字符串。如果需要拼接多次，应使用 <code>strings.Builder</code>，最小化内存拷贝次数。</p>
+<h2 id="如何判断-2-个字符串切片slice-是相等的">如何判断 2 个字符串切片（slice) 是相等的？</h2>
+<ul>
+<li>
+<p><code>reflect</code>比较的方法,直接使用<code>reflect</code>包的<code>reflect.DeepEqual</code>方法来比较<code>a</code>和<code>b</code>是否相等</p>
+</li>
+<li>
+<p>循环遍历比较的方法</p>
+<p>使用Benchmark测试发现循环遍历效率更高。</p>
+</li>
+</ul>
+<h2 id="讲讲空struct">讲讲空struct{}？</h2>
+<p>空结构体 struct{} 实例不占据任何的内存空间(使用 <code>unsafe.Sizeof</code> 计算出一个数据类型实例需要占用的字节数。)</p>
+<p>因为空结构体不占据内存空间，因此被广泛作为各种场景下的占位符使用。一是节省资源，二是空结构体本身就具备很强的语义，即这里不需要任何值，仅作为占位符。</p>
+<ul>
+<li>实现集合(Set):Go 语言标准库没有提供 Set 的实现，通常使用 map 来代替。事实上，对于集合来说，只需要 map 的键，而不需要值。即使是将值设置为 bool 类型，也会多占据 1 个字节，那假设 map 中有一百万条数据，就会浪费 1MB 的空间。因此呢，将 map 作为集合(Set)使用时，可以将值类型定义为空结构体，仅作为占位符使用即可。</li>
+<li>不发送数据的信道(channel):有时候使用 channel 不需要发送任何的数据，只用来通知子协程(goroutine)执行任务，或只用来控制协程并发度。这种情况下，使用空结构体作为占位符就非常合适了。</li>
+</ul>
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+      
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

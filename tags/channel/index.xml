@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>channel on </title>
+    <link>https://example.com/tags/channel/</link>
+    <description>Recent content in channel on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 21 Apr 2022 12:26:57 +0800</lastBuildDate><atom:link href="https://example.com/tags/channel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go的Channel详解</title>
+      <link>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 21 Apr 2022 12:26:57 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
+要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
+channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</description>
+      
+    </item>
+    
+  </channel>
+</rss>
