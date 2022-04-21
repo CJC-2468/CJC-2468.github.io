@@ -204,7 +204,7 @@ H O P E
 
     ,
         "url" : "https:\/\/example.com\/post\/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2\/",
-        "wordCount" : "57",
+        "wordCount" : "62",
         "genre" : [ 
       
       "blog搭建"
@@ -413,9 +413,9 @@ H O P E
       <p><strong>这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。</strong></p>
 <h1 id="新增文章">新增文章</h1>
 <p>在博客根路径下执行命令即可生成相应的文件：</p>
-<img src="/images/20220420092551.png" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092551.png" style="zoom:50%;" />
 <p>启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。</p>
-<img src="/images/20220420092759.png" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220420092759.png" style="zoom:50%;" />
 <p>最后做同步到github pages操作即可，见后面同步到github pages部分。</p>
 <h1 id="编辑文章">编辑文章</h1>
 <p>使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。</p>
@@ -433,9 +433,13 @@ H O P E
 <p><code>git push -u origin master</code></p>
 <p>最后访问自己的博客地址就可以看到最新的效果。</p>
 <h1 id="附">附：</h1>
-<h2 id="hugo-添加图片">hugo 添加图片</h2>
+<h2 id="hugo-添加图片基础版">hugo 添加图片（基础版）</h2>
 <p>Hugo 的配置文件和文章中引用图片都是从static作为根目录的。
 写md文章时可以使用<code>&lt;img src=&quot;/images/XXX.png&quot; /&gt;</code> 的方式插入图片，本地是看不到的，使用hugo命令渲染以后才能看到，图片就放到 cjc@~/Documents/hugo-blog/cjc-blog/static/images路径下面即可。</p>
+<p>相比于这种方式我更推荐下面的方式。</p>
+<h2 id="picgo-阿里云oss做图床进阶">PicGo +阿里云oss做图床（进阶）</h2>
+<p>之前有用picgo+gitee做图床，但是gitee现在加了防盗链，所以只能把图床迁移到阿里云oss上了。</p>
+<p>感兴趣可以自己google一下这部分，现在有很多现成的教程。</p>
 </div>
     <div class="post__footer">
       

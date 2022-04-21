@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      CJC
+        |
+        Go的GMP模型详解
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.97.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="CJC" />
+  <meta
+    name="description"
+    content="
+      Integrity
+Goodness
+Passion
+H O P E
+
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://example.com/post/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.560a26330d27ff44a44e83b53cd07a95d4230a65930d31c5c76a8d481e5b35bf.js"
+      integrity="sha256-VgomMw0n/0SkToO1PNB6ldQjCmWTDTHFx2qNSB5bNb8="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go的GMP模型详解"/>
+<meta name="twitter:description" content="什么是GM？1.0之前的GM调度模型 M 想要执行、放回 G 都必须访问全局 G 队列，并且 M 有多个，即多线程访问同一资源需要加锁进行保证互斥 / 同步，所以全局 G 队列是有互斥锁进行保护的。"/>
+
+
+
+  
+  <meta property="og:title" content="Go的GMP模型详解" />
+<meta property="og:description" content="什么是GM？1.0之前的GM调度模型 M 想要执行、放回 G 都必须访问全局 G 队列，并且 M 有多个，即多线程访问同一资源需要加锁进行保证互斥 / 同步，所以全局 G 队列是有互斥锁进行保护的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-20T23:58:58+08:00" />
+<meta property="article:modified_time" content="2022-04-20T23:58:58+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Go的GMP模型详解",
+        "headline": "Go的GMP模型详解",
+        "alternativeHeadline": "",
+        "description": "
+      
+        什么是GM？1.0之前的GM调度模型 M 想要执行、放回 G 都必须访问全局 G 队列，并且 M 有多个，即多线程访问同一资源需要加锁进行保证互斥 \/ 同步，所以全局 G 队列是有互斥锁进行保护的。
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-04-20T23:58:58.00Z",
+        "datePublished": "2022-04-20T23:58:58.00Z",
+        "dateModified": "2022-04-20T23:58:58.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3\/",
+        "wordCount" : "296",
+        "genre" : [ 
+      
+      "Go"
+
+    ],
+        "keywords" : [ 
+      
+      "GMP"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/cat.jpeg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">CJC&#39;s time&amp;space</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Integrity<br />Goodness<br />Passion<br />H O P E<br /></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/CJC-2468" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Posts</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="#"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Go的GMP模型详解</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Wed, Apr 20, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">2-minute read</span>
+          </li>
+        </ul>
+
+      <h2 id="什么是gm10之前的gm调度模型">什么是GM？1.0之前的GM调度模型</h2>
+<p>M 想要执行、放回 G 都必须访问全局 G 队列，并且 M 有多个，即多线程访问同一资源需要加锁进行保证互斥 / 同步，所以全局 G 队列是有<strong>互斥锁</strong>进行保护的。</p>
+<p>缺点：创建、销毁、调度 G 都需要每个 M 获取锁，这就形成了<strong>激烈的锁竞争</strong>。M 转移 G 会造成延迟和额外的系统负载。比如当 G 中包含创建新协程的时候，M 创建了 G’，为了继续执行 G，需要把 G’交给 M’执行，也造成了很差的<strong>局部性</strong>，因为 G’和 G 是相关的，最好放在 M 上执行，而不是其他 M’。系统调用 (CPU 在 M 之间的切换) 导致频繁的线程阻塞和取消阻塞操作增加了系统开销。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220119215624.png" style="zoom:25%;" />
+<h2 id="什么是gmp模型">什么是GMP模型？</h2>
+<p>GMP是golang的调度器的模型。</p>
+<ul>
+<li>G（Goroutine）: go协程，每个go关键字都会创建一个协程。</li>
+<li>M（Machine）：对<strong>内核级线程</strong>的封装，是实际的执行体，数量对应真实的CPU核心数（真正干活的对象）。</li>
+<li>P（Processor）： <strong>它包含了运行 goroutine 的资源</strong>，如果M想运行 G，必须先绑定一个有效的P。用来调度 G 和 M 之间的关联关系，其数量可通过 GOMAXPROCS() 来设置，默认为核心数。作用是控制可同时执行的任务数，并为M提供运行的资源。</li>
+</ul>
+<p>除此之外，还包含：</p>
+<p>全局的G队列：存放等待运行的 G。</p>
+<p>P的本地队列：同全局队列类似，存放的也是等待运行的 G，存的数量有限，不超过 <strong>256</strong> 个。新建 G’时，G’优先加入到 P 的本地队列，如果队列满了，则会把本地队列中一半的 G 移动到全局队列。</p>
+<p>P 列表：所有的 P 都在程序启动时创建，并保存在数组中，最多有 <code>GOMAXPROCS</code>(可配置) 个。</p>
+<p>M：线程想运行任务就得绑定 P，从 P 的本地队列获取 G，P 队列为空时，M 也会尝试从全局队列拿一批 G 放到 P 的本地队列，或从其他 P 的本地队列偷一半放到自己 P 的本地队列。M 运行 G，G 执行之后，M 会从 P 获取下一个 G，不断重复下去。</p>
+<p>Goroutine 调度器和 OS 调度器是通过 M 结合起来的，每个 M 都代表了 1 个内核线程，OS 调度器负责把内核线程分配到 CPU 的核上执行。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220119222103.png" style="zoom:25%;" />
+<h2 id="gmp中p和m的数量问题">GMP中P和M的数量问题？</h2>
+<ul>
+<li>
+<p>P 的数量：由启动时环境变量 $GOMAXPROCS 或者是由 runtime 的方法 GOMAXPROCS() 决定。</p>
+</li>
+<li>
+<p>M 的数量: go 语言本身的限制：go 程序启动时，会设置 M 的最大数量，<strong>默认 10000</strong>. 但是内核很难支持这么多的线程数，所以这个限制可以忽略。runtime/debug 中的 SetMaxThreads 函数，设置 M 的最大数量。一个 M 阻塞了，会创建新的 M。</p>
+<p><strong>M 与 P 的数量没有绝对关系</strong>，一个 M 阻塞，P 就会去<strong>创建或者切换</strong>另一个 M，所以，即使 P 的默认数量是 1，也有可能会创建很多个 M 出来。</p>
+</li>
+</ul>
+<h2 id="p-和-m-何时会被创建">P 和 M 何时会被创建？</h2>
+<ul>
+<li>
+<p>P 何时创建：在确定了 P 的最大数量 n 后，运行时系统会根据这个数量创建 n 个 P，也就是初始化的时候就创建，是固定的。</p>
+</li>
+<li>
+<p>M 何时创建：没有足够的 M 来关联 P 并运行其中的可运行的 G。比如所有的 M 此时都阻塞住了，而 P 中还有很多就绪任务，就会去寻找空闲的 M，而没有空闲的，就会去创建新的 M，是动态的。</p>
+</li>
+</ul>
+<h2 id="gmp调度流程">GMP调度流程？</h2>
+<p>从下图我们可以分析出几个结论：</p>
+<ul>
+<li>我们通过 go func () 来创建一个 goroutine；</li>
+<li>有两个存储 G 的队列，一个是局部调度器 P 的本地队列、一个是全局 G 队列。新创建的 G 会先保存在 P 的本地队列中，如果 P 的本地队列已经满了就会保存在全局的队列中；**可以发现，在新的调度器中依然有全局 G 队列，但功能已经被弱化了。**只有M绑定的P的本地队列没有G时，才会去全局队列拿。</li>
+<li>G 只能运行在 M 中，一个 M 必须持有一个 P，M 与 P 是 1：1 的关系。M 会从 P 的本地队列弹出一个可执行状态的 G 来执行，如果 P 的本地队列为空，就会想其他的 MP 组合偷取一个可执行的 G 来执行；</li>
+<li>一个 M 调度 G 执行的过程是一个循环机制；</li>
+<li>当 M 执行某一个 G 时候如果发生了 syscall 或则其余阻塞操作，M 会阻塞，如果当前有一些 G 在等待，runtime 会把这个线程 M 从 P 中摘除 (detach)，然后再创建一个新的内核线程 (如果有空闲的线程可用就复用空闲线程) 来服务于这个 P；</li>
+<li>当 M 系统调用结束时候，这个 G 会尝试获取一个空闲的 P 执行，并放入到这个 P 的本地队列。如果获取不到 P，那么这个线程 M 变成休眠状态， 加入到空闲线程中，然后这个 G 会被放入全局队列中。</li>
+</ul>
+<p>（图片来自网络，侵删。）</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220119223354.png" style="zoom:33%;" />
+<h2 id="gmp中的work-stealing机制">GMP中的work stealing机制？</h2>
+<p>当M发现自己绑定的P中无可运行的 G 时，会尝试先从全局队列中取一部分G，如果还是没有，就尝试从其他M绑定的 P 的本地队列偷取一半的 G，而不是销毁线程。</p>
+<h2 id="gmp中的hand-off机制">GMP中的hand off机制？</h2>
+<p>当M因为 G 进行系统调用阻塞时，M释放绑定的 P，把 P 转移给其他空闲的M执行。当发生上下文切换时，需要保护现场情况以便下次再执行时的现场恢复。只需要将M的寄存器保存到G的空间，就可以实现现场保护。下次调度时，M通过修改寄存器，将执行栈指向G自带的内存即可。</p>
+<h2 id="gmp调度过程中存在哪些阻塞">GMP调度过程中存在哪些阻塞？</h2>
+<p>各种类型的system call，等待channel数， lock机制等都会导致G的阻塞，这时候会触发hand off机制。</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://go.cyub.vip/gmp/gmp-model.html">GMP模型 — 深入Go语言之旅 (cyub.vip)</a></p>
+<p><a href="https://www.qiyacloud.cn/2020/04/2020-04-07/">Go 协程 Goroutine 到底是怎么回事？（一） - 奇伢云存储 (qiyacloud.cn)</a></p>
+<p><a href="https://juejin.cn/post/6886321367604527112">Golang并发调度的GMP模型 - 掘金 (juejin.cn)</a></p>
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/gmp/">GMP</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
