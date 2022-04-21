@@ -524,7 +524,6 @@ golang可以在语言层面包含自动的垃圾回收功能，系统可以在CP
 <p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220406152948.png" alt=""></p>
 <p>如果栈不添加,当全部三色标记扫描之后,栈上有可能依然存在白色对象被引用的情况(如上图的对象9). 所以要对栈重新进行三色标记扫描, 但这次为了对象不丢失, 要对本次标记扫描启动STW暂停. 直到栈空间的三色标记结束</p>
 <p><strong>满足弱三色不变性-Yuasa 删除写屏障</strong>：核心思想是防止丢失灰色对象到白色对象的可达路径，简单来说就是当删除对象<code>A</code>指向对象<code>B</code>的指针时，那么将被删除的对象标记为灰色（如果B之前为白色的话）。</p>
-<p>[<a href="https://segmentfault.com/a/1190000022030353">典藏版]Golang三色标记、混合写屏障GC模式图文全分析 - SegmentFault 思否</a></p>
 <h2 id="什么是混合写屏障go采用的是什么写屏障">什么是混合写屏障？go采用的是什么写屏障？</h2>
 <p>插入写屏障和删除写屏障的短板：</p>
 <ul>
@@ -564,6 +563,7 @@ golang可以在语言层面包含自动的垃圾回收功能，系统可以在CP
 <p>考虑内存对齐。</p>
 <h2 id="参考文献">参考文献</h2>
 <p><a href="https://zhuanlan.zhihu.com/p/297177002">图示Golang垃圾回收机制 - 知乎 (zhihu.com)</a></p>
+<p>[<a href="https://segmentfault.com/a/1190000022030353">典藏版]Golang三色标记、混合写屏障GC模式图文全分析 - SegmentFault 思否</a></p>
 </div>
     <div class="post__footer">
       
