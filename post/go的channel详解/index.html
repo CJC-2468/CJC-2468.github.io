@@ -117,18 +117,16 @@ H O P E
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go的Channel详解"/>
-<meta name="twitter:description" content="channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
-要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
-channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+<meta name="twitter:description" content="两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
 有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。"/>
 
 
 
   
   <meta property="og:title" content="Go的Channel详解" />
-<meta property="og:description" content="channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。
-要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。
-channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+<meta property="og:description" content="两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
 有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
@@ -152,7 +150,7 @@ channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫
         "alternativeHeadline": "",
         "description": "
       
-        channel有什么特点，需要注意什么？ 通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。\n要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。\nchannel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。\n有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。
+        两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。\n无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。\n有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。
 
 
       
@@ -202,7 +200,7 @@ channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3\/",
-        "wordCount" : "16",
+        "wordCount" : "28",
         "genre" : [ 
       
       "Go"
@@ -211,6 +209,13 @@ channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫
         "keywords" : [ 
       
       "channel"
+
+    
+      
+        ,
+
+      
+      "select"
 
     ]
     }
@@ -432,14 +437,26 @@ channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫
           </li>
         </ul>
 
-      <h2 id="channel有什么特点需要注意什么">channel有什么特点，需要注意什么？</h2>
-<p>通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层其实就是个队列，可以用来传递消息和事件通知。</p>
-<p>要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。</p>
-<h2 id="channel有什么特点无缓冲和有缓冲区别">channel有什么特点？（无缓冲和有缓冲区别）</h2>
+      <h2 id="两种类型的channel">两种类型的channel</h2>
+<p>go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。</p>
 <p>无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 <code>goroutine</code> 和接收 <code>goroutine</code> 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。</p>
 <p>有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</p>
-<h2 id="讲一下channel中ring-buffer的实现">讲一下channel中ring buffer的实现？</h2>
-<p>channel 使用的ring buffer来缓存写入的数据，ring buffer非常适合实现fifo的固定长度的队列。</p>
+<h2 id="channel有什么特点需要注意什么">channel有什么特点，需要注意什么？</h2>
+<p>通道是显式的，用的时候要求双方都知道数据类型和具体通道，底层用来存数据的其实是个ring buffer，可以用来传递消息和事件通知。</p>
+<p>要注意：向已经关闭的通道发消息会导致Panic；从已关闭的通道读数据会返回已缓冲数据或零值。把一个通道变成nil后，无论收发，nil通道都会阻塞，可以搭配select永久阻塞某个通道。</p>
+<h2 id="channel的底层实现">channel的底层实现？</h2>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220424221416.png" alt=""></p>
+<p>channel 使用的ring buffer来缓存写入的数据，先进先出，创建的时候在堆中分配。</p>
+<p>底层会用双链表来记录和channel相关的goroutine队列，阻塞的发送的goroutine会串成发送队列，阻塞的接收的goroutine会串成接收队列。举个例子，如果ring buffer已经满了，这时候有个goroutine向缓冲区发数据，那么这个goroutine就会被插入阻塞的发送队列里。</p>
+<h2 id="select的类型和原理">select的类型和原理</h2>
+<p>共三种，如下图：</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220424220510.png" style="zoom:50%;" />
+<p>为什么zero-case的情况下会永久阻塞？因为编译器直接给它翻译成runtime.block了，这种情况下就是永久阻塞。</p>
+<p>多个case的话，用if else肯定不行，所以它会先根据case地址随机化生成一个序列，然后做一个heap sort，然后再执行。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220424223234.png" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220424223347.png" style="zoom:50%;" />
+<h2 id="channel用完不关闭可以吗">channel用完不关闭可以吗？</h2>
+<p>可以，channel不关闭的话，只要相关的的用到它的goroutine都关闭了，那么go的垃圾回收就回去回收这个channel的内存。</p>
 </div>
     <div class="post__footer">
       
@@ -451,7 +468,7 @@ channel有什么特点？（无缓冲和有缓冲区别） 无缓冲通道又叫
       
 
       
-        <span><a class="tag" href="/tags/channel/">channel</a></span>
+        <span><a class="tag" href="/tags/channel/">channel</a><a class="tag" href="/tags/select/">select</a></span>
 
 
 

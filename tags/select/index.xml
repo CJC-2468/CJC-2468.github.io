@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>channel on </title>
-    <link>https://example.com/tags/channel/</link>
-    <description>Recent content in channel on </description>
+    <title>select on </title>
+    <link>https://example.com/tags/select/</link>
+    <description>Recent content in select on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 21 Apr 2022 12:26:57 +0800</lastBuildDate><atom:link href="https://example.com/tags/channel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Apr 2022 12:26:57 +0800</lastBuildDate><atom:link href="https://example.com/tags/select/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go的Channel详解</title>
       <link>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</link>
