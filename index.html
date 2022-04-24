@@ -304,6 +304,18 @@ H O P E
         <li class="nav__list-item">
           <a
             
+            href="/tags/"
+            
+            title=""
+            >tags</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
             href="#"
             
             title=""
@@ -345,6 +357,55 @@ H O P E
   
 
   
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/%E7%94%A8go%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98easycache/">用GO实现分布式缓存EASYCACHE</a></h3>
+        
+          <p>常见用来做分布式缓存的有redis和memcached，这篇主要先简单介绍memcached，然后介绍一个用Go语言实现的分布式缓存easycache，会涉及到其设计思想，具体实现，适用场景等，总体上借鉴了groupcache，groupcache是go版的memcached，在有些设计上做了很多简化和优化，他们的作者是同一个人。
+MemCached 简介 MemCache是一个自由、源码开放、高性能、分布式的分布式内存对象缓存系统，它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高了网站访问的速度，减轻数据库的负载。
+使用场景 在访问量高的Web网站和应用中使用MemCache，用来缓解数据库的压力，并且提升网站和应用的响应速度，例如页面缓存，访问频繁的数据库数据（身份token、首页动态），搜索的查询条件和结果（热门搜索的内容缓存起来）。
+工作流程 存取数据分两步：第一步，选择服务器，第二步存取数据。
+如下图，
+客户端请求数据，</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sat, Apr 23, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
   
     <div
       class="post 
@@ -588,9 +649,12 @@ newcap := old.cap	//old.</p>
       <div class="post__content">
         <h3><a href="/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></h3>
         
-          <p>实现单例模式 单例模式（Singleton）的目的是为了保证在一个进程中，某个类有且仅有一个实例。保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+          <p>设计模式能够帮助我们优化代码结构，让代码更优雅灵活。常见的设计模式有单例模式、工厂模式、装饰模式、策略模式、代理模式和观察者模式等。
+单例模式 基本特点 单例模式（Singleton）的目的是为了保证某个类有且仅有一个实例，并提供一个访问它的全局访问点。
 主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。
-type singleton struct{} var instance *singleton var once sync.</p>
+在golang中，
+1.命名以小写字母开头，对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 private ）
+2.提供一个能够访问这个全局唯一实例的函数GetInstance() *singleton</p>
 
         
         </div>
@@ -752,56 +816,42 @@ make函数会分配内存空间，接受的参数是类型，返回复合类型�
     </div>
 
   
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">GITHUB PAGES &#43; HUGO 搭建个人博客</a></h3>
-        
-          <p>这篇文章会简单介绍如何利用Github Pages和Hugo 搭建一个简单的个人博客，不涉及云服务器及域名购买。
-为什么用hugo+github pages搭建个人博客 Hugo:一个用Go语言编写的静态网站生成器，几分钟就能上手，用来生成我们需要的静态的个人博客。优点是修改MarkDown文章后，页面会自动呈现出最终显示效果，能极大的提高博客书写效率。
-Github pages：提供免费的静态网站托管服务，用来存放用hugo生成的静态网站的资源，它可以给你提供免费的域名如XXXX.github.io，让别人能访问你的静态个人博客。
-两者结合可以搭建好看并且免费的个人博客。
-搭建过程 环境：macos 核心步骤 1.</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Tue, Apr 19, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/blog/">blog</a><a class="tag" href="/tags/hugo/">hugo</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
   <div class="pagination">
     
+  <ul class="pagination__list">
+    
+    
+    
+    
+      
+        <li class="pagination__list-item">
+          <span class="page-link current">1</span>
+        </li>
+
+      
+
+
+    
+      
+        <li class="pagination__list-item">
+          <a class="page-link" href="/page/2/">2</a>
+        </li>
+
+      
+
+
+    
+    
+      <li class="pagination__list-item">
+        <a class="page-link" href="/page/2/">
+          <i class="fa fa-angle-right" aria-label="Next"></i>
+        </a>
+      </li>
+
+    
+  </ul>
+
+
 
   </div>
 
