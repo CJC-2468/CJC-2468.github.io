@@ -6,7 +6,29 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Apr 2022 09:28:32 +0800</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2022 12:26:57 +0800</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>channel</title>
+      <link>https://example.com/tags/channel/</link>
+      <pubDate>Sun, 24 Apr 2022 12:26:57 +0800</pubDate>
+      
+      <guid>https://example.com/tags/channel/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>select</title>
+      <link>https://example.com/tags/select/</link>
+      <pubDate>Sun, 24 Apr 2022 12:26:57 +0800</pubDate>
+      
+      <guid>https://example.com/tags/select/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>分布式缓存</title>
       <link>https://example.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/</link>
@@ -46,28 +68,6 @@
       <pubDate>Thu, 21 Apr 2022 12:28:16 +0800</pubDate>
       
       <guid>https://example.com/tags/map/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>channel</title>
-      <link>https://example.com/tags/channel/</link>
-      <pubDate>Thu, 21 Apr 2022 12:26:57 +0800</pubDate>
-      
-      <guid>https://example.com/tags/channel/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>select</title>
-      <link>https://example.com/tags/select/</link>
-      <pubDate>Thu, 21 Apr 2022 12:26:57 +0800</pubDate>
-      
-      <guid>https://example.com/tags/select/</guid>
       
         <description></description>
       

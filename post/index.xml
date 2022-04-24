@@ -6,7 +6,20 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Apr 2022 09:28:32 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Apr 2022 12:26:57 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go的Channel详解</title>
+      <link>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Sun, 24 Apr 2022 12:26:57 +0800</pubDate>
+      
+      <guid>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</guid>
+      
+        <description>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</description>
+      
+    </item>
+    
     <item>
       <title>用Go实现分布式缓存easyCache</title>
       <link>https://example.com/post/%E7%94%A8go%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98easycache/</link>
@@ -58,19 +71,6 @@ func main() { ch := make(chan struct{}) go func() { ch &amp;lt;- struct{}{} }() 
       <guid>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</guid>
       
         <description>golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。</description>
-      
-    </item>
-    
-    <item>
-      <title>Go的Channel详解</title>
-      <link>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</link>
-      <pubDate>Thu, 21 Apr 2022 12:26:57 +0800</pubDate>
-      
-      <guid>https://example.com/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/</guid>
-      
-        <description>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
-无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
-有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</description>
       
     </item>
     

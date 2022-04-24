@@ -366,6 +366,52 @@ H O P E
     >
       
       <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/">GO的CHANNEL详解</a></h3>
+        
+          <p>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sun, Apr 24, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/channel/">channel</a><a class="tag" href="/tags/select/">select</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
         <h3><a href="/post/%E7%94%A8go%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98easycache/">用GO实现分布式缓存EASYCACHE</a></h3>
         
           <p>常见用来做分布式缓存的有redis和memcached，这篇主要先简单介绍memcached，然后介绍一个用Go语言实现的分布式缓存easycache，会涉及到其设计思想，具体实现，适用场景等，总体上借鉴了groupcache，groupcache是go版的memcached，在有些设计上做了很多简化和优化，他们的作者是同一个人。
@@ -535,52 +581,6 @@ func main() { ch := make(chan struct{}) go func() { ch &lt;- struct{}{} }() fmt.
 
         
           <span><a class="tag" href="/tags/map/">map</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/">GO的CHANNEL详解</a></h3>
-        
-          <p>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
-无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
-有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Thu, Apr 21, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/go/">Go</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/channel/">channel</a><a class="tag" href="/tags/select/">select</a></span>
 
 
 
