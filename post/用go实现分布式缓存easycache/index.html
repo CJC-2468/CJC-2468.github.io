@@ -206,7 +206,7 @@ MemCached 简介 MemCache是一个自由、源码开放、高性能、分布式�
 
     ,
         "url" : "https:\/\/example.com\/post\/%E7%94%A8go%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98easycache\/",
-        "wordCount" : "116",
+        "wordCount" : "149",
         "genre" : [ 
       
       "分布式缓存"
@@ -545,6 +545,15 @@ MemCached 简介 MemCache是一个自由、源码开放、高性能、分布式�
 <p>感兴趣可以安装好上面工具后，用如下命令自己追溯函数调用：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">go-callvis -group pkg,type -nostd -ignore impl,errors,proto main.go  
 </span></span></code></pre></div><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220424152830.png" style="zoom:33%;" />
+<h2 id="测试">测试</h2>
+<p>作为一名后端开发者，我们在完成一个接口开发后经常想知道自己写的接口吞吐量能达到多少QPS（Query per second 每秒处理完的请求数） ，这里我使用轻量级性能测试工具 wrk进行简单测试。</p>
+<p>简单实用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wrk -t12 -c400 -d30s http://www.baidu.com
+</span></span></code></pre></div><p>这条命令表示，利用 wrk 对 <a href="https://www.baidu.com">www.baidu.com</a> 发起压力测试，线程数为 12，模拟 400 个并发请求，持续 30 秒。</p>
+<p>PS: 关于线程数，并不是设置的越大，压测效果越好，线程设置过大，反而会导致线程切换过于频繁，效果降低，一般来说，推荐设置成压测机器 CPU 核心数的 2 倍到 4 倍就行了。</p>
+<p>下面开20个线程测试一下：</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220425110207.png" style="zoom:50%;" />
+<p>结果可以发现本机环境下测试QPS可以达到76000+，当然这其实是比较理想的情况下，而且针对的只是GET请求。</p>
 <h2 id="参考">参考</h2>
 <p><a href="https://github.com/golang/groupcache/blob/master/groupcache.go">groupcache/groupcache.go at master · golang/groupcache (github.com)</a></p>
 <p><a href="https://geektutu.com/post/geecache.html"> 极客兔兔 (geektutu.com)</a></p>

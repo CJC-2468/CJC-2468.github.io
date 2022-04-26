@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      CJC
+        |
+        Docker笔记
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.97.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="CJC" />
+  <meta
+    name="description"
+    content="
+      Integrity
+Goodness
+Passion
+H O P E
+
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://example.com/post/docker%E7%AC%94%E8%AE%B0/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.560a26330d27ff44a44e83b53cd07a95d4230a65930d31c5c76a8d481e5b35bf.js"
+      integrity="sha256-VgomMw0n/0SkToO1PNB6ldQjCmWTDTHFx2qNSB5bNb8="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker笔记"/>
+<meta name="twitter:description" content="Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。
+历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。
+解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。
+优点：
+ 隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比："/>
+
+
+
+  
+  <meta property="og:title" content="Docker笔记" />
+<meta property="og:description" content="Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。
+历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。
+解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。
+优点：
+ 隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/docker%E7%AC%94%E8%AE%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-26T08:57:20+08:00" />
+<meta property="article:modified_time" content="2022-04-26T08:57:20+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Docker笔记",
+        "headline": "Docker笔记",
+        "alternativeHeadline": "",
+        "description": "
+      
+        Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。\n历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。\n解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。\n优点：\n 隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比：
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/docker%E7%AC%94%E8%AE%B0\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-04-26T08:57:20.00Z",
+        "datePublished": "2022-04-26T08:57:20.00Z",
+        "dateModified": "2022-04-26T08:57:20.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/docker%E7%AC%94%E8%AE%B0\/",
+        "wordCount" : "398",
+        "genre" : [ 
+      
+      "容器虚拟化"
+
+    ],
+        "keywords" : [ 
+      
+      "docker"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/cat.jpeg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">CJC&#39;s time&amp;space</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Integrity<br />Goodness<br />Passion<br />H O P E<br /></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/CJC-2468" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >Posts</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/categories/"
+            
+            title=""
+            >categories</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/tags/"
+            
+            title=""
+            >tags</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="#"
+            
+            title=""
+            >About</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>Docker笔记</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Tue, Apr 26, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">2-minute read</span>
+          </li>
+        </ul>
+
+      <h1 id="docker概述">Docker概述</h1>
+<p>Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。</p>
+<p><strong>历史</strong> :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。</p>
+<p><strong>解决问题</strong> :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。</li>
+<li>轻量：开销低（几兆），启动快（秒级）。</li>
+<li>方便弹性扩展：直接多跑个容器就行。</li>
+<li>交付部署容易：传统需要安装文档，现在打包成镜像一键部署。</li>
+<li>系统运维简单：开发和测试环境一致。</li>
+<li>更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。</li>
+</ul>
+<p><strong>虚拟化技术和容器技术对比：</strong></p>
+<ul>
+<li>
+<p>传统虚拟机会虚拟硬件，运行一个完整的操作系统，然后在这个系统上安装运行软件。</p>
+</li>
+<li>
+<p>Docker容器内的应用直接运行在宿主机上，利用宿主机的内核，没有自己的内核，没有虚拟硬件。</p>
+</li>
+<li>
+<p>每个容器都是相互隔离的，每个容器都有属于自己的文件系统，互不影响。</p>
+</li>
+</ul>
+<p><strong>架构和名词解释：</strong> 显然是C-S结构。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228161759.png" style="zoom:33%;" />
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228162449.png" alt=""></p>
+<p><strong>安装和卸载docker:</strong> 看官方文档。记得设置镜像仓库，修改成阿里云镜像地址。</p>
+<h1 id="docker原理">Docker原理</h1>
+<h2 id="run-命令执行过程">run 命令执行过程</h2>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228165440.png" style="zoom: 50%;" />
+<h2 id="c-s结构">C-S结构</h2>
+<p>Docker是一个Client-Server结构的系统，Docker的守护进程运行在主机上，通过Socket从客户端访问！Docker Server接收到Docker-Client的指令，就会执行这个指令！</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228200133.png" alt=""></p>
+<p>Docker为什么比VM Ware快？</p>
+<ul>
+<li>
+<p>Docker比虚拟机更少的抽象层</p>
+</li>
+<li>
+<p>docker利用宿主机的内核，VM需要的是Guest OS</p>
+</li>
+</ul>
+<p>Docker新建一个容器的时候，不需要像虚拟机一样重新加载一个操作系统内核，直接利用宿主机的操作系统，而虚拟机是需要加载Guest OS。</p>
+<h2 id="docker镜像">Docker镜像</h2>
+<p>镜像是一种轻量级、可执行的独立软件包，（简单讲就是环境+开发的软件），它包含运行某个软件所需要的所有内容，包括代码，一个程序在运行或者在被执行的依赖，如库、环境变量和配置文件等。</p>
+<p><strong>镜像获取</strong>:1.dockerhub  2.拷贝  3.自己做dockerfile</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229160942.png" alt=""></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229161851.png" alt=""></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229161742.png" alt=""></p>
+<p><strong>rootfs</strong>：它只是一个操作系统的所有文件和目录，并不包含内核，最多也就几百兆。而相比之下，传统虚拟机的镜像大多是一个磁盘的“快照”，磁盘有多大，镜像就至少有多大。</p>
+<p><strong>镜像分层理解：</strong></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229162557.png" alt=""></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229162733.png" alt=""></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229163221.png" alt=""></p>
+<p><strong>提交镜像</strong>：</p>
+<p>使用docker commit 命令提交容器成为一个新的image,即可以用来保存当前容器的一个状态，下次直接用。</p>
+<p>docker commit -m=“提交的描述信息”  -a=&ldquo;作者&rdquo; 容器id 目标镜像名:[TAG]</p>
+<h1 id="docker常用命令">Docker常用命令</h1>
+<h2 id="帮助类命令">帮助类命令</h2>
+<ul>
+<li>docker version</li>
+<li>docker info</li>
+<li>docker &ndash;help</li>
+<li>docker 命令 &ndash;help</li>
+</ul>
+<h2 id="镜像类命令">镜像类命令</h2>
+<ul>
+<li>
+<p>docker images  -q只显示容器编号</p>
+</li>
+<li>
+<p>docker search mysql</p>
+</li>
+<li>
+<p>docker pull mysql : latest</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228204852.png" alt=""></p>
+</li>
+<li>
+<p>docker rmi -f 镜像id</p>
+</li>
+<li>
+<p>docker rmi -f  $(docker images -aq)  dollar后面是参数 强制删除所有</p>
+</li>
+</ul>
+<h2 id="容器类命令">容器类命令</h2>
+<ul>
+<li>
+<p>创建容器并启动:</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211228210824.png" alt=""></p>
+</li>
+<li>
+<p>ctrl+p+q从容器中退回主机并且不停止容器</p>
+</li>
+<li>
+<p>docker ps  查看运行中容器</p>
+</li>
+<li>
+<p>docker ps -a 查看所有容器（现在+历史）</p>
+</li>
+<li>
+<p>docker ps -a -n=1 显示最近创建的一个容器  -q只显示容器编号</p>
+</li>
+<li>
+<p>docker rm image  删除容器  类似镜像方式</p>
+</li>
+<li>
+<p>docker start 容器id</p>
+</li>
+<li>
+<p>docker restart 容器id</p>
+</li>
+<li>
+<p>docker stop 容器id</p>
+</li>
+<li>
+<p>docker kill 容器id</p>
+</li>
+</ul>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229085144.png" alt=""></p>
+<h2 id="其他常用命令httpscjcpicgoimgoss-cn-beijingaliyuncscomimg20211229085218png">其他常用命令<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229085218.png" alt=""></h2>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229085353.png" alt=""></p>
+<ul>
+<li>
+<p>docker inspect 容器id   查看容器底层数据</p>
+</li>
+<li>
+<p>docker exec -it 容器id /bin/bash 以交互方式进入正在运行的容器  开启一个新的终端，可以在里面操作</p>
+</li>
+<li>
+<p>docker attach 容器id   进入容器正在执行的终端，不会启动新的进程</p>
+</li>
+<li>
+<p>docker cp 容器id:路径  主机路径    从容器中拷贝文件到主机</p>
+</li>
+</ul>
+<h2 id="小结">小结</h2>
+<p><strong>docker命令图谱：</strong></p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229093137.png" alt=""></p>
+<p><strong>端口暴露：</strong> 其实是一种映射关系</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211229095313.png" alt=""></p>
+<p>思考：每次修改nginx配置文件都要进docker，能不能通过映射在宿主机直接改容器内部的配置文件？可以，用参数-v  绑定挂载卷。</p>
+<h1 id="容器数据卷">容器数据卷</h1>
+<p>docker是应用+环境，那么应用产生的数据肯定不能放镜像里（导致镜像大，数据丢失等问题），所以我们有一个对数据持久化和同步的需求，即存到容器外面。容器数据卷也可用于容器之间数据共享。</p>
+<h2 id="三种挂载方式">三种挂载方式</h2>
+<ul>
+<li>docker run -it -v 主机目录:容器目录。 （用docker inspect可查看挂载成功没）</li>
+<li>通过dockerfile创建挂载点</li>
+<li>容器共享卷（挂载点）</li>
+</ul>
+<h2 id="具名挂载和匿名挂载">具名挂载和匿名挂载</h2>
+<p><strong>匿名挂载</strong>就是在指定数据卷的时候，不指定容器路径对应的主机路径，这样对应映射的主机路径就是默认的路径/var/lib/docker/volumes/中自动生成一个随机命名的文件夹。</p>
+<ul>
+<li>docker run -d -P &ndash;name nginx01 -v /etc/nginx nginx</li>
+</ul>
+<p>查看所有的数据卷volume的情况, VOLUME NAME这里的值是真实存在的目录</p>
+<ul>
+<li>docker volume ls</li>
+</ul>
+<p><strong>具名挂载</strong>就是指定文件夹名称，区别于指定路径挂载，这里的指定文件夹名称是在Docker指定的默认数据卷路径下的。通过<code>docker volume ls</code>命令可以查看当前数据卷的目录情况。</p>
+<ul>
+<li>docker run -d -P &ndash;name nginx02 -v juming-nginx:/etc/nginx nginx</li>
+</ul>
+<p>查看指定的数据卷信息的命令：</p>
+<ul>
+<li>docker volume inspect 数据卷名称</li>
+</ul>
+<p><strong>Docker所有的数据卷默认在/var/lib/docker/volumes/ 目录下</strong></p>
+<p><strong>匿名挂载，具名挂载，指定路径挂载的命令区别如下：</strong>
+-v 容器内路径   #匿名挂载</p>
+<p>​	-v 卷名:容器内路径   #具名挂载</p>
+<p>​	-v /宿主机路径:容器内路径   #指定路径挂载</p>
+<p><strong>指定数据卷映射的相关参数：</strong></p>
+<p>ro —— readonly 只读。设置了只读则只能操作宿主机的路径，不能操作容器中的对应路径。</p>
+<p>rw &mdash;&ndash; readwrite 可读可写.(默认)</p>
+<ul>
+<li>docker run -d -P &ndash;name nginx02 -v juming-nginx:/etc/nginx:ro nginx</li>
+</ul>
+<h2 id="dockerfile实现挂载">Dockerfile实现挂载</h2>
+<p>dockerfile 是用来构建镜像的文件。就是一段命令脚本，通过脚本可以生成镜像。</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230113444.png" alt=""></p>
+<p><strong>编译成镜像：</strong></p>
+<p>docker build -f /home/docker-test-volume/dockerfile01 -t ethan/centos:1.0  .</p>
+<h2 id="容器数据卷-1">容器数据卷</h2>
+<p>容器数据卷是指建立数据卷，实现多个容器间的数据同步。</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230131218.png" alt=""></p>
+<p>他们之间是双向拷贝的关系。比如2和3挂载1的，删除1后，2和3的卷还在。</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230141505.png" alt=""></p>
+<p>可以实现多个mysql之间的数据共享。</p>
+<p><strong>结论：</strong></p>
+<p>做容器之间配置文件的共享时，数据卷的生命周期会一直持续到没有容器使用为止。但是一旦持久化到本地，这时候本地数据是持久化的，不会被删除。</p>
+<h1 id="dockerfile">Dockerfile</h1>
+<p>构建镜像步骤：dockerfile&mdash;&gt;build&ndash;&gt;run或push</p>
+<h2 id="基础知识"><strong>基础知识：</strong></h2>
+<ul>
+<li>指令都是大写</li>
+<li>每一行是一个layer</li>
+<li>从上到下执行</li>
+</ul>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230153816.png" style="zoom:33%;" />
+<p>企业交付镜像，dockerfile面向开发，自己用来构建镜像。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230154836.png" style="zoom: 33%;" />
+<p><strong>编译成镜像：</strong></p>
+<p>docker build -f /home/docker-test-volume/dockerfile01 -t ethan/centos:1.0  . (最后这个点是个path，用来指定从哪里拿到context)</p>
+<p><strong>查看镜像怎么做的：</strong></p>
+<p>docker history 镜像名</p>
+<p><strong>CMD和ENTRYPOINT区别：</strong></p>
+<p>CMD编写的命令会被docker run后面追加的命令替换掉</p>
+<p>ENTRYPOINT编写的命令，会将run后面的命令直接追加到自己后面，用来支持可变参数的。</p>
+<h3 id="add和copy区别">ADD和COPY区别：</h3>
+<p>都是复制文件到容器，只不过add带有解压相关的一些功能，docker官方是推荐用copy，我平时写dockerfile也是用copy。</p>
+<h2 id="构建一个tomcat镜像">构建一个tomcat镜像</h2>
+<ul>
+<li>准备tomcat  jdk压缩包</li>
+<li>编写Dockerfile, build命令会自动找这个文件，就不用-f了。</li>
+</ul>
+<h2 id="发布镜像">发布镜像</h2>
+<p><strong>发布到dockerhub</strong></p>
+<p>docker login -u -p  先登录</p>
+<p>docker push   上传  上传的时候要带标签  否则会失败</p>
+<h2 id="小结-1"><strong>小结</strong></h2>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20211230203717.png" style="zoom: 50%;" />
+<h1 id="docker网络">Docker网络</h1>
+<h2 id="基础知识-1">基础知识</h2>
+<p>只要安装了docker，就会有docker0网卡，用ip addr能查到，在没有指定网络的情况下，默认docker0网卡作为路由，每创建一个docker容器，docker都会给容器分配一个ip，采用的是桥接模式，基于veth-pair技术。</p>
+<p>顾名思义，veth-pair 就是一对的虚拟设备接口，一端连着协议栈，一端彼此相连着。正因为有这个特性，它常常充当着一个桥梁，连接着各种虚拟网络设备。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101162357.png" style="zoom: 33%;" />
+<p>docker中所有网卡都是虚拟的，因为传输速度快。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101163939.png" style="zoom: 50%;" />
+<p>解决场景：docker容器更换后ip会变动，如何实现通过容器名访问服务？</p>
+<h2 id="link命令不推荐用">link命令（不推荐用）</h2>
+<p>两个容器不配置的话是无法直接通过容器名ping通的，但是可以通过&ndash;link解决。但是&ndash;link是单向的，如果先双向联通就需要配置两次。</p>
+<p>原理其实是修改容器中的host文件，给ip增加个别名，难怪要改两次。</p>
+<p>docker0不支持自定义网络，不支持容器名访问，一般都是自定义网络。</p>
+<h2 id="自定义网络">自定义网络</h2>
+<ul>
+<li>
+<p>docker network 查看所有docker网络</p>
+</li>
+<li>
+<p>网络模式</p>
+<ul>
+<li>bridge：桥接模式，启动容器默认也是使用桥接模式，默认指定参数&ndash;net bridge,也就是连接到docker0。虚拟网桥的工作方式和物理交换机类似，这样主机上的所有容器就通过交换机连在了一个二层网络中。</li>
+<li>none：不配置。这种类型的网络没有办法联网，封闭的网络能很好的保证容器的安全性。</li>
+<li>host：主机模式。和宿主机共享网络。网络性能比较好，但是docker host上已经使用的端口就不能再用了，网络的隔离性不好。</li>
+<li>container:容器内网络联通。（用的少）</li>
+</ul>
+</li>
+</ul>
+<p>自定义网络命令：</p>
+<p>docker network create &ndash;driver bridge  &ndash;subnet 192.168.0.0/16 &ndash;gateway 192.168.0.1 mynet</p>
+<h2 id="自定义网络测试">自定义网络测试</h2>
+<p>下面启动两个容器，指定使用该自定义网络mynet，测试处于自定义网络下的容器，是否可以直接通过容器名进行网络访问。</p>
+<p>docker run -d -P &ndash;name tomcat-net-01 &ndash;net mynet tomcat
+docker run -d -P &ndash;name tomcat-net-02 &ndash;net mynet tomcat
+docker network inspect mynet</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101191844.png" alt=""></p>
+<p>可以发现，在我们的自定义网络下，容器之间既可以通过容器名也可以通过ip地址进行网络通信。 我们自定义的网络默认已经帮我们维护了容器间的网络通信问题，这是实现网络互联的推荐方式。</p>
+<h2 id="不同网络联通">不同网络联通</h2>
+<p>两个网络之间的虚拟网卡没办法联通，但是可以用connect去连接一个容器到一个网络。</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101213422.png" alt=""></p>
+<p>下面设置容器tomcat-01连接到mynet网络上：</p>
+<p>docker network connect mynet tomcat-01</p>
+<p>查看mynet的网络详情：</p>
+<p>docker network inspect mynet</p>
+<p>可以看到给容器tm01分配了一个ip地址。(一个容器，两个ip)</p>
+<p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101214030.png" alt=""></p>
+<h1 id="常见问题">常见问题</h1>
+<h3 id="docker中namespace和cgroup的区别">docker中namespace和cgroup的区别？</h3>
+<p>总的来说，namespace 是用来做资源隔离, cgroup 是用来做资源限制。</p>
+<p>Namespace:先说Namespace，虚拟技术基本要求就是资源隔离，简单的说就是在自己的Namespace独占当前所有的资源。比如我在 8080 端口起 web 服务器，不用担心其他进程端口占用。Linux 自带 namespace 就能达到这个目的。 namespace 从2002 开始开发到现在已经快20年的历史了，到现在一共有6种 namespace：</p>
+<ul>
+<li>mnt， 文件系统</li>
+<li>pid， 进程</li>
+<li>net， 网络</li>
+<li>ipc， 系统进程通信</li>
+<li>uts， hostname</li>
+<li>user， 用户</li>
+</ul>
+<p>cgroups 是 control groups 控制组的意思, 可以通过文件系统来访问这些信息。一般cgroups 挂载在 <code>/sys/fs/cgroup</code></p>
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/%E5%AE%B9%E5%99%A8%E8%99%9A%E6%8B%9F%E5%8C%96/">容器虚拟化</a></span>
+
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/docker/">docker</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

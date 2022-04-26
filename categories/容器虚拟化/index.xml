@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>容器虚拟化 on </title>
+    <link>https://example.com/categories/%E5%AE%B9%E5%99%A8%E8%99%9A%E6%8B%9F%E5%8C%96/</link>
+    <description>Recent content in 容器虚拟化 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 26 Apr 2022 08:57:20 +0800</lastBuildDate><atom:link href="https://example.com/categories/%E5%AE%B9%E5%99%A8%E8%99%9A%E6%8B%9F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker笔记</title>
+      <link>https://example.com/post/docker%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 26 Apr 2022 08:57:20 +0800</pubDate>
+      
+      <guid>https://example.com/post/docker%E7%AC%94%E8%AE%B0/</guid>
+      
+        <description>Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。
+历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。
+解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。
+优点：
+ 隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比：</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -366,6 +366,99 @@ H O P E
     >
       
       <div class="post__content">
+        <h3><a href="/post/docker%E7%AC%94%E8%AE%B0/">DOCKER笔记</a></h3>
+        
+          <p>Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。
+历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。
+解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。
+优点：
+隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比：</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Tue, Apr 26, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/%E5%AE%B9%E5%99%A8%E8%99%9A%E6%8B%9F%E5%8C%96/">容器虚拟化</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/docker/">docker</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">GIT常用命令</a></h3>
+        
+          <p>基本知识 下图是git的基本区域：
+workspace：工作区，就是你在电脑里能看到的目录。 staging area：暂存区/缓存区，英文叫 stage 或 index。一般存放在 .git 目录下的 index 文件（.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Mon, Apr 25, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/git/">git</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/git%E5%91%BD%E4%BB%A4/">git命令</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
         <h3><a href="/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/">GO的CHANNEL详解</a></h3>
         
           <p>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
@@ -717,98 +810,6 @@ make函数会分配内存空间，接受的参数是类型，返回复合类型�
 
 
         
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/go%E7%9A%84gmp%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/">GO的GMP模型详解</a></h3>
-        
-          <p>什么是GM？1.0之前的GM调度模型 M 想要执行、放回 G 都必须访问全局 G 队列，并且 M 有多个，即多线程访问同一资源需要加锁进行保证互斥 / 同步，所以全局 G 队列是有互斥锁进行保护的。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Wed, Apr 20, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/go/">Go</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/gmp/">GMP</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E4%BD%BF%E7%94%A8hugo%E5%86%99%E5%8D%9A%E5%AE%A2/">使用HUGO写博客</a></h3>
-        
-          <p>这篇文章会简单介绍如何使用Hugo新增文章，编辑文章，删除文章等日常操作，最后将操作结果同步至github pages。
-新增文章 在博客根路径下执行命令即可生成相应的文件：
-启动hugo服务，打开http://localhost:1313/ 可实时查看最新的博客效果。
-最后做同步到github pages操作即可，见后面同步到github pages部分。
-编辑文章 使用vscode或者typora打开刚刚新建的md文件，文件的路径在上面生成的时候有提示。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Wed, Apr 20, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/blog%E6%90%AD%E5%BB%BA/">blog搭建</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/hugo%E5%86%99%E6%96%87%E7%AB%A0/">hugo写文章</a></span>
-
-
-
 
         
       </div>

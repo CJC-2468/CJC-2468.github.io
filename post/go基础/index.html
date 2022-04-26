@@ -204,7 +204,7 @@ make函数会分配内存空间，接受的参数是类型，返回复合类型�
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E5%9F%BA%E7%A1%80\/",
-        "wordCount" : "328",
+        "wordCount" : "330",
         "genre" : [ 
       
       "Go"
@@ -521,7 +521,7 @@ make函数会分配内存空间，接受的参数是类型，返回复合类型�
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">stu3</span> <span class="o">==</span> <span class="nx">stu4</span><span class="p">)</span> <span class="c1">// true 类型相等且值相等
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div><h2 id="什么是rune类型">什么是rune类型？</h2>
-<p>ASCII 码只需要 7 bit 就可以完整地表示，但只能表示英文字母在内的128个字符，为了表示世界上大部分的文字系统，发明了 Unicode， 它是ASCII的超集，包含世界上书写系统中存在的所有字符，在 Go 语言中称之为 rune，是 int32 类型的别名。</p>
+<p>ASCII 码只需要 7 bit 就可以完整地表示，但只能表示英文字母在内的128个字符，为了表示世界上大部分的文字系统，发明了 Unicode， 它是ASCII的超集，包含世界上书写系统中存在的所有字符，<strong>在 Go 语言中称之为 rune，是 int32 类型的别名</strong>。</p>
 <p>Go 语言中，字符串的底层表示是 byte (8 bit) 序列，而非 rune (32 bit) 序列。例如下面的例子中 <code>语</code> 和 <code>言</code> 使用 UTF-8 编码后各占 3 个 byte，因此 <code>len(&quot;Go语言&quot;)</code> 等于 8，当然我们也可以将字符串转换为 rune 序列。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s">&#34;Go语言&#34;</span><span class="p">))</span> <span class="c1">// 8
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">([]</span><span class="nb">rune</span><span class="p">(</span><span class="s">&#34;Go语言&#34;</span><span class="p">)))</span> <span class="c1">// 4
@@ -537,6 +537,8 @@ make函数会分配内存空间，接受的参数是类型，返回复合类型�
 <p>使用Benchmark测试发现循环遍历效率更高。</p>
 </li>
 </ul>
+<h2 id="如何判断2个数组是相等的">如何判断2个数组是相等的？</h2>
+<p>在go语言中，可以使用比较运算符“==”或“!=”来进行数组比较，判断两个数组是否相等；只有当两个数组的所有元素都是相等的时候数组才是相等的，不能比较两个类型不同的数组，否则程序将无法完成编译。</p>
 <h2 id="讲讲空struct">讲讲空struct{}？</h2>
 <p>空结构体 struct{} 实例不占据任何的内存空间(使用 <code>unsafe.Sizeof</code> 计算出一个数据类型实例需要占用的字节数。)</p>
 <p>因为空结构体不占据内存空间，因此被广泛作为各种场景下的占位符使用。一是节省资源，二是空结构体本身就具备很强的语义，即这里不需要任何值，仅作为占位符。</p>
