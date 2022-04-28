@@ -307,7 +307,17 @@ H O P E
     src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
     integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
     crossorigin="anonymous"
-  ></script></div>
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+</div>
 </aside>
       <main
         
@@ -688,9 +698,9 @@ H O P E
 <p>docker network create &ndash;driver bridge  &ndash;subnet 192.168.0.0/16 &ndash;gateway 192.168.0.1 mynet</p>
 <h2 id="自定义网络测试">自定义网络测试</h2>
 <p>下面启动两个容器，指定使用该自定义网络mynet，测试处于自定义网络下的容器，是否可以直接通过容器名进行网络访问。</p>
-<p>docker run -d -P &ndash;name tomcat-net-01 &ndash;net mynet tomcat
-docker run -d -P &ndash;name tomcat-net-02 &ndash;net mynet tomcat
-docker network inspect mynet</p>
+<p><code>docker run -d -P --name tomcat-net-01 --net mynet tomcat</code><br>
+<code>docker run -d -P --name tomcat-net-02 --net mynet tomcat</code>
+<code>docker network inspect mynet</code></p>
 <p><img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220101191844.png" alt=""></p>
 <p>可以发现，在我们的自定义网络下，容器之间既可以通过容器名也可以通过ip地址进行网络通信。 我们自定义的网络默认已经帮我们维护了容器间的网络通信问题，这是实现网络互联的推荐方式。</p>
 <h2 id="不同网络联通">不同网络联通</h2>
@@ -759,5 +769,20 @@ docker network inspect mynet</p>
     src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
     integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
     crossorigin="anonymous"
-  ></script></body>
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+
+  <script async defer src=" https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" /></noscript>
+
+
+</body>
 </html>

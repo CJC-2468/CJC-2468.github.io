@@ -204,7 +204,7 @@ newcap := old.cap	//old." />
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3\/",
-        "wordCount" : "63",
+        "wordCount" : "107",
         "genre" : [ 
       
       "Go"
@@ -307,7 +307,17 @@ newcap := old.cap	//old." />
     src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
     integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
     crossorigin="anonymous"
-  ></script></div>
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+</div>
 </aside>
       <main
         
@@ -464,6 +474,17 @@ newcap := old.cap	//old." />
 <h2 id="slice的深拷贝和浅拷贝">slice的深拷贝和浅拷贝？</h2>
 <p>深拷贝：新的切片和原来的切片指向不同的底层数组，任何一个数组元素改变都不影响另外一个。</p>
 <p>浅拷贝：新的切片和原来的切片指向相同的底层数组，任何一个数组元素改变都会影响另外一个。</p>
+<h2 id="slice支持并发吗">slice支持并发吗？</h2>
+<p>切片底层就是数组，在并发写数据的情况下相同的索引位置上的数据会被覆盖，并且切片有自己的扩容机制，底层数组可能会被替换，在切换数组时多个goroutine同时运行，我们就不知道哪个先运行，但是肯定会存在数据覆盖的情况，所以动态扩容时并发写操作是不安全的。</p>
+<p>总结：指定索引使用切片时，切片支持并发读写索引区的数据，但是索引区数据在并发时会被覆盖。不指定索引使用切片的话，就涉及到动态扩容，并发场景下扩容会被覆盖，所以切片时不支持并发的。</p>
+<h2 id="slice使用中遇到的坑">slice使用中遇到的坑</h2>
+<p>Slice 的底层数组如果发生了扩容后会让函数内外原本指向同一个底层数组的两个 Slice 变量，分别指向两个不同的底层数组。最后就导致了函数内做的数据添加，但是函数外原来的 Slice 变量并没有任何改变的诡异效果。所以如果作为参数传递进去，那么要把slice当返回值才能看到扩容后的slice。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092153.png" style="zoom:33%;" />
+<p>本来切片只有 3 个元素，分别是 1，2，3。我们把切片赋给了变量 s，然后用变量 s 作为参数传给了函数 reverse 进行处理，函数 reverse 在反转切片元素之前还给原来的切片先追加了几个值，这就导致了切片发生扩容。因为切片实际上并不是一个指针类型，它的运行时类型表示是 SliceHeader。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092225.png" style="zoom:33%;" />
+<p>因为 Go 里边有<strong>一切都是值传递的规则</strong>，所以切片作为参数时，会在函数内重新拷贝一个 SliceHeader 结构体，只不过结构体的 Data 指针一开始跟外部切片的指向是一样的，都是同一个底层数据。</p>
+<p>这就导致了函数内切片 SliceHeader 里的 Data 指针发生变化后，函数外原来的切片还是指向原来的底层数组。最后结果，打印函数外切片变量输出的是 <code>[1, 2, 3]</code>，但函数里边的切片已经是 <code>[1001, 1000, 999, 3, 2, 1]</code> 了。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092416.png" style="zoom:33%;" />
 </div>
     <div class="post__footer">
       
@@ -508,5 +529,20 @@ newcap := old.cap	//old." />
     src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
     integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
     crossorigin="anonymous"
-  ></script></body>
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+
+  <script async defer src=" https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" /></noscript>
+
+
+</body>
 </html>
