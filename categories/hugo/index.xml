@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on </title>
+    <link>https://example.com/categories/hugo/</link>
+    <description>Recent content in hugo on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 30 Apr 2022 18:09:49 +0800</lastBuildDate><atom:link href="https://example.com/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo添加自定义页面</title>
+      <link>https://example.com/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/</link>
+      <pubDate>Sat, 30 Apr 2022 18:09:49 +0800</pubDate>
+      
+      <guid>https://example.com/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/</guid>
+      
+        <description>这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。
+前置知识 一个用hugo生成的网站包含以下文件和文件夹：
+ config.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

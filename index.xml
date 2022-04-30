@@ -6,7 +6,31 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Apr 2022 08:57:20 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 18:09:49 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo添加自定义页面</title>
+      <link>https://example.com/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/</link>
+      <pubDate>Sat, 30 Apr 2022 18:09:49 +0800</pubDate>
+      
+      <guid>https://example.com/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/</guid>
+      
+        <description>这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。
+前置知识 一个用hugo生成的网站包含以下文件和文件夹：
+ config.</description>
+      
+    </item>
+    
+    <item>
+      <title>Redis笔记</title>
+      <link>https://example.com/post/redis%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 29 Apr 2022 18:18:54 +0800</pubDate>
+      
+      <guid>https://example.com/post/redis%E7%AC%94%E8%AE%B0/</guid>
+      
+        <description>Nosql数据库简介 </description>
+      
+    </item>
+    
     <item>
       <title>Docker笔记</title>
       <link>https://example.com/post/docker%E7%AC%94%E8%AE%B0/</link>

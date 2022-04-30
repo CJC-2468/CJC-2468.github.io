@@ -197,7 +197,7 @@ H O P E
 
       
         <li class="sidebar__list-item">
-          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+          <a href="mailto:jccheng2022@gmail.com" rel="me" aria-label="e-mail" title="e-mail">
             <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
           </a>
         </li>
@@ -326,7 +326,7 @@ H O P E
         <li class="nav__list-item">
           <a
             
-            href="#"
+            href="/wikif"
             
             title=""
             >About</a
@@ -367,6 +367,96 @@ H O P E
   
 
   
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/">HUGO添加自定义页面</a></h3>
+        
+          <p>这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。
+前置知识 一个用hugo生成的网站包含以下文件和文件夹：
+config.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sat, Apr 30, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/hugo/">hugo</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/hugo/">hugo</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/redis%E7%AC%94%E8%AE%B0/">REDIS笔记</a></h3>
+        
+          <p>Nosql数据库简介</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Fri, Apr 29, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/redis/">redis</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/redis/">redis</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
   
     <div
       class="post 
@@ -735,91 +825,6 @@ newcap := old.cap	//old.</p>
 
 
 
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></h3>
-        
-          <p>设计模式能够帮助我们优化代码结构，让代码更优雅灵活。常见的设计模式有单例模式、工厂模式、装饰模式、策略模式、代理模式和观察者模式等。
-单例模式 基本特点 单例模式（Singleton）的目的是为了保证某个类有且仅有一个实例，并提供一个访问它的全局访问点。
-主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。
-在golang中，
-1.命名以小写字母开头，对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 private ）
-2.提供一个能够访问这个全局唯一实例的函数GetInstance() *singleton</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Thu, Apr 21, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span>
-
-
-
-
-        
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/go%E5%9F%BA%E7%A1%80/">GO基础</a></h3>
-        
-          <p>go语言中new和make的区别？ 首先这俩都是内建函数。
-new函数会分配内存空间，接受的参数是类型，返回的是该类型的指针，也就是新分配该类型内存地址的指针。new可以分配任意类型的内存空间。
-make函数会分配内存空间，接受的参数是类型，返回复合类型的本身。只能是用来为slice，map，chan分配内存并且初始化，返回的是类型本身。注意这三种类型本来就是引用类型。
-其实 new 函数在日常工程代码中是比较少见的，因为它是可以被代替，使用T{}方式更加便捷方便。
-与其他语言相比，使用 Go 有什么好处?  语法简单：和C很像，删去了很多冗余的语法，比如只保留for循环，去除了while循环，更加统一。 高并发模型：从根上并发化，用goroutine去运行所有的函数，包括main入口函数，goroutine也是go语言的最大特征。并发的语法简单，搭配channel实现CSP模型。 内存分配：go内存分配器用的tcmalloc，就是为了高并发设计的。 垃圾回收：自动垃圾回收，三色标记法和写屏障。 静态链接：编译后形成一个可执行文件，不需要附加任何东西就能部署。将运行时，依赖库直接打包进可执行文件，可以简化部署和发布，不需要再配各种环境和库文件。 标准库：自身标准库丰富，比如net/http，几句话就能构建一个高性能的web server，另外就是第三方库也越来越丰富，比如gozero, excelize等等。 工具链：工具链完整，编译，错误检查，帮助文档，第三方包下载，测试工具，性能测试工具，包依赖管理等等。  Go中的包是什么？ 由一个目录下的一个或多个源文件组成，这些源文件的包名要一致，但与目录名不要求一致，作用类似于namespace，是成员作用域和访问权限的边界。包内成员和相互访问，不管在不在一个源文件。要想让其他包访问首字母要大写。import时可以取别名。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Thu, Apr 21, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/go/">Go</a></span>
-
-
-
-
-        
 
         
       </div>

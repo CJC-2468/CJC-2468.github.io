@@ -6,7 +6,29 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 26 Apr 2022 08:57:20 +0800</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 18:09:49 +0800</lastBuildDate><atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo</title>
+      <link>https://example.com/tags/hugo/</link>
+      <pubDate>Sat, 30 Apr 2022 18:09:49 +0800</pubDate>
+      
+      <guid>https://example.com/tags/hugo/</guid>
+      
+        <description></description>
+      
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>https://example.com/tags/redis/</link>
+      <pubDate>Fri, 29 Apr 2022 18:18:54 +0800</pubDate>
+      
+      <guid>https://example.com/tags/redis/</guid>
+      
+        <description></description>
+      
+    </item>
+    
     <item>
       <title>docker</title>
       <link>https://example.com/tags/docker/</link>
@@ -134,17 +156,6 @@
       <pubDate>Tue, 19 Apr 2022 13:44:33 +0800</pubDate>
       
       <guid>https://example.com/tags/blog/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://example.com/tags/hugo/</link>
-      <pubDate>Tue, 19 Apr 2022 13:44:33 +0800</pubDate>
-      
-      <guid>https://example.com/tags/hugo/</guid>
       
         <description></description>
       

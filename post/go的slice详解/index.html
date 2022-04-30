@@ -204,7 +204,7 @@ newcap := old.cap	//old." />
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3\/",
-        "wordCount" : "107",
+        "wordCount" : "109",
         "genre" : [ 
       
       "Go"
@@ -266,7 +266,7 @@ newcap := old.cap	//old." />
 
       
         <li class="sidebar__list-item">
-          <a href="#" rel="me" aria-label="e-mail" title="e-mail">
+          <a href="mailto:jccheng2022@gmail.com" rel="me" aria-label="e-mail" title="e-mail">
             <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
           </a>
         </li>
@@ -392,7 +392,7 @@ newcap := old.cap	//old." />
         <li class="nav__list-item">
           <a
             
-            href="#"
+            href="/wikif"
             
             title=""
             >About</a
@@ -467,6 +467,8 @@ newcap := old.cap	//old." />
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>它会先计算旧容量加上新加入的元素个数，然后和旧容量的2倍做个比较，看看能不能hold住，如果hold不住的话，就会直接扩容到旧容量加上新加入的元素个数，如果能hold住，那么就判断旧容量大不大于1024，如果不大于，就2倍2倍的扩，如果大于，就1.25倍的扩。但是到这里还没结束，为了更高效的利用内存，还会有一个内存对齐的操作，经过内存对齐重新计算应该的容量，然后才能得到最后的结果。</p>
+<p>GoLang中的切片扩容机制，与切片的数据类型、原本切片的容量、所需要的容量都有关系，比较复杂。对于常见数据类型，在元素数量较少时，大致可以认为扩容是按照翻倍进行的。但具体情况需要具体分析。</p>
+<p>例如byte类型，直接append第一个元素进去就会直接扩容到8，这也是常见的坑。</p>
 <h2 id="扩容前后slice是否相同">扩容前后slice是否相同？</h2>
 <p>注意一个前提：切片可能只用了一个数组中间的部分，指定的cap没有到数组的末尾。</p>
 <p>当切片底层指向的数组的实际容量还够扩容时，扩容前后切片底层的数组还是原来的数组，</p>
