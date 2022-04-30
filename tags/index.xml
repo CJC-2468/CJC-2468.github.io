@@ -19,17 +19,6 @@
     </item>
     
     <item>
-      <title>redis</title>
-      <link>https://example.com/tags/redis/</link>
-      <pubDate>Fri, 29 Apr 2022 18:18:54 +0800</pubDate>
-      
-      <guid>https://example.com/tags/redis/</guid>
-      
-        <description></description>
-      
-    </item>
-    
-    <item>
       <title>docker</title>
       <link>https://example.com/tags/docker/</link>
       <pubDate>Tue, 26 Apr 2022 08:57:20 +0800</pubDate>

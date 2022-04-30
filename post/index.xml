@@ -21,17 +21,6 @@
     </item>
     
     <item>
-      <title>Redis笔记</title>
-      <link>https://example.com/post/redis%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 29 Apr 2022 18:18:54 +0800</pubDate>
-      
-      <guid>https://example.com/post/redis%E7%AC%94%E8%AE%B0/</guid>
-      
-        <description>Nosql数据库简介 </description>
-      
-    </item>
-    
-    <item>
       <title>Docker笔记</title>
       <link>https://example.com/post/docker%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Tue, 26 Apr 2022 08:57:20 +0800</pubDate>
