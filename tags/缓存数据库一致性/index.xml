@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>缓存数据库一致性 on </title>
+    <link>https://example.com/tags/%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+    <description>Recent content in 缓存数据库一致性 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 04 May 2022 16:29:54 +0800</lastBuildDate><atom:link href="https://example.com/tags/%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>缓存和数据库一致性</title>
+      <link>https://example.com/post/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+      <pubDate>Wed, 04 May 2022 16:29:54 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+      
+        <description>为什么引入缓存 如果业务的流量很小，那么无论读写操作，直接操作数据库即可。但是流量大了之后，直接操作数据库的话就会有性能问题，这时候就需要缓存来提高性能。
+redis是一个很好的缓存中间件，性能很好，同时支持丰富的数据类型。通常的做法是读请求去redis读，读写请求可以去mysql去做。
+但是这样就面临一个问题，之前只有mysql，数据都在mysql中，现在引入redis，如何把数据从mysql存入redis呢？
+如何把数据库中的数据放到缓存中？ 最简单的方案：全量数据刷到缓存
+ 数据库的数据，全量刷入缓存（不设置失效时间） 写请求只更新数据库，不更新缓存 启动一个定时任务，定时把数据库的数据，更新到缓存中  优点：所有读请求都可以直接「命中」缓存，不需要再查数据库，性能非常高。</description>
+      
+    </item>
+    
+  </channel>
+</rss>

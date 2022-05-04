@@ -376,6 +376,54 @@ H O P E
     >
       
       <div class="post__content">
+        <h3><a href="/post/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/">缓存和数据库一致性</a></h3>
+        
+          <p>为什么引入缓存 如果业务的流量很小，那么无论读写操作，直接操作数据库即可。但是流量大了之后，直接操作数据库的话就会有性能问题，这时候就需要缓存来提高性能。
+redis是一个很好的缓存中间件，性能很好，同时支持丰富的数据类型。通常的做法是读请求去redis读，读写请求可以去mysql去做。
+但是这样就面临一个问题，之前只有mysql，数据都在mysql中，现在引入redis，如何把数据从mysql存入redis呢？
+如何把数据库中的数据放到缓存中？ 最简单的方案：全量数据刷到缓存
+数据库的数据，全量刷入缓存（不设置失效时间） 写请求只更新数据库，不更新缓存 启动一个定时任务，定时把数据库的数据，更新到缓存中  优点：所有读请求都可以直接「命中」缓存，不需要再查数据库，性能非常高。</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Wed, May 4, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/">缓存数据库一致性</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
         <h3><a href="/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/">HUGO添加自定义页面</a></h3>
         
           <p>这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。
@@ -781,49 +829,6 @@ newcap := old.cap	//old.</p>
 
 
 
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></h3>
-        
-          <p>设计模式能够帮助我们优化代码结构，让代码更优雅灵活。常见的设计模式有单例模式、工厂模式、装饰模式、策略模式、代理模式和观察者模式等。
-单例模式 基本特点 单例模式（Singleton）的目的是为了保证某个类有且仅有一个实例，并提供一个访问它的全局访问点。
-主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。
-在golang中，
-1.命名以小写字母开头，对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 private ）
-2.提供一个能够访问这个全局唯一实例的函数GetInstance() *singleton</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Thu, Apr 21, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></span>
-
-
-
-
-        
 
         
       </div>
