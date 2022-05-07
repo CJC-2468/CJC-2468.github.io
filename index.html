@@ -376,427 +376,6 @@ H O P E
     >
       
       <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">操作系统基本命令</a></h3>
-        
-          <p>Linux基本命令 linux文本三剑客 awk、grep、sed是linux操作文本的三大利器，合称文本三剑客，也是必须掌握的linux命令之一。三者的功能都是处理文本，但侧重点各不相同，其中属awk功能最强大，但也最复杂。grep更适合单纯的查找或匹配文本，sed更适合编辑匹配到的文本，awk更适合格式化文本，对文本进行较复杂格式处理。
-grep:文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来（匹配到的标红）。grep全称是Global Regular Expression Print，表示全局正则表达式版本，它的使用权限是所有用户。
-grep的工作方式是这样的，它在一个或多个文件中搜索字符串模板。如果模板包括空格，则必须被引用，模板后的所有字符串被看作文件名。搜索的结果被送到标准输出，不影响原文件内容。
-grep可用于shell脚本，因为grep通过返回一个状态值来说明搜索的状态，如果模板搜索成功，则返回0，如果搜索不成功，则返回1，如果搜索的文件不存在，则返回2。我们利用这些返回值就可进行一些自动化的文本处理工作。
-egrep = grep -E：扩展的正则表达式 （除了&amp;lt; , &amp;gt; , \b 使用其他正则都可以去掉\）</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">操作系统基本命令</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">操作系统设备管理</a></h3>
-        
-          <p>设备管理 设备控制器 操作系统如何管理多种设备？
-设备控制器：为了屏蔽设备之间的差异，每个设备都有一个叫设备控制器 的组件，比如硬盘有硬盘控制器、显示器有视频控制器等。设备控制器里有芯片，它可执行自己的逻辑，也有自己的寄存器，用来与 CPU 进行通信。
-输入输出设备分类？ 块设备和字符设备：
-块设备，把数据存储在固定大小的块中，每个块有自己的地址，硬盘、USB 是常见的块设备。 字符设备，以字符为单位发送或接收一个字符流，字符设备是不可寻址的，也没有任何寻道操作，鼠标是常见的字符设备。  IO控制方式   轮询：控制器的寄存器一般会有状态标记位，用来标识输入或输出操作是否完成。让 CPU 一直查寄存器的状态，直到状态标记为完成，很明显，这种方式非常的傻瓜，它会占用 CPU 的全部时间。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">操作系统设备管理</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/">操作系统网络系统</a></h3>
-        
-          <p>网络系统 文件怎么发送？ 如果服务端要提供文件传输的功能，我们能想到的最简单的方式是：将磁盘上的文件读取出来，然后通过网络协议发送给客户端。
-传统的文件传输：read+write操作。两次系统调用，四次上下文切换，四次拷贝，其中两次是 DMA 的拷贝，另外两次则是通过 CPU 拷贝的
-所以，要想提高文件传输的性能，就需要减少「用户态与内核态的上下文切换」和「内存拷贝」的次数。
-要想减少上下文切换到次数，就要减少系统调用的次数。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/">操作系统网络系统</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">操作系统文件系统</a></h3>
-        
-          <p>文件系统 什么是文件系统？文件系统的基本组成？ 文件系统是操作系统中负责管理持久数据的子系统。说简单点，就是负责把用户的文件存到磁盘硬件中，因为即使计算机断电了，磁盘里的数据并不会丢失，所以可以持久化的保存文件。
-文件系统的基本数据单位是文件，它的目的是对磁盘上的文件进行组织管理，那组织的方式不同，就会形成不同的文件系统。
-Linux 最经典的一句话是：「一切皆文件」，不仅普通的文件和目录，就连块设备、管道、socket 等，也都是统一交给文件系统管理的。
-文件系统的基本操作单位是数据块。
-文件的数据结构？什么是inode？有什么用？ Linux 文件系统会为每个文件分配两个数据结构：索引节点（index node）和目录项（directory entry），它们主要用来记录文件的元信息和目录层次结构。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">操作系统文件系统</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/">操作系统调度算法</a></h3>
-        
-          <p>调度算法 操作系统的三大调度机制，分别是「进程调度/页面置换/磁盘调度算法」。6+5+5
-进程/CPU调度算法有哪些？ 硬件时钟提供某个频率的周期性中断，那么可以根据如何处理时钟中断 ，把调度算法分为两类：
-非抢占式调度算法会让正在运行的进程运行直到被阻塞，或者直到该进程退出，才会调用另外一个进程，也就是说不会理时钟中断这个事情。 抢占式调度算法挑选一个进程，然后让该进程只运行某段时间，如果在该时段结束时，该进程仍然在运行时，则会把它挂起，接着调度程序从就绪队列挑选另外一个进程。这种抢占式调度处理，需要在时间间隔的末端发生时钟中断，以便把 CPU 控制返回给调度程序进行调度，也就是常说的时间片机制。  先来先服务，短作业优先，高响应比优先，时间片轮转，最高优先级，多级反馈队列。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/">操作系统调度算法</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">操作系统进程管理</a></h3>
-        
-          <p>进程管理 进程，线程，协程分别是什么？区别是什么？ 进程：首先进程其实是运行起来的程序，是资源(包括内存、打开的文件等)分配的单位，每个进程都有自己的独立虚拟地址空间，拥有自己独立的堆和栈，上下文切换开销比较大。
-线程：线程是 CPU 调度的单位，线程只会有运行时需要的必不可少的资源（程序计数器，寄存器，栈），它的栈是独立的，但是堆是共享的，线程可以享有这个进程内所有的共享资源。上下文切换开销比进程小。线程的作用：线程能减少并发执行的时间和空间开销。（注意：当进程中的一个线程崩溃时，会导致其所属进程的所有线程崩溃。这里是针对 C/C++ 语言，Java语言中的线程奔溃不会造成进程崩溃）。
-协程：一种用户态的轻量级线程，这是对内核透明的，也就是系统并不知道有协程的存在，是完全由用户自己的程序进行调度的。协程和线程一样共享堆，不共享栈，发生上下文切换的时候，因为是用户态的，所以没有内核切换的开销，上下文切换的会比较快。
-区别：</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">操作系统进程管理</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统内存管理</a></h3>
-        
-          <p>内存管理 什么是逻辑地址和物理地址？ 我们编程一般只有可能和逻辑地址打交道，比如在 GO 语言中，指针里面存储的数值就可以理解成为内存里的一个地址，这个地址也就是我们说的逻辑地址，逻辑地址由操作系统决定。物理地址指的是真实物理内存中地址，更具体一点来说就是内存地址寄存器中的地址。物理地址是内存单元真正的地址。
-进程地址空间有哪些划分？ 虚拟地址空间的内部又被分为 内核空间 和 用户空间 两部分。</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统内存管理</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/">操作系统硬件结构</a></h3>
-        
-          <p>硬件结构 冯诺依曼模型 计算机基本结构为 5 个部分，分别是运算器、控制器、存储器、输入设备、输出设备，这 5 个部分也被称为冯诺依曼模型。
-运算器、控制器是在CPU里的，存储器就我们常见的内存，输入输出设备则是计算机外接的设备，比如键盘就是输入设备，显示器就是输出设备。
-32 位和 64 位 CPU区别，优点？  32 位 CPU 一次可以计算 4 个字节； 64 位 CPU 一次可以计算 8 个字节；  之所以 CPU 要这样设计，是为了能计算更大的数值，所以 CPU 位宽越大，可以计算的数值就越大</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/">操作系统硬件结构</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">操作系统基础</a></h3>
-        
-          <p>基础 什么是操作系统？ 操作系统是管理计算机硬件与软件资源的程序。常见的操作系统有win, macos, linux, unix。
-linux一般指的都是内核，基于Linux内核的发行版有很多。比如ubuntu，centos等等。
-什么是系统调用？ 我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！
-系统调用类别：</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Sat, May 7, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">操作系统基础</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
         <h3><a href="/post/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/">缓存和数据库一致性</a></h3>
         
           <p>为什么引入缓存 如果业务的流量很小，那么无论读写操作，直接操作数据库即可。但是流量大了之后，直接操作数据库的话就会有性能问题，这时候就需要缓存来提高性能。
@@ -837,6 +416,425 @@ redis是一个很好的缓存中间件，性能很好，同时支持丰富的数
     </div>
 
   
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/hugo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2/">HUGO添加自定义页面</a></h3>
+        
+          <p>这里说的页面不是指 hugo 利用 markdown 文件生成的页面，而是我们自己手动创建的 html 页面。
+前置知识 一个用hugo生成的网站包含以下文件和文件夹：
+config.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sat, Apr 30, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/hugo/">hugo</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/hugo/">hugo</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/docker%E7%AC%94%E8%AE%B0/">DOCKER笔记</a></h3>
+        
+          <p>Docker概述 Docker 可以让开发者将应用以及依赖打包到一个轻量级可移植的容器中，然后发布到其他机器，也可以实现虚拟化。
+历史 :最开始是dotCloud公司做一些云计算的，一开始不火，后来开源火了。基于golang，看官方文档，另外dockerHub类似gitHub。
+解决问题 :开发人员开发完给运维人员部署，出现“在我电脑能跑，你那怎么不能跑”的问题。
+优点：
+隔离性：每个容器之间相互隔离，可防止环境中的交叉冲突，如端口等。沙箱机制是一种安全机制，为给执行的程序提供隔离环境，沙箱中的一切都可以推翻重来。 轻量：开销低（几兆），启动快（秒级）。 方便弹性扩展：直接多跑个容器就行。 交付部署容易：传统需要安装文档，现在打包成镜像一键部署。 系统运维简单：开发和测试环境一致。 更好利用服务器性能：内核就一个，消耗少了可以利用节省的资源跑更多的容器。  虚拟化技术和容器技术对比：</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Tue, Apr 26, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/%E5%AE%B9%E5%99%A8%E8%99%9A%E6%8B%9F%E5%8C%96/">容器虚拟化</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/docker/">docker</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">GIT常用命令</a></h3>
+        
+          <p>基本知识 下图是git的基本区域：
+workspace：工作区，就是你在电脑里能看到的目录。 staging area：暂存区/缓存区，英文叫 stage 或 index。一般存放在 .git 目录下的 index 文件（.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Mon, Apr 25, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/git/">git</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/git%E5%91%BD%E4%BB%A4/">git命令</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84channel%E8%AF%A6%E8%A7%A3/">GO的CHANNEL详解</a></h3>
+        
+          <p>两种类型的channel go官方文档给的是两种，分别是buffered channel和unbuffered channel，也就是有缓冲和无缓冲，go的开发人员更喜欢称之为非阻塞和阻塞的channel。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。通常用来做并发控制。
+有缓冲通道是非同步的，在声明的时候可以设置缓冲容量，只有通道满了才会阻塞。</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sun, Apr 24, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/channel/">channel</a><a class="tag" href="/tags/select/">select</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/%E7%94%A8go%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98easycache/">用GO实现分布式缓存EASYCACHE</a></h3>
+        
+          <p>常见用来做分布式缓存的有redis和memcached，这篇主要先简单介绍memcached，然后介绍一个用Go语言实现的分布式缓存easycache，会涉及到其设计思想，具体实现，适用场景等，总体上借鉴了groupcache，groupcache是go版的memcached，在有些设计上做了很多简化和优化，他们的作者是同一个人。
+MemCached 简介 MemCache是一个自由、源码开放、高性能、分布式的分布式内存对象缓存系统，它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高了网站访问的速度，减轻数据库的负载。
+使用场景 在访问量高的Web网站和应用中使用MemCache，用来缓解数据库的压力，并且提升网站和应用的响应速度，例如页面缓存，访问频繁的数据库数据（身份token、首页动态），搜索的查询条件和结果（热门搜索的内容缓存起来）。
+工作流程 存取数据分两步：第一步，选择服务器，第二步存取数据。
+如下图，
+客户端请求数据，</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Sat, Apr 23, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84gc%E6%9C%BA%E5%88%B6/">GO的GC机制</a></h3>
+        
+          <p>什么是GC（garbage collection）？ 垃圾回收就是对程序中不再使用的内存资源进行自动回收的操作。正常情况下，操作系统会记录一个进程运行时的所占用的内存、CPU和寄存器等资源，当进程结束后便由操作系统能够自动回收资源。但是对于一个运行较长时间的程序，如果使用完内存资源后没有及时释放就会造成内存泄漏。
+golang可以在语言层面包含自动的垃圾回收功能，系统可以在CPU相对空闲的时候进行垃圾回收。
+垃圾回收的目的是什么？  防止内存泄漏：垃圾回收器最基本的目标就是 减少防止程序员未及时释放 导致的内存泄漏，它会识别并清理内存垃圾。 自动回收无用内存：垃圾回收器作为独立的子任务，不需要程序员显式调用即可自动清理内存垃圾 内存整理：如果只是简单回收无用内存，那么堆上的内存空间会存在较多碎片而无法满足分配较大对象的需求，因此垃圾回收器需要重整内存空间，提高内存利用率。  什么是STW（stop the world ）？  这是一种全局暂停的现象，为了保证在 GC 的过程中，实现的正确性，停止所有其他正在运行的协程。 STW对性能有一些影响，时间越长，影响越大，比如一些对通信时间敏感的，Golang目前已经可以做到1ms以下的STW。  垃圾回收器的原理是什么？ 垃圾回收器的工作流程大体如下：</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Thu, Apr 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/gc/">GC</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">GO的并发编程</a></h3>
+        
+          <p>讲一下go的并发模型？ go控制并发的话有三种种经典的方式，一种是通过channel通知实现并发控制，一种是WaitGroup，另外一种就是Context。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。这样子其实就实现了发送和接收goroutine的同步化，也就是并发控制。注意：当一个值在无缓冲通道传递，接收值后发送方goroutine才会被再次唤醒。
+例子：
+func main() { ch := make(chan struct{}) go func() { ch &lt;- struct{}{} }() fmt.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Thu, Apr 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/">GO的MAP详解</a></h3>
+        
+          <p>golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Thu, Apr 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/map/">map</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/">GO的SLICE详解</a></h3>
+        
+          <p>go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
+讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
+newcap := old.cap	//old.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Thu, Apr 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/slice/">slice</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
   <div class="pagination">
     
   <ul class="pagination__list">
@@ -856,15 +854,6 @@ redis是一个很好的缓存中间件，性能很好，同时支持丰富的数
       
         <li class="pagination__list-item">
           <a class="page-link" href="/page/2/">2</a>
-        </li>
-
-      
-
-
-    
-      
-        <li class="pagination__list-item">
-          <a class="page-link" href="/page/3/">3</a>
         </li>
 
       
