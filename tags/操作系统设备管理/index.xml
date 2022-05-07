@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统设备管理 on </title>
+    <link>https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 操作系统设备管理 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 07 May 2022 19:15:26 +0800</lastBuildDate><atom:link href="https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统设备管理</title>
+      <link>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sat, 07 May 2022 19:15:26 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid>
+      
+        <description>设备管理 设备控制器 操作系统如何管理多种设备？
+设备控制器：为了屏蔽设备之间的差异，每个设备都有一个叫设备控制器 的组件，比如硬盘有硬盘控制器、显示器有视频控制器等。设备控制器里有芯片，它可执行自己的逻辑，也有自己的寄存器，用来与 CPU 进行通信。
+输入输出设备分类？ 块设备和字符设备：
+ 块设备，把数据存储在固定大小的块中，每个块有自己的地址，硬盘、USB 是常见的块设备。 字符设备，以字符为单位发送或接收一个字符流，字符设备是不可寻址的，也没有任何寻道操作，鼠标是常见的字符设备。  IO控制方式   轮询：控制器的寄存器一般会有状态标记位，用来标识输入或输出操作是否完成。让 CPU 一直查寄存器的状态，直到状态标记为完成，很明显，这种方式非常的傻瓜，它会占用 CPU 的全部时间。</description>
+      
+    </item>
+    
+  </channel>
+</rss>

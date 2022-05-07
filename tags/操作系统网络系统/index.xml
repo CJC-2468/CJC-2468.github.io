@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统网络系统 on </title>
+    <link>https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 操作系统网络系统 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 07 May 2022 19:13:48 +0800</lastBuildDate><atom:link href="https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统网络系统</title>
+      <link>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Sat, 07 May 2022 19:13:48 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</guid>
+      
+        <description>网络系统 文件怎么发送？ 如果服务端要提供文件传输的功能，我们能想到的最简单的方式是：将磁盘上的文件读取出来，然后通过网络协议发送给客户端。
+传统的文件传输：read+write操作。两次系统调用，四次上下文切换，四次拷贝，其中两次是 DMA 的拷贝，另外两次则是通过 CPU 拷贝的
+所以，要想提高文件传输的性能，就需要减少「用户态与内核态的上下文切换」和「内存拷贝」的次数。
+  要想减少上下文切换到次数，就要减少系统调用的次数。</description>
+      
+    </item>
+    
+  </channel>
+</rss>

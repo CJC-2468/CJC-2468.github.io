@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统进程管理 on </title>
+    <link>https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 操作系统进程管理 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 07 May 2022 19:08:46 +0800</lastBuildDate><atom:link href="https://example.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统进程管理</title>
+      <link>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sat, 07 May 2022 19:08:46 +0800</pubDate>
+      
+      <guid>https://example.com/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
+      
+        <description>进程管理 进程，线程，协程分别是什么？区别是什么？ 进程：首先进程其实是运行起来的程序，是资源(包括内存、打开的文件等)分配的单位，每个进程都有自己的独立虚拟地址空间，拥有自己独立的堆和栈，上下文切换开销比较大。
+线程：线程是 CPU 调度的单位，线程只会有运行时需要的必不可少的资源（程序计数器，寄存器，栈），它的栈是独立的，但是堆是共享的，线程可以享有这个进程内所有的共享资源。上下文切换开销比进程小。线程的作用：线程能减少并发执行的时间和空间开销。（注意：当进程中的一个线程崩溃时，会导致其所属进程的所有线程崩溃。这里是针对 C/C++ 语言，Java语言中的线程奔溃不会造成进程崩溃）。
+协程：一种用户态的轻量级线程，这是对内核透明的，也就是系统并不知道有协程的存在，是完全由用户自己的程序进行调度的。协程和线程一样共享堆，不共享栈，发生上下文切换的时候，因为是用户态的，所以没有内核切换的开销，上下文切换的会比较快。
+区别：</description>
+      
+    </item>
+    
+  </channel>
+</rss>
