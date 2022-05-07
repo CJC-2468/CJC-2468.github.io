@@ -447,7 +447,7 @@ redis是一个很好的缓存中间件，性能很好，同时支持丰富的数
       <h1 id="为什么引入缓存">为什么引入缓存</h1>
 <p>如果业务的流量很小，那么无论读写操作，直接操作数据库即可。但是流量大了之后，直接操作数据库的话就会有性能问题，这时候就需要缓存来提高性能。</p>
 <p>redis是一个很好的缓存中间件，性能很好，同时支持丰富的数据类型。通常的做法是读请求去redis读，读写请求可以去mysql去做。</p>
-<img src="/Users/cjc/Library/Application Support/typora-user-images/image-20220504164931383.png" alt="image-20220504164931383" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/image-20220504164931383.png" style="zoom:50%;" />
 <p>但是这样就面临一个问题，之前只有mysql，数据都在mysql中，现在引入redis，如何把数据从mysql存入redis呢？</p>
 <h1 id="如何把数据库中的数据放到缓存中">如何把数据库中的数据放到缓存中？</h1>
 <p>最简单的方案：全量数据刷到缓存</p>
@@ -456,7 +456,7 @@ redis是一个很好的缓存中间件，性能很好，同时支持丰富的数
 <li>写请求只更新数据库，不更新缓存</li>
 <li>启动一个定时任务，定时把数据库的数据，更新到缓存中</li>
 </ul>
-<img src="/Users/cjc/Library/Application Support/typora-user-images/image-20220504165823673.png" alt="image-20220504165823673" style="zoom:50%;" />
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/image-20220504165823673.png" style="zoom:50%;" />
 <p><strong>优点</strong>：所有读请求都可以直接「命中」缓存，不需要再查数据库，性能非常高。</p>
 <p><strong>缺点</strong>：</p>
 <ol>
