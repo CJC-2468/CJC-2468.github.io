@@ -118,7 +118,7 @@ H O P E
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go的Slice详解"/>
 <meta name="twitter:description" content="go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
-切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化。因为基于数组实现，所以它的底层的内存是连续分配的，可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。能够自动扩容。
 golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
 讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
 newcap := old.cap	//old."/>
@@ -128,7 +128,7 @@ newcap := old.cap	//old."/>
   
   <meta property="og:title" content="Go的Slice详解" />
 <meta property="og:description" content="go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。
-切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。
+切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化。因为基于数组实现，所以它的底层的内存是连续分配的，可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。能够自动扩容。
 golang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。
 讲一下slice的扩容机制？ 根据runtime/slice.go源码，它的扩容情况如下：
 newcap := old.cap	//old." />
@@ -154,7 +154,7 @@ newcap := old.cap	//old." />
         "alternativeHeadline": "",
         "description": "
       
-        go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。\n切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。\ngolang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。\n讲一下slice的扩容机制？ 根据runtime\/slice.go源码，它的扩容情况如下：\nnewcap := old.cap\t\/\/old.
+        go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。\n切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化。因为基于数组实现，所以它的底层的内存是连续分配的，可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。能够自动扩容。\ngolang中数组和切片在参数传递的时候区别是什么？ 数组是值传递，切片看上去像是引用传递，实际上还是值传递。\n讲一下slice的扩容机制？ 根据runtime\/slice.go源码，它的扩容情况如下：\nnewcap := old.cap\t\/\/old.
 
 
       
@@ -204,7 +204,7 @@ newcap := old.cap	//old." />
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3\/",
-        "wordCount" : "109",
+        "wordCount" : "273",
         "genre" : [ 
       
       "Go"
@@ -440,13 +440,13 @@ newcap := old.cap	//old." />
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">One-minute read</span>
+            <span class="post__meta-text">2-minute read</span>
           </li>
         </ul>
 
       <h2 id="go数组和切片区别">go数组和切片区别？</h2>
 <p>数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。</p>
-<p>切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化，能够自动扩容。因为基于数组实现，所以它的底层的内存是连续分配的，效率非常高，还可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。</p>
+<p>切片：底层有三个属性：指针，长度，容量，不需要指定长度容量，可以通过数组初始化也能用make初始化。因为基于数组实现，所以它的底层的内存是连续分配的，可以通过索引获得数据。多个切片底层可能公用同一个底层数组，所以对一个切片的操作可能影响多个slice。能够自动扩容。</p>
 <h2 id="golang中数组和切片在参数传递的时候区别是什么">golang中数组和切片在参数传递的时候区别是什么？</h2>
 <p>数组是值传递，切片看上去像是引用传递，实际上还是值传递。</p>
 <h2 id="讲一下slice的扩容机制">讲一下slice的扩容机制？</h2>
@@ -466,27 +466,103 @@ newcap := old.cap	//old." />
 </span></span><span class="line"><span class="cl">			<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>它会先计算旧容量加上新加入的元素个数，然后和旧容量的2倍做个比较，看看能不能hold住，如果hold不住的话，就会直接扩容到旧容量加上新加入的元素个数，如果能hold住，那么就判断旧容量大不大于1024，如果不大于，就2倍2倍的扩，如果大于，就1.25倍的扩。但是到这里还没结束，为了更高效的利用内存，还会有一个内存对齐的操作，经过内存对齐重新计算应该的容量，然后才能得到最后的结果。</p>
-<p>GoLang中的切片扩容机制，与切片的数据类型、原本切片的容量、所需要的容量都有关系，比较复杂。对于常见数据类型，在元素数量较少时，大致可以认为扩容是按照翻倍进行的。但具体情况需要具体分析。</p>
-<p>例如byte类型，直接append第一个元素进去就会直接扩容到8，这也是常见的坑。</p>
+</span></span></code></pre></div><p>它会先计算旧容量加上新加入的元素个数，然后和旧容量的2倍做个比较，看看能不能hold住，如果hold不住的话，就会直接扩容到旧容量加上新加入的元素个数，如果能hold住，那么就判断旧容量大不大于1024，如果不大于，就2倍2倍的扩，如果大于，就1.25倍的扩。但是到这里还没结束，为了更高效的利用内存，还会有一个<strong>内存对齐</strong>的操作，经过内存对齐重新计算应该的容量，然后才能得到最后的结果。</p>
+<p>GoLang中的切片扩容机制，与<strong>切片的数据类型、原本切片的容量、所需要的容量</strong>都有关系，比较复杂。对于常见数据类型，在元素数量较少时，大致可以认为扩容是按照翻倍进行的。但具体情况需要具体分析。</p>
+<p><strong>例如byte类型，直接append第一个元素进去就会直接扩容到8，这也是常见的坑。</strong></p>
 <h2 id="扩容前后slice是否相同">扩容前后slice是否相同？</h2>
 <p>注意一个前提：切片可能只用了一个数组中间的部分，指定的cap没有到数组的末尾。</p>
 <p>当切片底层指向的数组的实际容量还够扩容时，扩容前后切片底层的数组还是原来的数组，</p>
 <p>如果切片底层指向的数组实际容量已经到了最大值，扩容会重新分配一块更大的内存，将原 slice 拷贝到新 slice ，再将数据追加进去。</p>
 <h2 id="slice的深拷贝和浅拷贝">slice的深拷贝和浅拷贝？</h2>
-<p>深拷贝：新的切片和原来的切片指向不同的底层数组，任何一个数组元素改变都不影响另外一个。</p>
-<p>浅拷贝：新的切片和原来的切片指向相同的底层数组，任何一个数组元素改变都会影响另外一个。</p>
+<p>深浅拷贝都是进行复制，区别在于复制出来的新对象与原来的对象在它们发生改变时，是否会相互影响，本质区别就是复制出来的对象与原对象是否会指向同一个地址。在<code>Go</code>语言，切片拷贝有三种方式：</p>
+<ul>
+<li>使用<code>=</code>操作符拷贝切片，这种就是浅拷贝</li>
+<li>使用<code>[:]</code>下标的方式复制切片，这种也是浅拷贝</li>
+<li>使用<code>Go</code>语言的内置函数<code>copy()</code>进行切片拷贝，这种就是深拷贝</li>
+</ul>
 <h2 id="slice支持并发吗">slice支持并发吗？</h2>
 <p>切片底层就是数组，在并发写数据的情况下相同的索引位置上的数据会被覆盖，并且切片有自己的扩容机制，底层数组可能会被替换，在切换数组时多个goroutine同时运行，我们就不知道哪个先运行，但是肯定会存在数据覆盖的情况，所以动态扩容时并发写操作是不安全的。</p>
-<p>总结：指定索引使用切片时，切片支持并发读写索引区的数据，但是索引区数据在并发时会被覆盖。不指定索引使用切片的话，就涉及到动态扩容，并发场景下扩容会被覆盖，所以切片时不支持并发的。</p>
+<p>总结：指定索引使用切片时，切片支持并发读写索引区的数据，但是索引区数据在并发时会被覆盖。不指定索引使用切片的话，就涉及到<strong>动态扩容</strong>，并发场景下扩容会被覆盖，所以<strong>切片是不支持并发</strong>的。</p>
 <h2 id="slice使用中遇到的坑">slice使用中遇到的坑</h2>
-<p>Slice 的底层数组如果发生了扩容后会让函数内外原本指向同一个底层数组的两个 Slice 变量，分别指向两个不同的底层数组。最后就导致了函数内做的数据添加，但是函数外原来的 Slice 变量并没有任何改变的诡异效果。所以如果作为参数传递进去，那么要把slice当返回值才能看到扩容后的slice。</p>
+<p>Slice 的底层数组如果发生了扩容后会让函数内外原本指向同一个底层数组的两个 Slice 变量，分别指向两个不同的底层数组。最后就导致了函数内做的数据添加，但是函数外原来的 Slice 变量并没有任何改变的诡异效果。<strong>所以如果作为参数传递进去，那么要把slice当返回值才能看到扩容后的slice。</strong></p>
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092153.png" style="zoom:33%;" />
 <p>本来切片只有 3 个元素，分别是 1，2，3。我们把切片赋给了变量 s，然后用变量 s 作为参数传给了函数 reverse 进行处理，函数 reverse 在反转切片元素之前还给原来的切片先追加了几个值，这就导致了切片发生扩容。因为切片实际上并不是一个指针类型，它的运行时类型表示是 SliceHeader。</p>
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092225.png" style="zoom:33%;" />
-<p>因为 Go 里边有<strong>一切都是值传递的规则</strong>，所以切片作为参数时，会在函数内重新拷贝一个 SliceHeader 结构体，只不过结构体的 Data 指针一开始跟外部切片的指向是一样的，都是同一个底层数据。</p>
+<p>因为 Go 里边有<strong>一切都是值传递的规则</strong>，所以切片作为参数时，会在函数内重新拷贝一个 SliceHeader <strong>结构体</strong>，只不过结构体的 Data 指针一开始跟外部切片的指向是一样的，都是同一个底层数据。</p>
 <p>这就导致了函数内切片 SliceHeader 里的 Data 指针发生变化后，函数外原来的切片还是指向原来的底层数组。最后结果，打印函数外切片变量输出的是 <code>[1, 2, 3]</code>，但函数里边的切片已经是 <code>[1001, 1000, 999, 3, 2, 1]</code> 了。</p>
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220428092416.png" style="zoom:33%;" />
+<h2 id="拷贝大切片一定比拷贝小切片代价大吗">拷贝大切片一定比拷贝小切片代价大吗？</h2>
+<p>不会，因为切片就是个结构体，里面就三个变量，存的是数组的指针。切片中的第一个字是指向切片底层数组的指针，这是切片的存储空间，第二个字段是切片的长度，第三个字段是容量。将一个切片变量分配给另一个变量只会复制三个机器字，大切片跟小切片的区别无非就是 <code>Len</code> 和 <code>Cap</code>的值比小切片的这两个值大一些，如果发生拷贝，本质上就是拷贝上面的三个字段。</p>
+<h2 id="零切片空切片nil切片是什么">零切片、空切片、nil切片是什么</h2>
+<ul>
+<li>零切片</li>
+</ul>
+<p>我们把切片内部数组的元素都是零值或者底层数组的内容就全是 <code>nil</code>的切片叫做零切片，使用<code>make</code>创建的、长度、容量都不为0的切片就是零值切片：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">slice := make([]int,5) // 0 0 0 0 0
+</span></span><span class="line"><span class="cl">slice := make([]*int,5) // nil nil nil nil nil
+</span></span></code></pre></div><ul>
+<li><code>nil</code>切片</li>
+</ul>
+<p><code>nil</code>切片的长度和容量都为<code>0</code>，并且和<code>nil</code>比较的结果为<code>true</code>，采用直接创建切片的方式、<code>new</code>创建切片的方式都可以创建<code>nil</code>切片：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var slice []int
+</span></span><span class="line"><span class="cl">var slice = *new([]int)
+</span></span></code></pre></div><ul>
+<li>空切片</li>
+</ul>
+<p>空切片的长度和容量也都为<code>0</code>，但是和<code>nil</code>的比较结果为<code>false</code>，因为所有的空切片的数据指针都指向同一个地址 <code>0xc42003bda0</code>；使用字面量、<code>make</code>可以创建空切片：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var slice = []int{}
+</span></span><span class="line"><span class="cl">var slice = make([]int, 0)
+</span></span></code></pre></div><p>空切片指向的 zerobase 内存地址是一个神奇的地址。</p>
+<h2 id="参数传递切片和切片指针有什么区别">参数传递切片和切片指针有什么区别？</h2>
+<p>当切片作为参数传递时，其实就是一个结构体的传递，因为<code>Go</code>语言参数传递只有值传递，传递一个切片就会浅拷贝原切片，但因为底层数据的地址没有变，所以在函数内对切片的修改，也将会影响到函数外的切片</p>
+<p>因为切片发生了扩容，函数外的切片指向了一个新的底层数组，所以函数内外不会相互影响，因此可以得出一个结论，当参数直接传递切片时，<strong>如果指向底层数组的指针被覆盖或者修改（copy、重分配、append触发扩容），此时函数内部对数据的修改将不再影响到外部的切片，代表长度的len和容量cap也均不会被修改</strong>。</p>
+<p>参数传递切片指针就很容易理解了，如果你想修改切片中元素的值，并且更改切片的容量和底层数组，则应该按指针传递。</p>
+<h2 id="range遍历切片有什么要注意的"><code>range</code>遍历切片有什么要注意的？</h2>
+<p><code>Go</code>语言提供了<code>range</code>关键字用于for 循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素，有两种使用方式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for k,v := range _ { }
+</span></span><span class="line"><span class="cl">for k := range _ { }
+</span></span></code></pre></div><p>第一种是遍历下标和对应值，第二种是只遍历下标，使用<code>range</code>遍历切片时会先拷贝一份，然后在遍历拷贝数据：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">s := []int{1, 2}
+</span></span><span class="line"><span class="cl">for k, v := range s {
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">会被编译器认为是
+</span></span><span class="line"><span class="cl">for_temp := s
+</span></span><span class="line"><span class="cl">len_temp := len(for_temp)
+</span></span><span class="line"><span class="cl">for index_temp := 0; index_temp &lt; len_temp; index_temp++ {
+</span></span><span class="line"><span class="cl">  value_temp := for_temp[index_temp]
+</span></span><span class="line"><span class="cl">  _ = index_temp
+</span></span><span class="line"><span class="cl">  value := value_temp
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>不知道这个知识点的情况下很容易踩坑，例如下面这个例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl"> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">user</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">age</span> <span class="kt">uint64</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">u</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">user</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="s">&#34;asong&#34;</span><span class="p">,</span><span class="mi">23</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="s">&#34;song&#34;</span><span class="p">,</span><span class="mi">19</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span><span class="s">&#34;asong2020&#34;</span><span class="p">,</span><span class="mi">18</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">u</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">age</span> <span class="o">!=</span> <span class="mi">18</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">v</span><span class="p">.</span><span class="nx">age</span> <span class="p">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 运行结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[{</span><span class="nx">asong</span> <span class="mi">23</span><span class="p">}</span> <span class="p">{</span><span class="nx">song</span> <span class="mi">19</span><span class="p">}</span> <span class="p">{</span><span class="nx">asong2020</span> <span class="mi">18</span><span class="p">}]</span>
+</span></span></code></pre></div><p>因为使用<code>range</code>遍历切片<code>u</code>，变量<code>v</code>是拷贝切片中的数据，修改拷贝数据不会对原切片有影响。</p>
 </div>
     <div class="post__footer">
       
