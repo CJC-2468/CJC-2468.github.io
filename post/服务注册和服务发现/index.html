@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html
+  dir="ltr"
+  lang="en"
+  data-theme=""
+  class="html"
+><head>
+  <title>
+    
+      CJC
+        |
+        服务注册和服务发现
+
+
+      
+
+
+    
+  </title>
+
+  
+  <meta charset="utf-8" /><meta name="generator" content="Hugo 0.97.3" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="CJC" />
+  <meta
+    name="description"
+    content="
+      Integrity
+Goodness
+Passion
+H O P E
+
+
+
+    "
+  />
+  
+  
+    
+    
+    <link
+      rel="stylesheet"
+      href="/scss/main.min.5551757e3608c8c17519a404d0c78646f8b4ce68b04e5acc290a21597ce09467.css"
+      integrity="sha256-VVF1fjYIyMF1GaQE0MeGRvi0zmiwTlrMKQohWXzglGc="
+      crossorigin="anonymous"
+      type="text/css"
+    />
+
+  
+
+  
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.31b0a1f317f55c529a460897848c97436bb138b19c399b37de70d463a8bf6ed5.css"
+    integrity="sha256-MbCh8xf1XFKaRgiXhIyXQ2uxOLGcOZs33nDUY6i/btU="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.69685904d5c2a0c6258d03c207b778c10466edf6cea928cc0164c376b0ad0930.css"
+    integrity="sha256-aWhZBNXCoMYljQPCB7d4wQRm7fbOqSjMAWTDdrCtCTA="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.6d585e78d28cce1200d39fb133c92ed83df01738da721d0f48fb6eac62d24e04.css"
+    integrity="sha256-bVheeNKMzhIA05&#43;xM8ku2D3wFzjach0PSPturGLSTgQ="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.6b00d96498d59caa0dbcf9b49d30d821915291f2ceb0e19248523c8607ff43fa.css"
+    integrity="sha256-awDZZJjVnKoNvPm0nTDYIZFSkfLOsOGSSFI8hgf/Q/o="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://example.com/post/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/" />
+
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.560a26330d27ff44a44e83b53cd07a95d4230a65930d31c5c76a8d481e5b35bf.js"
+      integrity="sha256-VgomMw0n/0SkToO1PNB6ldQjCmWTDTHFx2qNSB5bNb8="
+      crossorigin="anonymous"
+    ></script>
+
+  
+
+  
+
+
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="服务注册和服务发现"/>
+<meta name="twitter:description" content="背景 在微服务架构或分布式环境下，服务注册与发现技术不可或缺。下面看一下常见的几种系统架构。
+单体架构 在系统建立之初可能不会有特别多的用户，将所有的业务打成一个应用包放在tomcat容器中运行，与数据库共用一台服务器，这种架构一般称之为单体架构。
+在初期这种架构的效率非常高，根据用户的反馈可以快速迭代上线。但是随着用户量增加，一台服务的内存和CPU吃紧，很容易造成瓶颈，新的问题来了怎么解决呢？
+应用与数据分离 随着用户请求量增加，一台服务器的内存和CPU持续飙升，用户请求响应时间变慢。这时候可以考虑将应用与数据库拆开，各自使用一台服务器，你看问题又解决了吧。
+突然有一天扫地阿姨不小心碰了电线，其中一台服务器掉电了，用户所有的请求都报错，随之而来的是一系列投诉电话。
+集群部署 单实例很容易造成单点问题，比如遇到服务器故障或者服务能力瓶颈，那怎么办？聪明的你肯定想到了，用集群呀。"/>
+
+
+
+  
+  <meta property="og:title" content="服务注册和服务发现" />
+<meta property="og:description" content="背景 在微服务架构或分布式环境下，服务注册与发现技术不可或缺。下面看一下常见的几种系统架构。
+单体架构 在系统建立之初可能不会有特别多的用户，将所有的业务打成一个应用包放在tomcat容器中运行，与数据库共用一台服务器，这种架构一般称之为单体架构。
+在初期这种架构的效率非常高，根据用户的反馈可以快速迭代上线。但是随着用户量增加，一台服务的内存和CPU吃紧，很容易造成瓶颈，新的问题来了怎么解决呢？
+应用与数据分离 随着用户请求量增加，一台服务器的内存和CPU持续飙升，用户请求响应时间变慢。这时候可以考虑将应用与数据库拆开，各自使用一台服务器，你看问题又解决了吧。
+突然有一天扫地阿姨不小心碰了电线，其中一台服务器掉电了，用户所有的请求都报错，随之而来的是一系列投诉电话。
+集群部署 单实例很容易造成单点问题，比如遇到服务器故障或者服务能力瓶颈，那怎么办？聪明的你肯定想到了，用集群呀。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/post/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-25T20:23:20+08:00" />
+<meta property="article:modified_time" content="2022-05-25T20:23:20+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+
+
+
+  
+  
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "服务注册和服务发现",
+        "headline": "服务注册和服务发现",
+        "alternativeHeadline": "",
+        "description": "
+      
+        背景 在微服务架构或分布式环境下，服务注册与发现技术不可或缺。下面看一下常见的几种系统架构。\n单体架构 在系统建立之初可能不会有特别多的用户，将所有的业务打成一个应用包放在tomcat容器中运行，与数据库共用一台服务器，这种架构一般称之为单体架构。\n在初期这种架构的效率非常高，根据用户的反馈可以快速迭代上线。但是随着用户量增加，一台服务的内存和CPU吃紧，很容易造成瓶颈，新的问题来了怎么解决呢？\n应用与数据分离 随着用户请求量增加，一台服务器的内存和CPU持续飙升，用户请求响应时间变慢。这时候可以考虑将应用与数据库拆开，各自使用一台服务器，你看问题又解决了吧。\n突然有一天扫地阿姨不小心碰了电线，其中一台服务器掉电了，用户所有的请求都报错，随之而来的是一系列投诉电话。\n集群部署 单实例很容易造成单点问题，比如遇到服务器故障或者服务能力瓶颈，那怎么办？聪明的你肯定想到了，用集群呀。
+
+
+      
+
+
+    ",
+        "inLanguage": "en",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/example.com\/post\/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "CJC"
+        },
+        "copyrightYear" : "2022",
+        "dateCreated": "2022-05-25T20:23:20.00Z",
+        "datePublished": "2022-05-25T20:23:20.00Z",
+        "dateModified": "2022-05-25T20:23:20.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "CJC",
+            "url": "https://example.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/example.comfavicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/example.com\/post\/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0\/",
+        "wordCount" : "53",
+        "genre" : [ 
+      
+      "架构"
+
+    ],
+        "keywords" : [ 
+      
+      "微服务，分布式"
+
+    ]
+    }
+  </script>
+
+
+
+</head>
+<body
+    
+      class="body theme--light"
+
+    
+  >
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+
+        
+      ><div
+  class="sidebar
+    animated fadeInDown
+
+  "
+>
+  <div class="sidebar__content">
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/images/cat.jpeg"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">CJC&#39;s time&amp;space</a>
+        </div>
+
+      
+      <div class="sidebar__introduction-description">
+        <p>Integrity<br />Goodness<br />Passion<br />H O P E<br /></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a href="https://github.com/CJC-2468" rel="me" aria-label="GitHub" title="GitHub">
+            <i class="fab fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="mailto:jccheng2022@gmail.com" rel="me" aria-label="e-mail" title="e-mail">
+            <i class="fas fa-envelope fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="instagram" title="instagram">
+            <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+        <li class="sidebar__list-item">
+          <a href="#" rel="me" aria-label="Linkedin" title="Linkedin">
+            <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+</div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/"
+            
+            title=""
+            >Home</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/post/"
+            
+            title=""
+            >目录</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/categories/"
+            
+            title=""
+            >分类</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/tags/"
+            
+            title=""
+            >标签</a
+          >
+        </li>
+
+      
+        
+        <li class="nav__list-item">
+          <a
+            
+            href="/wikif"
+            
+            title=""
+            >个人探索</a
+          >
+        </li>
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+
+    "
+  >
+    
+    <div class="post__content">
+      <h1>服务注册和服务发现</h1>
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                Wed, May 25, 2022
+
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">One-minute read</span>
+          </li>
+        </ul>
+
+      <h1 id="背景">背景</h1>
+<p>在微服务架构或分布式环境下，服务注册与发现技术不可或缺。下面看一下常见的几种系统架构。</p>
+<h2 id="单体架构">单体架构</h2>
+<p>在系统建立之初可能不会有特别多的用户，将所有的业务打成一个应用包放在tomcat容器中运行，与数据库共用一台服务器，这种架构一般称之为单体架构。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525202629.png" style="zoom: 33%;" />
+<p>在初期这种架构的效率非常高，根据用户的反馈可以快速迭代上线。但是随着用户量增加，一台服务的内存和CPU吃紧，很容易造成瓶颈，新的问题来了怎么解决呢？</p>
+<h2 id="应用与数据分离">应用与数据分离</h2>
+<p>随着用户请求量增加，一台服务器的内存和CPU持续飙升，用户请求响应时间变慢。这时候可以考虑将应用与数据库拆开，各自使用一台服务器，你看问题又解决了吧。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525202820.png" style="zoom:33%;" />
+<p>突然有一天扫地阿姨不小心碰了电线，其中一台服务器掉电了，用户所有的请求都报错，随之而来的是一系列投诉电话。</p>
+<h2 id="集群部署">集群部署</h2>
+<p>单实例很容易造成单点问题，比如遇到服务器故障或者服务能力瓶颈，那怎么办？聪明的你肯定想到了，用集群呀。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525202915.png" style="zoom:50%;" />
+<p>集群部署是指将应用部署在多个服务器或者虚机上，用户通过服务均衡随机访问其中的一个实例，从而使多个实例的流量均衡，如果一个实例出现故障可以将其下线，其他实例不受影响仍然可以对外提供服务。</p>
+<p>随着用户数量快速增加，老板决定增加投入扩大团队规模。开发团队壮大后效率并没有得到显著的提高，以前小团队可以一周迭代上线一次，现在至少需要两到三周时间。</p>
+<p>业务逻辑越来越复杂，代码间耦合很严重，修改一行代码可能引入几个线上问题。架构师意识到需要进行架构重构。</p>
+<h2 id="微服务架构">微服务架构</h2>
+<p>当单体架构演进到一定阶段后开发测试的复杂性都会成本增加，团队规模的扩大也会使得各自工作耦合性更严重，牵一发而动全身就是这种场景。</p>
+<p>单体架构遇到瓶颈了，微服务架构就横空出世了。微服务就是将之前的单体服务按照业务维度进行拆分，拆分粒度可大可小，拆分时机可以分节奏进行。最佳实践是先将一些独立的功能从单体中剥离出来抽成一个或多个微服务，这样可以保障业务的连续性和稳定性。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525203500.png" style="zoom:50%;" />
+<p>如上图将一个商用应用拆分为六个独立微服务。六个微服务可以使用Docker容器化进行多实例部署。</p>
+<p>架构演化到这里遇到了一个难题，如果要查询用户所有的订单，用户服务可能会依赖订单服务，用户服务如何与订单服务交互呢？订单服务有多个实例该访问哪一个？</p>
+<p>通常有几种解决办法：</p>
+<p>（1）服务地址硬编码：</p>
+<p>服务的地址写死在数据库或者配置文件，通过访问DNS域名进行寻址路由。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525203739.png" style="zoom:50%;" />
+<p>服务B的地址硬编码在数据库或者配置文件中，服务A首先需要拿到服务B的地址，然后通过DNS服务器解析获取其中一实例的真实地址，最后可以向服务B发起请求。</p>
+<p>如果遇到大促活动需要对服务实例扩容，大促完需要对服务实例进行下线，运维人员要做大量的手工操作，非常容易误操作。</p>
+<p><strong>（2）服务动态注册与发现</strong></p>
+<p>服务地址硬编码还有一个非常致命的问题，如果一台实例挂了，运维人员可能不能及时感知到，导致一部分用户的请求会异常。</p>
+<p>引入服务注册与发现组件可以很好解决上面遇到的问题，避免过多的人工操作。</p>
+<h2 id="架构演进总结">架构演进总结</h2>
+<p>在单体架构中一个应用程序就是一个服务包，包内的模块通过函数方法相互调用，模型足够简单，根本没有服务注册和发现一说。</p>
+<p>在微服务架构中会将一个应用程序拆分为多个微服务，微服务会部署在不同的服务器、不同的容器、甚至多数据中心，微服务间要相互调用，服务注册和发现成为了一个不可或缺的组件。</p>
+<h1 id="服务注册与发现基本原理">服务注册与发现基本原理</h1>
+<p>服务注册与发现是分为注册和发现两个关键的步骤。</p>
+<p><strong>服务注册</strong>：服务进程在注册中心注册自己的元数据信息。通常包括主机和端口号，有时还有身份验证信息，协议，版本号，以及运行环境的信息。</p>
+<p><strong>服务发现</strong>：客户端服务进程向注册中心发起查询，来获取服务的信息。服务发现的一个重要作用就是提供给客户端一个可用的服务列表。</p>
+<h2 id="服务注册">服务注册</h2>
+<p>服务注册有两种形式：客户端注册和代理注册。</p>
+<p><strong>客户端注册</strong></p>
+<p>客户端注册是服务自己要负责注册与注销的工作。当服务启动后注册线程向注册中心注册，当服务下线时注销自己。<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525204735.png" style="zoom:50%;" /></p>
+<p>这种方式的缺点是注册注销逻辑与服务的业务逻辑耦合在一起，如果服务使用不同语言开发，那需要适配多套服务注册逻辑。</p>
+<p><strong>代理注册</strong></p>
+<p>代理注册由一个单独的代理服务负责注册与注销。当服务提供者启动后以某种方式通知代理服务，然后代理服务负责向注册中心发起注册工作。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525204914.png" style="zoom:50%;" />
+<p>这种方式的缺点是多引用了一个代理服务，并且代理服务要保持高可用状态。</p>
+<h2 id="服务发现">服务发现</h2>
+<p>服务发现也分为客户端发现和代理发现。</p>
+<p><strong>客户端发现</strong></p>
+<p>客户端发现是指客户端负责向注册中心查询可用服务地址，获取到所有的可用实例地址列表后客户端根据负载均衡算法选择一个实例发起请求调用。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525204958.png" style="zoom:50%;" />
+<p>这种方式非常直接，客户端可以控制负载均衡算法。但是缺点也很明显，获取实例地址、负载均衡等逻辑与服务的业务逻辑耦合在一起，如果服务发现或者负载平衡有变化，那么所有的服务都要修改重新上线。</p>
+<p><strong>代理发现</strong></p>
+<p>代理发现是指新增一个路由服务负责服务发现获取可用的实例列表，服务消费者如果需要调用服务A的一个实例可以直接将请求发往路由服务，路由服务根据配置好的负载均衡算法从可用的实例列表中选择一个实例将请求转发过去即可，如果发现实例不可用，路由服务还可以自行重试，服务消费者完全不用感知。</p>
+<h2 id="心跳机制">心跳机制</h2>
+<p>如果服务有多个实例，其中一个实例出现宕机，注册中心是可以实时感知到，并且将该实例信息从列表中移出，也称为摘机。</p>
+<p>如何实现摘机？业界比较常用的方式是通过心跳检测的方式实现，心跳检测有<strong>主动</strong>和<strong>被动</strong>两种方式。</p>
+<p><strong>被动检测</strong>是指服务主动向注册中心发送心跳消息，时间间隔可自定义，比如配置5秒发送一次，注册中心如果在三个周期内比如说15秒内没有收到实例的心跳消息，就会将该实例从列表中移除。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525205335.png" style="zoom:50%;" />
+<p>上图中服务A的实例2已经宕机不能主动给注册中心发送心跳消息，15秒之后注册就会将实例2移除掉。</p>
+<p><strong>主动检测</strong>是注册中心主动发起，每隔几秒中会给所有列表中的服务实例发送心跳检测消息，如果多个周期内未发送成功或未收到回复就会主动移除该实例。</p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220525205407.png" style="zoom:50%;" />
+</div>
+    <div class="post__footer">
+      
+        <span><a class="category" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a></span>
+
+
+
+
+      
+
+      
+        <span><a class="tag" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B8%83%E5%BC%8F/">微服务，分布式</a></span>
+
+
+
+
+      
+    </div>
+
+    
+  </div>
+
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul class="footer__list">
+    <li class="footer__item">
+      &copy;
+      
+        CJC
+        2022
+
+
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9c062c557275acbaba71f0c7cd4024da3e3cc825d248bc4b2130811b0965330b.js"
+    integrity="sha256-nAYsVXJ1rLq6cfDHzUAk2j48yCXSSLxLITCBGwllMws="
+    crossorigin="anonymous"
+  ></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5HQND29S4G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-5HQND29S4G');
+</script>
+</body>
+</html>
