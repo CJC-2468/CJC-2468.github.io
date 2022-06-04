@@ -95,12 +95,6 @@
     <loc>https://example.com/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2022-04-21T12:29:15+08:00</lastmod>
   </url><url>
-    <loc>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2022-04-21T12:28:16+08:00</lastmod>
-  </url><url>
-    <loc>https://example.com/tags/map/</loc>
-    <lastmod>2022-04-21T12:28:16+08:00</lastmod>
-  </url><url>
     <loc>https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2022-04-21T12:25:09+08:00</lastmod>
   </url><url>
@@ -136,6 +130,8 @@
   </url><url>
     <loc>https://example.com/post/hugo&#43;github-pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2022-04-19T13:44:33+08:00</lastmod>
+  </url><url>
+    <loc>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</loc>
   </url><url>
     <loc>https://example.com/series/</loc>
   </url>

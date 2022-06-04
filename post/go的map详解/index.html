@@ -8,11 +8,6 @@
   <title>
     
       CJC
-        |
-        Go的Map详解
-
-
-      
 
 
     
@@ -116,18 +111,20 @@ H O P E
 
   
   <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go的Map详解"/>
-<meta name="twitter:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。
+这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。"/>
 
 
 
   
-  <meta property="og:title" content="Go的Map详解" />
-<meta property="og:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。" />
+  <meta property="og:title" content="" />
+<meta property="og:description" content="golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。
+这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-04-21T12:28:16+08:00" />
-<meta property="article:modified_time" content="2022-04-21T12:28:16+08:00" /><meta property="og:site_name" content="CJC&#39;s time&amp;space" />
+
+<meta property="og:site_name" content="CJC&#39;s time&amp;space" />
 
 
 
@@ -141,12 +138,12 @@ H O P E
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "articleSection": "post",
-        "name": "Go的Map详解",
-        "headline": "Go的Map详解",
+        "name": "",
+        "headline": "",
         "alternativeHeadline": "",
         "description": "
       
-        golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。
+        golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。\n这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。
 
 
       
@@ -175,10 +172,10 @@ H O P E
             "@type": "Person",
             "name": "CJC"
         },
-        "copyrightYear" : "2022",
-        "dateCreated": "2022-04-21T12:28:16.00Z",
-        "datePublished": "2022-04-21T12:28:16.00Z",
-        "dateModified": "2022-04-21T12:28:16.00Z",
+        "copyrightYear" : "0001",
+        "dateCreated": "0001-01-01T00:00:00.00Z",
+        "datePublished": "0001-01-01T00:00:00.00Z",
+        "dateModified": "0001-01-01T00:00:00.00Z",
         "publisher":{
             "@type":"Organization",
             "name": "CJC",
@@ -196,17 +193,9 @@ H O P E
 
     ,
         "url" : "https:\/\/example.com\/post\/go%E7%9A%84map%E8%AF%A6%E8%A7%A3\/",
-        "wordCount" : "63",
-        "genre" : [ 
-      
-      "Go"
-
-    ],
-        "keywords" : [ 
-      
-      "map"
-
-    ]
+        "wordCount" : "81",
+        "genre" : [ ],
+        "keywords" : [ ]
     }
   </script>
 
@@ -417,14 +406,14 @@ H O P E
   >
     
     <div class="post__content">
-      <h1>Go的Map详解</h1>
+      <h1></h1>
       
         <ul class="post__meta">
           <li class="post__meta-item">
             <em class="fas fa-calendar-day post__meta-icon"></em>
             <span class="post__meta-text"
               >
-                Thu, Apr 21, 2022
+                Mon, Jan 1, 0001
 
 
               
@@ -437,36 +426,33 @@ H O P E
         </ul>
 
       <h2 id="golang-map底层实现">golang map底层实现？</h2>
-<p>底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用<strong>拉链法</strong>解决冲突。这个散列表里有两个结构体，一个是<strong>hmap</strong>（(a header for a go map)），一个是<strong>bmap</strong>（(a bucket for a Go map，通常叫其 bucket)）。</p>
+<p>底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用<strong>拉链法</strong>解决冲突。</p>
+<p>这个散列表里有两个结构体，一个是<strong>hmap</strong>（(a header for a go map)），一个是<strong>bmap</strong>（(a bucket for a Go map，通常叫其 bucket)）。</p>
 <p><strong>hmap中存有buckets数组的地址，数组中每一个元素都是一个bucket，bucket是一个链表。</strong></p>
+<img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220601214119.png" style="zoom: 33%;" />
 <p>我们根据key计算出一个hash，取低位找到我们要找的kv在数组的哪一个bucket（也就是在buckets数组的哪一个位置），再取高位哈希，定位到他在bucket的哪个key，这里其实是按照链表那样，如果这个bucket没找到就一个个往后面的overflow bucket找，然后取到我们要的kv。</p>
 <p>（如果在 bucket 中没找到，并且 overflow 不为空，还要继续去 overflow bucket 中寻找，直到找到或是所有的 key 槽位都找遍了，包括所有的 overflow bucket。）</p>
 <p><code>bmap</code> 就是我们常说的“桶”，桶里面会最多装 8 个 key，这些 key 之所以会落入同一个桶，是因为它们经过哈希计算后，哈希结果是“一类”的。在桶内，又会根据 key 计算出来的 hash 值的高 8 位来决定 key 到底落入桶内的哪个位置（一个桶内最多有8个位置）。</p>
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227102350.png" style="zoom:50%;" />
 <h2 id="go-map如何扩容">go map如何扩容？</h2>
-<p>双倍扩容：扩容采用一种增量式扩容，原有的 key 并不会一次性搬迁完毕，因为会造成系统卡顿，所以他是通过后面每次访问的时候顺便搬迁，每次最多只会搬迁 2 个 bucket。</p>
-<p>等量扩容：重新排列。扩容完成后，其实链表长度就变短，key 都集中到了一个 bucket，更为紧凑，提高了查找的效率。</p>
-<p>极端情况下，重新排列也解决不了，map存储就会蜕变成链表，性能大大降低。</p>
-<p>此时调整哈希因子hash0，可以降低此类极端场景的发生。哈希因子阈值是6.5，超过就会扩容。</p>
+<p>go语言默认负载因子阈值是6.5，超过就会双倍扩容。负载因子=元素个数/桶的个数。如果负载因子没有超过，但是溢出桶太多，那么也会扩容，但是会发生等量扩容。</p>
+<p>翻倍扩容：容量扩容为原来的两倍，原有的 key 并不会一次性搬迁完毕，因为会造成系统卡顿，所以他是通过后面每次访问的时候顺便搬迁，每次最多只会搬迁 2 个 bucket，这种一点点搬迁的方式叫渐进式扩容。</p>
+<p>等量扩容：重新排列。新申请同样容量大小的桶，然后一个个把旧桶的键值迁移到新桶。这种情况会发生在旧桶中很多kv被删除的情况，迁移实际上就是旧的bucket[0]迁移到新的bucket[0]，但是这些kv会紧密排在桶里，这样可以有效减少溢出桶的数量。扩容完成后，其实链表长度就变短，key 都集中到了一个 bucket，更为紧凑，提高了查找的效率。</p>
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227102912.png" style="zoom:50%;" />
 <img src="https://cjcpicgoimg.oss-cn-beijing.aliyuncs.com/img/20220227103011.png" style="zoom:50%;" />
-<h2 id="参考文献">参考文献</h2>
-<p><a href="https://juejin.cn/post/6844903848587296781">深度解密Go语言之 map - 掘金 (juejin.cn)</a></p>
+<h2 id="map为什么不是并发安全的">map为什么不是并发安全的？</h2>
+<p>因为多个协程并发的向map中的某个key执行写操作的时候，最开始会出现脏数据，后来干脆编译器直接报panic:concurrent map writes的错，所以说map不是并发安全的。</p>
+<p>但是后来go引入了效率较高的并发安全的 sync.Map，sync.Map 有以下特性：</p>
+<ul>
+<li>无须初始化，直接声明即可。</li>
+<li>sync.Map 不能使用 map 的方式进行取值和设置等操作，而是使用 sync.Map 的方法进行调用，Store 表示存储，Load 表示获取，Delete 表示删除。</li>
+</ul>
+<p>实现思想：sync.map 的整体思想用尽量将读写分离，来减少锁对性能的影响。</p>
+<p>适用场景：两种场景都比较苛刻，要么是一写多读，要么是各个协程操作的 key 集合没有交集（或者交集很少）。所以官方建议先对自己的场景做性能测评，如果确实能显著提高性能，再使用 sync.map。</p>
+<p>另外，还可以<strong>自己用的时候配合读写锁</strong>。</p>
 </div>
     <div class="post__footer">
       
-        <span><a class="category" href="/categories/go/">Go</a></span>
-
-
-
-
-      
-
-      
-        <span><a class="tag" href="/tags/map/">map</a></span>
-
-
-
 
       
     </div>

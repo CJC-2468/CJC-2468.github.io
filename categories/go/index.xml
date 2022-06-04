@@ -48,17 +48,6 @@ func main() { ch := make(chan struct{}) go func() { ch &amp;lt;- struct{}{} }() 
     </item>
     
     <item>
-      <title>Go的Map详解</title>
-      <link>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</link>
-      <pubDate>Thu, 21 Apr 2022 12:28:16 +0800</pubDate>
-      
-      <guid>https://example.com/post/go%E7%9A%84map%E8%AF%A6%E8%A7%A3/</guid>
-      
-        <description>golang map底层实现？ 底层是一个散列表，因此实现map的过程实际上就是实现散表的过程，go中实现采用拉链法解决冲突。这个散列表里有两个结构体，一个是hmap（(a header for a go map)），一个是bmap（(a bucket for a Go map，通常叫其 bucket)）。</description>
-      
-    </item>
-    
-    <item>
       <title>Go的Slice详解</title>
       <link>https://example.com/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Thu, 21 Apr 2022 12:25:09 +0800</pubDate>
