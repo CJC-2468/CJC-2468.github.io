@@ -202,7 +202,7 @@ H O P E
 
     ,
         "url" : "https:\/\/example.com\/post\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F\/",
-        "wordCount" : "424",
+        "wordCount" : "498",
         "genre" : [ 
       
       "设计模式"
@@ -434,7 +434,7 @@ H O P E
           </li>
           <li class="post__meta-item">
             <em class="fas fa-stopwatch post__meta-icon"></em>
-            <span class="post__meta-text">2-minute read</span>
+            <span class="post__meta-text">3-minute read</span>
           </li>
         </ul>
 
@@ -499,13 +499,12 @@ H O P E
 <h1 id="单例模式">单例模式</h1>
 <h2 id="基本特点">基本特点</h2>
 <p>单例模式（Singleton）的目的是为了保证某个类有且仅有一个实例，并提供一个访问它的全局访问点。</p>
-<p>主要解决：一个全局使用的类频繁地创建与销毁。为了控制实例数目，节省系统资源的时候。判断系统是否已经有这个单例，如果有则返回，如果没有则创建。</p>
+<p>场景：比如你的软件的全局配置信息，或者说工厂模式下</p>
 <p>在golang中，</p>
-<p>1.命名以小写字母开头，对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 private ）</p>
+<p>1.命名以小写字母开头，对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 private ），这里其实就是让类自己负责这个实例的创建，而不应该让外界也去能够创建这样一个实例。</p>
 <p>2.提供一个能够访问这个全局唯一实例的函数GetInstance() *singleton</p>
 <p>3.在GetInstance()中，先做判断是否已形成实例，如果已形成则直接返回，否则创建实例。</p>
-<h2 id="常见的错误">常见的错误</h2>
-<p>有一些错误是很常见的，比如不考虑并发安全的单例模式。就像下面的示例代码：</p>
+<h2 id="懒汉式">懒汉式</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">singleton</span>
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">instance</span> <span class="o">*</span><span class="nx">singleton</span>
@@ -515,8 +514,8 @@ H O P E
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">instance</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>在上述情况下，多个goroutine可以执行第一个检查，并且它们都将创建该<code>singleton</code>类型的实例并相互覆盖。无法保证它将在此处返回哪个实例，并且对该实例的其他进一步操作可能与开发人员的期望不一致。</p>
-<h2 id="加锁">加锁</h2>
+</span></span></code></pre></div><p>在上述情况下，多个goroutine可以同时判断instance为nil，并且它们都将创建该<code>singleton</code>类型的实例并相互覆盖。无法保证它将在此处返回哪个实例。</p>
+<h3 id="懒汉式锁">懒汉式+锁</h3>
 <p>使用下面的代码确实能解决并发安全问题，通过加锁把对该函数的并发调用变成了串行。在实例已经创建的情况下，我们应该简单地返回缓存的单例实例。在高度并发的代码基础上，这可能会产生瓶颈，因为一次只有一个goroutine可以获得单例实例。所以这样还是不行。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">singleton</span>
 </span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span> <span class="p">{}</span>
@@ -530,8 +529,42 @@ H O P E
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">instance</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h2 id="go语言惯用的单例模式">Go语言惯用的单例模式</h2>
-<p>我们在标准库<code>sync</code>中找到了<code>Once</code>类型。它能保证某个操作仅且只执行一次。该实现利用<code>sync.Once</code>类型去同步对<code>GetInstance()</code>的访问，并确保我们的类型仅被初始化一次。</p>
+</span></span></code></pre></div><h3 id="懒汉式双重检锁double-check-locking"><strong>懒汉式+双重检锁（double check locking）</strong></h3>
+<p>既可以避免串行化，只在还没实例化instance的时候加锁，且多个goroutine面对instance为nil的时候，多个goroutine只会有一个创建实例。但是缺点是要在instance还没实例化的时候每一次访问都要检查两次。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">instance</span> <span class="o">*</span><span class="nx">singleton</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">mu</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetInstance</span><span class="p">()</span> <span class="o">*</span><span class="nx">singleton</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">instance</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mu</span><span class="p">.</span><span class="nf">Lock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">instance</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">instance</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">singleton</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mu</span><span class="p">.</span><span class="nf">Unlock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">instance</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="饿汉式">饿汉式</h2>
+<p>饿汉模式将在包加载的时候就会创建单例对象，当程序中用不到该对象时，浪费了一部分空间，但是相对于懒汉模式，不需要进行了加锁操作，会更安全，但是会减慢启动速度。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">instance</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">singleton</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetInstance</span><span class="p">()</span> <span class="o">*</span><span class="nx">singleton</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">instance</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">或者</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">instance</span> <span class="o">*</span><span class="nx">singleton</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetInstance</span><span class="p">()</span> <span class="o">*</span><span class="nx">singleton</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">instance</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">instance</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">singleton</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这两种方法都可以，第一种我们采用创建一个全局变量的方式来实现，第二种我们使用<code>init</code>包加载的时候创建实例，这里两个都可以，不过根据golang的执行顺序，全局变量的初始化函数会比包的<code>init</code>函数先执行，没有特别的差距。</p>
+<h2 id="go语言惯用的单例模式">Go语言惯用的单例模式</h2>
+<p>这里使用了<code>sync.Once</code>的<code>Do</code>方法可以实现在程序运行过程中只运行一次其中的回调，这样就可以只创建了一个对象，这种方法是推荐的.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">singleton</span> <span class="kd">struct</span><span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">instance</span> <span class="o">*</span><span class="nx">singleton</span>
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">once</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span>
