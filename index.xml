@@ -6,7 +6,20 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 May 2022 20:23:20 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Jun 2022 05:19:19 +0800</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Skiplist</title>
+      <link>https://example.com/post/skiplist/</link>
+      <pubDate>Tue, 21 Jun 2022 05:19:19 +0800</pubDate>
+      
+      <guid>https://example.com/post/skiplist/</guid>
+      
+        <description>跳表 Redis 只有在 Zset 对象的底层实现用到了跳表，跳表的优势是能支持平均 O(logN) 复杂度的节点查找。
+Zset 对象是唯一一个同时使用了两个数据结构，这两个数据结构一个是跳表，一个是哈希表。这样的好处是既能进行高效的范围查询，也能进行高效单点查询。
+typedef struct zset { dict *dict;//哈希表  zskiplist *zsl;//跳表 } zset; Zset 对象能支持范围查询（如 ZRANGEBYSCORE 操作），这是因为它的数据结构设计采用了跳表，而又能以常数复杂度获取元素权重（如 ZSCORE 操作），这是因为它同时采用了哈希表进行索引。</description>
+      
+    </item>
+    
     <item>
       <title>服务注册和服务发现</title>
       <link>https://example.com/post/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link>

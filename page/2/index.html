@@ -376,6 +376,53 @@ H O P E
     >
       
       <div class="post__content">
+        <h3><a href="/post/go%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">GO的并发编程</a></h3>
+        
+          <p>讲一下go的并发模型？ go控制并发的话有三种种经典的方式，一种是通过channel通知实现并发控制，一种是WaitGroup，另外一种就是Context。
+无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。这样子其实就实现了发送和接收goroutine的同步化，也就是并发控制。注意：当一个值在无缓冲通道传递，接收值后发送方goroutine才会被再次唤醒。
+例子：
+func main() { ch := make(chan struct{}) go func() { ch &lt;- struct{}{} }() fmt.</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Thu, Apr 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/go/">Go</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
         <h3><a href="/post/go%E7%9A%84slice%E8%AF%A6%E8%A7%A3/">GO的SLICE详解</a></h3>
         
           <p>go数组和切片区别？ 数组：长度固定，并且长度也是数组类型的一部分，一般声明的时候要指定大小，不指定也能根据初始化的时候自己算大小，值类型。

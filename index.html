@@ -376,6 +376,52 @@ H O P E
     >
       
       <div class="post__content">
+        <h3><a href="/post/skiplist/">SKIPLIST</a></h3>
+        
+          <p>跳表 Redis 只有在 Zset 对象的底层实现用到了跳表，跳表的优势是能支持平均 O(logN) 复杂度的节点查找。
+Zset 对象是唯一一个同时使用了两个数据结构，这两个数据结构一个是跳表，一个是哈希表。这样的好处是既能进行高效的范围查询，也能进行高效单点查询。
+typedef struct zset { dict *dict;//哈希表  zskiplist *zsl;//跳表 } zset; Zset 对象能支持范围查询（如 ZRANGEBYSCORE 操作），这是因为它的数据结构设计采用了跳表，而又能以常数复杂度获取元素权重（如 ZSCORE 操作），这是因为它同时采用了哈希表进行索引。</p>
+
+        
+        </div>
+
+      
+      <div class="post__footer">
+        <em class="fas fa-calendar-day"></em>
+        <span class="post__footer-date"
+          >
+            Tue, Jun 21, 2022
+
+
+          </span
+        >
+        
+          <span><a class="category" href="/categories/redis/">Redis</a></span>
+
+
+
+
+        
+
+        
+          <span><a class="tag" href="/tags/skiplist/">skiplist</a><a class="tag" href="/tags/%E8%B7%B3%E8%A1%A8/">跳表</a></span>
+
+
+
+
+        
+      </div>
+    </div>
+
+  
+    <div
+      class="post 
+        animated fadeInDown
+
+      "
+    >
+      
+      <div class="post__content">
         <h3><a href="/post/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/">服务注册和服务发现</a></h3>
         
           <p>背景 在微服务架构或分布式环境下，服务注册与发现技术不可或缺。下面看一下常见的几种系统架构。
@@ -782,53 +828,6 @@ golang可以在语言层面包含自动的垃圾回收功能，系统可以在CP
 
         
           <span><a class="tag" href="/tags/gc/">GC</a></span>
-
-
-
-
-        
-      </div>
-    </div>
-
-  
-    <div
-      class="post 
-        animated fadeInDown
-
-      "
-    >
-      
-      <div class="post__content">
-        <h3><a href="/post/go%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">GO的并发编程</a></h3>
-        
-          <p>讲一下go的并发模型？ go控制并发的话有三种种经典的方式，一种是通过channel通知实现并发控制，一种是WaitGroup，另外一种就是Context。
-无缓冲通道又叫同步通道，通道的大小为0，也就是说，这种类型的通道在接收前没有能力保存任何值，它要求发送 goroutine 和接收 goroutine 同时准备好，才可以完成发送和接收操作。也就是说，先执行发送操作的话，由于没有接收的，那么发送操作会被阻塞，同样的，如果先执行接收操作的话，由于没有发送的，所以接收的goroutine会被阻塞。这样子其实就实现了发送和接收goroutine的同步化，也就是并发控制。注意：当一个值在无缓冲通道传递，接收值后发送方goroutine才会被再次唤醒。
-例子：
-func main() { ch := make(chan struct{}) go func() { ch &lt;- struct{}{} }() fmt.</p>
-
-        
-        </div>
-
-      
-      <div class="post__footer">
-        <em class="fas fa-calendar-day"></em>
-        <span class="post__footer-date"
-          >
-            Thu, Apr 21, 2022
-
-
-          </span
-        >
-        
-          <span><a class="category" href="/categories/go/">Go</a></span>
-
-
-
-
-        
-
-        
-          <span><a class="tag" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></span>
 
 
 
